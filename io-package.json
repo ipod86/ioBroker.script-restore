@@ -48,8 +48,7 @@
 			"backup",
 			"restore",
 			"scripts",
-			"javascript",
-			"iobroker"
+			"javascript"
 		],
 		"licenseInformation": {
 			"type": "free",
@@ -74,7 +73,19 @@
 		},
 		"adminTab": {
 			"singleton": true,
-			"name": "Script Restore"
+			"name": {
+				"en": "Script Restore",
+				"de": "Script Restore",
+				"ru": "Script Restore",
+				"pt": "Script Restore",
+				"nl": "Script Restore",
+				"fr": "Script Restore",
+				"it": "Script Restore",
+				"es": "Script Restore",
+				"pl": "Script Restore",
+				"uk": "Script Restore",
+				"zh-cn": "Script Restore"
+			}
 		},
 		"dependencies": [
 			{
@@ -83,7 +94,7 @@
 		],
 		"globalDependencies": [
 			{
-				"admin": ">=7.0.23"
+				"admin": ">=7.6.20"
 			}
 		]
 	},

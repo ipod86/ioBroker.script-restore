@@ -4,10 +4,9 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-      day: 6
-      time: "00:05"
+      time: "03:17"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 15
     assignees:
       - ipod86
     versioning-strategy: increase
@@ -16,9 +15,8 @@ updates:
     directory: "/"
     schedule:
       interval: monthly
-      day: 6
-      time: "00:05"
+      time: "03:17"
       timezone: Europe/Berlin
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 15
     assignees:
       - ipod86

@@ -10,6 +10,7 @@
   "homepage": "https://github.com/ipod86/ioBroker.script-restore",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "backup",
     "restore",
     "scripts",
@@ -21,7 +22,7 @@
     "url": "https://github.com/ipod86/ioBroker.script-restore.git"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2"
