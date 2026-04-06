@@ -368,6 +368,23 @@
 		const instance = urlParams.get('instance') || '0';
 		const adapterInst = 'script-restore.' + instance;
 
+		// === Dark Theme Detection ===
+		function applyTheme(theme) {
+			if (theme === 'dark') {
+				document.body.classList.add('dark');
+			} else {
+				document.body.classList.remove('dark');
+			}
+		}
+		// ioBroker passes ?theme=dark or ?themeType=dark in the URL
+		const urlTheme = urlParams.get('theme') || urlParams.get('themeType') || urlParams.get('themeName');
+		if (urlTheme) applyTheme(urlTheme);
+		// Also listen for runtime theme changes from the parent admin
+		window.addEventListener('message', function(e) {
+			if (e.data && e.data.theme) applyTheme(e.data.theme);
+			if (e.data && e.data.themeType) applyTheme(e.data.themeType);
+		});
+
 		let socket = null;
 		let socketReady = false;
 
