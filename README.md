@@ -30,7 +30,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 - Supported formats: `.tar.gz`, `.tar`, `.json`, `.jsonl`
 - Tree view of all scripts organized by folder
 - Search across all script names
-- View source code with syntax highlighting (JS/TS/Blockly/Rules)
+- View source code (JS/TS/Blockly/Rules)
 - Copy source code to clipboard or download as file
 - Fully browser-based parsing — no server roundtrip for uploads
 
@@ -75,7 +75,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.0.2 (2026-04-06)
 * (ipod86) update README, fix SVG icon dimensions, add full language translations
 
 ### 0.0.1 (2026-04-06)
