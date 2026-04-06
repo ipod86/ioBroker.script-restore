@@ -352,16 +352,28 @@
 
 		function sendTo(command, message, callback) {
 			if (!socket) {
-				callback({ error: 'Adapter-Instanz nicht erreichbar. Bitte prüfen ob script-restore.' + instance + ' läuft.' });
+				callback({ error: 'Kein Socket. Bitte prüfen ob script-restore.' + instance + ' läuft.' });
 				return;
 			}
+			let done = false;
+			const timer = setTimeout(() => {
+				if (done) return;
+				done = true;
+				callback({ error: 'Timeout: Adapter antwortet nicht. Läuft script-restore.' + instance + '?' });
+			}, 30000);
+			const wrapped = (result) => {
+				if (done) return;
+				done = true;
+				clearTimeout(timer);
+				callback(result);
+			};
 			// Admin 7 Connection wrapper has sendTo as async method
 			if (typeof socket.sendTo === 'function') {
 				Promise.resolve(socket.sendTo(adapterInst, command, message))
-					.then(result => callback(result))
-					.catch(err => callback({ error: String(err) }));
+					.then(wrapped)
+					.catch(err => wrapped({ error: String(err) }));
 			} else {
-				socket.emit('sendTo', adapterInst, command, message, callback);
+				socket.emit('sendTo', adapterInst, command, message, wrapped);
 			}
 		}
 
@@ -480,9 +492,12 @@
 						menu.innerHTML = '<div class="dropdown-empty">⚠️ ' + escapeHTML(result.error) + '</div>';
 					} else if (result && result.files && result.files.length > 0) {
 						menu.innerHTML = result.files.map(f =>
-							'<div class="dropdown-item" onclick="loadLocalFile(' + JSON.stringify(f) + ')">' +
+							'<div class="dropdown-item" data-file="' + escapeHTML(f) + '">' +
 							escapeHTML(f) + '</div>'
 						).join('');
+						menu.querySelectorAll('.dropdown-item').forEach(el => {
+							el.addEventListener('click', function() { loadLocalFile(this.dataset.file); });
+						});
 					} else {
 						menu.innerHTML = '<div class="dropdown-empty">Keine Dateien gefunden in:<br>' + escapeHTML((result && result.path) || '') + '</div>';
 					}
