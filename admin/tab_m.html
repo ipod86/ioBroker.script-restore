@@ -845,7 +845,7 @@
 			document.getElementById('codeContainer').className = 'code-display';
 
 			const vs = document.getElementById('viewSwitcher');
-			vs.innerHTML = '<button onclick="showView(\'src\')" class="btn btn-outline-light" id="btn-src">JS/TS</button>';
+			vs.innerHTML = '<button onclick="showView(\'src\')" class="btn btn-outline-light" id="btn-src">' + (cur.type === 'TypeScript' ? 'TS' : 'JS') + '</button>';
 			if (cur.xml) vs.innerHTML += '<button onclick="showView(\'xml\')" class="btn btn-outline-primary" id="btn-xml">BLOCKLY</button>';
 			if (cur.rule) vs.innerHTML += '<button onclick="showView(\'rule\')" class="btn btn-outline-success" id="btn-rule">RULES</button>';
 
