@@ -1,106 +1,121 @@
 {
-	"common": {
-		"name": "script-restore",
-		"version": "0.0.1",
-		"news": {
-			"0.0.1": {
-				"en": "Initial release",
-				"de": "Erstveröffentlichung",
-				"ru": "Начальная версия",
-				"pt": "Versão inicial",
-				"nl": "Eerste versie",
-				"fr": "Version initiale",
-				"it": "Versione iniziale",
-				"es": "Versión inicial",
-				"pl": "Pierwsze wydanie",
-				"uk": "Початкова версія",
-				"zh-cn": "首次出版"
-			}
-		},
-		"titleLang": {
-			"en": "Script Restore",
-			"de": "Script Restore",
-			"ru": "Script Restore",
-			"pt": "Script Restore",
-			"nl": "Script Restore",
-			"fr": "Script Restore",
-			"it": "Script Restore",
-			"es": "Script Restore",
-			"pl": "Script Restore",
-			"uk": "Script Restore",
-			"zh-cn": "Script Restore"
-		},
-		"desc": {
-			"en": "Restore ioBroker scripts from backup archives",
-			"de": "ioBroker-Skripte aus Backup-Archiven wiederherstellen",
-			"ru": "Восстановление скриптов ioBroker из резервных архивов",
-			"pt": "Restaurar scripts ioBroker de arquivos de backup",
-			"nl": "Herstel ioBroker-scripts vanuit back-uparchieven",
-			"fr": "Restaurer les scripts ioBroker à partir des archives de sauvegarde",
-			"it": "Ripristina gli script ioBroker dagli archivi di backup",
-			"es": "Restaurar scripts de ioBroker desde archivos de respaldo",
-			"pl": "Przywróć skrypty ioBroker z archiwów kopii zapasowych",
-			"uk": "Відновлення скриптів ioBroker з резервних архівів",
-			"zh-cn": "从备份存档中恢复 ioBroker 脚本"
-		},
-		"authors": ["ipod86 <david@graef.email>"],
-		"keywords": [
-			"backup",
-			"restore",
-			"scripts",
-			"javascript"
-		],
-		"licenseInformation": {
-			"type": "free",
-			"license": "MIT"
-		},
-		"platform": "Javascript/Node.js",
-		"icon": "script-restore.svg",
-		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/ipod86/ioBroker.script-restore/main/admin/script-restore.svg",
-		"readme": "https://github.com/ipod86/ioBroker.script-restore/blob/main/README.md",
-		"loglevel": "info",
-		"tier": 3,
-		"mode": "daemon",
-		"type": "utility",
-		"compact": true,
-		"messagebox": true,
-		"connectionType": "local",
-		"dataSource": "push",
-		"adminUI": {
-			"config": "materialize",
-			"tab": "materialize"
-		},
-		"adminTab": {
-			"singleton": true,
-			"name": {
-				"en": "Script Restore",
-				"de": "Script Restore",
-				"ru": "Script Restore",
-				"pt": "Script Restore",
-				"nl": "Script Restore",
-				"fr": "Script Restore",
-				"it": "Script Restore",
-				"es": "Script Restore",
-				"pl": "Script Restore",
-				"uk": "Script Restore",
-				"zh-cn": "Script Restore"
-			}
-		},
-		"dependencies": [
-			{
-				"js-controller": ">=6.0.11"
-			}
-		],
-		"globalDependencies": [
-			{
-				"admin": ">=7.6.20"
-			}
-		]
-	},
-	"native": {
-		"backupPath": "/opt/iobroker/backups"
-	},
-	"objects": [],
-	"instanceObjects": []
+  "common": {
+    "name": "script-restore",
+    "version": "0.0.3",
+    "news": {
+      "0.0.2": {
+        "en": "update README, fix SVG icon dimensions, add full language translations",
+        "de": "rEADME aktualisieren, SVG-Icondimensionen beheben, vollständige Übersetzungen hinzufügen",
+        "ru": "обновление README, исправление размеров значков SVG, добавление полных языковых переводов",
+        "pt": "atualizar README, corrigir dimensões do ícone SVG, adicionar traduções completas do idioma",
+        "nl": "update README, fix SVG pictogram afmetingen, voeg volledige taal vertalingen",
+        "fr": "mettre à jour README, corriger les dimensions des icônes SVG, ajouter des traductions en langue complète",
+        "it": "aggiornare README, correggere le dimensioni dell'icona SVG, aggiungere traduzioni in lingua completa",
+        "es": "actualizar README, fijar dimensiones de icono SVG, añadir traducciones completas del idioma",
+        "pl": "aktualizacja README, poprawianie wymiarów ikon SVG, dodawanie pełnych tłumaczeń językowych",
+        "uk": "оновлення README, зафіксувати розміри значків SVG, додати повномовні переклади",
+        "zh-cn": "更新 README, 修正 SVG 图标尺寸, 添加完整的语言翻译"
+      },
+      "0.0.1": {
+        "en": "Initial release",
+        "de": "Erstveröffentlichung",
+        "ru": "Начальная версия",
+        "pt": "Versão inicial",
+        "nl": "Eerste versie",
+        "fr": "Version initiale",
+        "it": "Versione iniziale",
+        "es": "Versión inicial",
+        "pl": "Pierwsze wydanie",
+        "uk": "Початкова версія",
+        "zh-cn": "首次出版"
+      }
+    },
+    "titleLang": {
+      "en": "Script Restore",
+      "de": "Script Restore",
+      "ru": "Script Restore",
+      "pt": "Script Restore",
+      "nl": "Script Restore",
+      "fr": "Script Restore",
+      "it": "Script Restore",
+      "es": "Script Restore",
+      "pl": "Script Restore",
+      "uk": "Script Restore",
+      "zh-cn": "Script Restore"
+    },
+    "desc": {
+      "en": "Restore ioBroker scripts from backup archives",
+      "de": "ioBroker-Skripte aus Backup-Archiven wiederherstellen",
+      "ru": "Восстановление скриптов ioBroker из резервных архивов",
+      "pt": "Restaurar scripts ioBroker de arquivos de backup",
+      "nl": "Herstel ioBroker-scripts vanuit back-uparchieven",
+      "fr": "Restaurer les scripts ioBroker à partir des archives de sauvegarde",
+      "it": "Ripristina gli script ioBroker dagli archivi di backup",
+      "es": "Restaurar scripts de ioBroker desde archivos de respaldo",
+      "pl": "Przywróć skrypty ioBroker z archiwów kopii zapasowych",
+      "uk": "Відновлення скриптів ioBroker з резервних архівів",
+      "zh-cn": "从备份存档中恢复 ioBroker 脚本"
+    },
+    "authors": [
+      "ipod86 <david@graef.email>"
+    ],
+    "keywords": [
+      "backup",
+      "restore",
+      "scripts",
+      "javascript"
+    ],
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "script-restore.svg",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/ipod86/ioBroker.script-restore/main/admin/script-restore.svg",
+    "readme": "https://github.com/ipod86/ioBroker.script-restore/blob/main/README.md",
+    "loglevel": "info",
+    "tier": 3,
+    "mode": "daemon",
+    "type": "utility",
+    "compact": true,
+    "messagebox": true,
+    "connectionType": "local",
+    "dataSource": "push",
+    "adminUI": {
+      "config": "materialize",
+      "tab": "materialize"
+    },
+    "adminTab": {
+      "singleton": true,
+      "name": {
+        "en": "Script Restore",
+        "de": "Script Restore",
+        "ru": "Script Restore",
+        "pt": "Script Restore",
+        "nl": "Script Restore",
+        "fr": "Script Restore",
+        "it": "Script Restore",
+        "es": "Script Restore",
+        "pl": "Script Restore",
+        "uk": "Script Restore",
+        "zh-cn": "Script Restore"
+      }
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.20"
+      }
+    ]
+  },
+  "native": {
+    "backupPath": "/opt/iobroker/backups"
+  },
+  "objects": [],
+  "instanceObjects": []
 }
