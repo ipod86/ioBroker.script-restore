@@ -75,8 +75,11 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### 0.0.2 (2026-04-06)
-* (ipod86) update README, fix SVG icon dimensions, add full language translations
+### 0.0.4 (2026-04-06)
+* (ipod86) improve dark theme detection: live switching via MutationObserver and storage events
+
+### 0.0.3 (2026-04-06)
+* (ipod86) add dark theme support for admin tab UI
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
