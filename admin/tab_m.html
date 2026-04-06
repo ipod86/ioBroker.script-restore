@@ -320,33 +320,49 @@
 		let socketReady = false;
 
 		function initSocket() {
+			// Try 1: admin 7 Connection object on parent (has .sendTo method)
 			try {
-				// Try parent socket first (most reliable in admin iframe)
-				if (window.parent && window.parent.socket) {
-					socket = window.parent.socket;
+				const p = window.parent;
+				if (p && p.socket) {
+					socket = p.socket;
 					socketReady = true;
 					return;
 				}
 			} catch(e) {}
 
-			// Create own socket connection
+			// Try 2: servConn._socket (older admin)
 			try {
-				socket = window.io ? window.io('/') : null;
-				if (socket) {
-					socket.on('connect', () => { socketReady = true; });
-					socket.on('disconnect', () => { socketReady = false; });
+				const p = window.parent;
+				if (p && p.servConn && p.servConn._socket) {
+					socket = p.servConn._socket;
+					socketReady = socket.connected;
+					return;
 				}
-			} catch(e) {
-				console.warn('Could not connect to socket:', e);
-			}
+			} catch(e) {}
+
+			// Try 3: create own socket.io connection (same origin)
+			try {
+				if (typeof io !== 'undefined') {
+					const raw = io.connect(window.location.origin, { path: '/socket.io' });
+					raw.on('connect', () => { socket = raw; socketReady = true; });
+					raw.on('disconnect', () => { socketReady = false; });
+				}
+			} catch(e) {}
 		}
 
 		function sendTo(command, message, callback) {
 			if (!socket) {
-				callback({ error: 'Keine Verbindung zum ioBroker (Socket nicht verfügbar)' });
+				callback({ error: 'Adapter-Instanz nicht erreichbar. Bitte prüfen ob script-restore.' + instance + ' läuft.' });
 				return;
 			}
-			socket.emit('sendTo', adapterInst, command, message, callback);
+			// Admin 7 Connection wrapper has sendTo as async method
+			if (typeof socket.sendTo === 'function') {
+				Promise.resolve(socket.sendTo(adapterInst, command, message))
+					.then(result => callback(result))
+					.catch(err => callback({ error: String(err) }));
+			} else {
+				socket.emit('sendTo', adapterInst, command, message, callback);
+			}
 		}
 
 		initSocket();
