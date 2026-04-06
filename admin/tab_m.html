@@ -369,21 +369,61 @@
 		const adapterInst = 'script-restore.' + instance;
 
 		// === Dark Theme Detection ===
-		function applyTheme(theme) {
-			if (theme === 'dark') {
-				document.body.classList.add('dark');
-			} else {
-				document.body.classList.remove('dark');
-			}
+		function applyTheme(isDark) {
+			document.body.classList.toggle('dark', !!isDark);
 		}
-		// ioBroker passes ?theme=dark or ?themeType=dark in the URL
-		const urlTheme = urlParams.get('theme') || urlParams.get('themeType') || urlParams.get('themeName');
-		if (urlTheme) applyTheme(urlTheme);
-		// Also listen for runtime theme changes from the parent admin
+
+		function detectTheme() {
+			// 1. URL parameter
+			const urlTheme = urlParams.get('theme') || urlParams.get('themeType') || urlParams.get('themeName');
+			if (urlTheme) { applyTheme(urlTheme === 'dark'); return; }
+
+			// 2. localStorage (ioBroker admin stores theme here)
+			try {
+				const stored = localStorage.getItem('App.theme') || localStorage.getItem('themeType') || localStorage.getItem('iobroker.ui.theme');
+				if (stored) { applyTheme(stored === 'dark'); return; }
+			} catch(e) {}
+
+			// 3. Parent frame body/html class or attribute
+			try {
+				const p = window.parent;
+				if (p && p.document) {
+					const pb = p.document.body;
+					const ph = p.document.documentElement;
+					if (pb.classList.contains('dark') || ph.classList.contains('dark') ||
+						ph.getAttribute('data-theme') === 'dark' ||
+						pb.getAttribute('data-theme') === 'dark') {
+						applyTheme(true); return;
+					}
+					// MUI dark mode: look for dark background color hint
+					const bg = window.getComputedStyle(pb).backgroundColor;
+					if (bg) {
+						const m = bg.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+						if (m && (+m[1] + +m[2] + +m[3]) < 200) { applyTheme(true); return; }
+					}
+				}
+			} catch(e) {}
+
+			applyTheme(false);
+		}
+
+		detectTheme();
+
+		// Re-detect on postMessage from parent (theme switch at runtime)
 		window.addEventListener('message', function(e) {
-			if (e.data && e.data.theme) applyTheme(e.data.theme);
-			if (e.data && e.data.themeType) applyTheme(e.data.themeType);
+			if (!e.data) return;
+			if (e.data.theme !== undefined) applyTheme(e.data.theme === 'dark');
+			if (e.data.themeType !== undefined) applyTheme(e.data.themeType === 'dark');
 		});
+
+		// Observe parent body for class/attribute changes (live theme switch)
+		try {
+			const pb = window.parent.document.body;
+			const ph = window.parent.document.documentElement;
+			const obs = new MutationObserver(() => detectTheme());
+			obs.observe(pb, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+			obs.observe(ph, { attributes: true, attributeFilter: ['class', 'data-theme'] });
+		} catch(e) {}
 
 		let socket = null;
 		let socketReady = false;
