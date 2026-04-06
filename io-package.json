@@ -74,11 +74,7 @@
 		},
 		"adminTab": {
 			"singleton": true,
-			"name": {
-				"en": "Script Restore",
-				"de": "Script Restore"
-			},
-			"link": ""
+			"name": "Script Restore"
 		},
 		"dependencies": [
 			{
