@@ -66,3 +66,4 @@ jobs:
           install-command: 'npm install'
           build: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          npm-token: ${{ secrets.NPM_TOKEN }}
