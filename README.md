@@ -75,6 +75,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
