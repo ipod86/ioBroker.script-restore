@@ -1,4 +1,4 @@
-![Logo](admin/script-restore.png)
+![Logo](admin/script-restore.svg)
 # ioBroker.script-restore
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.script-restore.svg)](https://www.npmjs.com/package/iobroker.script-restore)
