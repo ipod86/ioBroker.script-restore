@@ -12,121 +12,65 @@
 
 ## script-restore adapter for ioBroker
 
-Restore ioBroker scripts from backup archives
+Browse and recover individual scripts from ioBroker backup archives — without restoring the entire backup.
 
-## Developer manual
-This section is intended for the developer. It can be deleted later.
+## Description
 
-### DISCLAIMER
+The script-restore adapter adds a tab to the ioBroker admin interface that lets you open backup archives and browse all contained JavaScript, TypeScript, Blockly and Rules scripts. You can view the source code of each script and download or copy it individually.
 
-Please make sure that you consider copyrights and trademarks when you use names or logos of a company and add a disclaimer to your README.
-You can check other adapters for examples or ask in the developer community. Using a name or logo of a company without permission may cause legal problems for you.
+The archive is parsed entirely in the browser — no files are written to disk during browsing.
 
-### Getting started
+**Note:** This adapter does not automatically restore scripts into ioBroker. It only allows you to view and download them so you can manually re-import them via the JavaScript adapter.
 
-You are almost done, only a few steps left:
-1. Create a new repository on GitHub with the name `ioBroker.script-restore`
-1. Initialize the current folder as a new git repository:  
-	```bash
-	git init -b main
-	git add .
-	git commit -m "Initial commit"
-	```
-1. Link your local repository with the one on GitHub:  
-	```bash
-	git remote add origin https://github.com/ipod86/ioBroker.script-restore
-	```
+## Features
 
-1. Push all files to the GitHub repo:  
-	```bash
-	git push origin main
-	```
-1. Add a new secret under https://github.com/ipod86/ioBroker.script-restore/settings/secrets. It must be named `AUTO_MERGE_TOKEN` and contain a personal access token with push access to the repository, e.g. yours. You can create a new token under https://github.com/settings/tokens.
+- Browse backup archives directly from the ioBroker admin tab
+- Load local backup files from the backup directory (default: `/opt/iobroker/backups`)
+- Upload archive files directly from your computer
+- Supported formats: `.tar.gz`, `.tar`, `.json`, `.jsonl`
+- Tree view of all scripts organized by folder
+- Search across all script names
+- View source code with syntax highlighting (JS/TS/Blockly/Rules)
+- Copy source code to clipboard or download as file
+- Fully browser-based parsing — no server roundtrip for uploads
 
-1. Head over to [src/main.ts](src/main.ts) and start programming!
+## Configuration
 
-### Best Practices
-We've collected some [best practices](https://github.com/ioBroker/ioBroker.repositories#development-and-coding-best-practices) regarding ioBroker development and coding in general. If you're new to ioBroker or Node.js, you should
-check them out. If you're already experienced, you should also take a look at them - you might learn something new :)
+| Setting | Description | Default |
+|---------|-------------|---------|
+| Backup path | Directory where ioBroker backup files are stored | `/opt/iobroker/backups` |
 
-### State Roles
-When creating state objects, it is important to use the correct role for the state. The role defines how the state should be interpreted by visualizations and other adapters. For a list of available roles and their meanings, please refer to the [state roles documentation](https://www.iobroker.net/#en/documentation/dev/stateroles.md).
+## Usage
 
-**Important:** Do not invent your own custom role names. If you need a role that is not part of the official list, please contact the ioBroker developer community for guidance and discussion about adding new roles.
+### Loading a local backup file
 
-### Scripts in `package.json`
-Several npm scripts are predefined for your convenience. You can run them using `npm run <scriptname>`
-| Script name | Description |
-|-------------|-------------|
-| `build` | Compile the TypeScript sources. |
-| `watch` | Compile the TypeScript sources and watch for changes. |
-| `test:ts` | Executes the tests you defined in `*.test.ts` files. |
-| `test:package` | Ensures your `package.json` and `io-package.json` are valid. |
-| `test:integration` | Tests the adapter startup with an actual instance of ioBroker. |
-| `test` | Performs a minimal test run on package files and your tests. |
-| `check` | Performs a type-check on your code (without compiling anything). |
-| `lint` | Runs `ESLint` to check your code for formatting errors and potential bugs. |
-| `translate` | Translates texts in your adapter to all required languages, see [`@iobroker/adapter-dev`](https://github.com/ioBroker/adapter-dev#manage-translations) for more details. |
-| `release` | Creates a new release, see [`@alcalzone/release-script`](https://github.com/AlCalzone/release-script#usage) for more details. |
+1. Open the **Script Restore** tab in ioBroker admin
+2. Click the **Local files** dropdown
+3. Select a backup file from the list — scripts are loaded automatically
 
-### Configuring the compilation
-The adapter template uses [esbuild](https://esbuild.github.io/) to compile TypeScript and/or React code. You can configure many compilation settings 
-either in `tsconfig.json` or by changing options for the build tasks. These options are described in detail in the
-[`@iobroker/adapter-dev` documentation](https://github.com/ioBroker/adapter-dev#compile-adapter-files).
+### Uploading a backup file
 
-### Writing tests
-When done right, testing code is invaluable, because it gives you the 
-confidence to change your code while knowing exactly if and when 
-something breaks. A good read on the topic of test-driven development 
-is https://hackernoon.com/introduction-to-test-driven-development-tdd-61a13bc92d92. 
-Although writing tests before the code might seem strange at first, but it has very 
-clear upsides.
+1. Open the **Script Restore** tab in ioBroker admin
+2. Click **Upload archive** and select a file from your computer
+3. The archive is parsed in the browser and all scripts are displayed
 
-The template provides you with basic tests for the adapter startup and package files.
-It is recommended that you add your own tests into the mix.
+### Viewing and downloading scripts
 
-### Publishing the adapter
-Using GitHub Actions, you can enable automatic releases on npm whenever you push a new git tag that matches the form 
-`v<major>.<minor>.<patch>`. We **strongly recommend** that you do. The necessary steps are described in `.github/workflows/test-and-release.yml`.
+- Click a script in the tree to view its source code
+- Use the **Copy** button to copy the source to the clipboard
+- Use the **Download** button to save the script as a file
 
-Since you installed the release script, you can create a new
-release simply by calling:
-```bash
-npm run release
-```
-Additional command line options for the release script are explained in the
-[release-script documentation](https://github.com/AlCalzone/release-script#command-line).
+## Supported backup formats
 
-To get your adapter released in ioBroker, please refer to the documentation 
-of [ioBroker.repositories](https://github.com/ioBroker/ioBroker.repositories#requirements-for-adapter-to-get-added-to-the-latest-repository).
-
-### Test the adapter manually on a local ioBroker installation
-In order to install the adapter locally without publishing, the following steps are recommended:
-1. Create a GitHub repository for your adapter if you haven't already
-1. Push your code to the GitHub repository
-1. Use the ioBroker Admin interface or command line to install the adapter from GitHub:
-	* **Via Admin UI**: Go to the "Adapters" tab, click on "Custom Install" (GitHub icon), and enter your repository URL:
-		```
-		https://github.com/ipod86/ioBroker.script-restore
-		```
-		You can also install from a specific branch by adding `#branchname` at the end:
-		```
-		https://github.com/ipod86/ioBroker.script-restore#dev
-		```
-	* **Via Command Line**: Install using the `iob` command:
-		```bash
-		iob url https://github.com/ipod86/ioBroker.script-restore
-		```
-		Or from a specific branch:
-		```bash
-		iob url https://github.com/ipod86/ioBroker.script-restore#dev
-		```
-
-For later updates:
-1. Push your changes to GitHub
-1. Repeat the installation steps above (via Admin UI or `iob url` command) to update the adapter
+| Format | Description |
+|--------|-------------|
+| `.tar.gz` | Standard ioBroker backup (`iobroker_YYYY-MM-DD-HH-mm_SS_backupiobroker.tar.gz`) |
+| `.tar` | Uncompressed tar archive |
+| `.json` | JavaScript adapter script export |
+| `.jsonl` | ioBroker objects export (JSON lines) |
 
 ## Changelog
+
 <!--
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
