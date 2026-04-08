@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "news": {
+      "0.0.9": {
+        "en": "Fix jsonConfig: add responsive size attributes, i18n support, remove outdated admin files",
+        "de": "jsonConfig: Responsive Size-Attribute ergänzt, i18n-Unterstützung, veraltete Admin-Dateien entfernt",
+        "ru": "jsonConfig: добавлены атрибуты размера, поддержка i18n, удалены устаревшие файлы admin",
+        "pt": "jsonConfig: atributos de tamanho responsivos, suporte i18n, remoção de ficheiros admin obsoletos",
+        "nl": "jsonConfig: responsieve grootteattributen, i18n-ondersteuning, verouderde adminbestanden verwijderd",
+        "fr": "jsonConfig: attributs de taille responsifs, support i18n, suppression fichiers admin obsolètes",
+        "it": "jsonConfig: attributi dimensione responsivi, supporto i18n, rimozione file admin obsoleti",
+        "es": "jsonConfig: atributos de tamaño responsivos, soporte i18n, eliminación de archivos admin obsoletos",
+        "pl": "jsonConfig: atrybuty rozmiaru responsywnego, wsparcie i18n, usunięcie przestarzałych plików admin",
+        "uk": "jsonConfig: атрибути розміру, підтримка i18n, видалення застарілих файлів admin",
+        "zh-cn": "jsonConfig：添加响应式尺寸属性、i18n 支持，删除过时的 admin 文件"
+      },
       "0.0.8": {
         "en": "Migrate settings UI to jsonConfig (admin 5+); fix node:fs import; update Dependabot schedule; migrate automerge workflow",
         "de": "Einstellungen auf jsonConfig (Admin 5+) migriert; node:fs-Import korrigiert; Dependabot-Schedule aktualisiert; Automerge-Workflow migriert",

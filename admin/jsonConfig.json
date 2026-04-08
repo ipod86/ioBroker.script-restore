@@ -1,238 +1,421 @@
 {
     "type": "tabs",
+    "i18n": true,
     "items": {
         "tabLocal": {
             "type": "panel",
-            "label": {"en": "Local Backups", "de": "Lokale Backups"},
+            "label": "localSection",
             "items": {
                 "localEnabled": {
                     "type": "checkbox",
-                    "label": {"en": "Enable local backups", "de": "Lokale Backups aktivieren"},
-                    "default": true
+                    "label": "localEnabled",
+                    "default": true,
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
-                "_divLocal": {"type": "divider"},
+                "_divLocal": {
+                    "type": "divider"
+                },
                 "backupPath": {
                     "type": "text",
-                    "label": {"en": "Backup path", "de": "Backup-Pfad"},
+                    "label": "backupPath",
                     "placeholder": "/opt/iobroker/backups",
-                    "sm": 10,
-                    "hidden": "!data.localEnabled"
+                    "hidden": "!data.localEnabled",
+                    "xs": 12,
+                    "sm": 9,
+                    "md": 9,
+                    "lg": 10,
+                    "xl": 10
                 },
                 "_suggestBtn": {
                     "type": "sendTo",
                     "command": "suggestBackupPath",
-                    "label": {"en": "Suggest path", "de": "Pfad vorschlagen"},
-                    "copyToField": "backupPath",
-                    "sm": 2,
-                    "hidden": "!data.localEnabled"
+                    "label": "suggestPath",
+                    "hidden": "!data.localEnabled",
+                    "xs": 12,
+                    "sm": 3,
+                    "md": 3,
+                    "lg": 2,
+                    "xl": 2
                 }
             }
         },
         "tabFtp": {
             "type": "panel",
-            "label": "FTP",
+            "label": "ftpSection",
             "items": {
                 "ftpEnabled": {
                     "type": "checkbox",
-                    "label": {"en": "Enable FTP", "de": "FTP aktivieren"}
+                    "label": "ftpEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
-                "_divFtp": {"type": "divider"},
+                "_divFtp": {
+                    "type": "divider"
+                },
                 "ftpHost": {
                     "type": "text",
-                    "label": {"en": "Host", "de": "Host"},
+                    "label": "ftpHost",
                     "placeholder": "192.168.1.100",
-                    "hidden": "!data.ftpEnabled"
+                    "hidden": "!data.ftpEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "ftpPort": {
                     "type": "number",
-                    "label": {"en": "Port", "de": "Port"},
+                    "label": "ftpPort",
                     "placeholder": "21",
                     "min": 1,
                     "max": 65535,
-                    "hidden": "!data.ftpEnabled"
+                    "hidden": "!data.ftpEnabled",
+                    "xs": 12,
+                    "sm": 3,
+                    "md": 3,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "ftpSecure": {
                     "type": "checkbox",
-                    "label": {"en": "Use FTPS (TLS)", "de": "FTPS (TLS) verwenden"},
-                    "hidden": "!data.ftpEnabled"
+                    "label": "ftpSecure",
+                    "hidden": "!data.ftpEnabled",
+                    "xs": 12,
+                    "sm": 3,
+                    "md": 3,
+                    "lg": 3,
+                    "xl": 3
                 },
                 "ftpUser": {
                     "type": "text",
-                    "label": {"en": "User", "de": "Benutzer"},
+                    "label": "ftpUser",
                     "placeholder": "anonymous",
-                    "hidden": "!data.ftpEnabled"
+                    "hidden": "!data.ftpEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "ftpPassword": {
                     "type": "password",
-                    "label": {"en": "Password", "de": "Passwort"},
-                    "hidden": "!data.ftpEnabled"
+                    "label": "ftpPassword",
+                    "hidden": "!data.ftpEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "ftpPath": {
                     "type": "text",
-                    "label": {"en": "Path", "de": "Pfad"},
+                    "label": "ftpPath",
                     "placeholder": "/backups",
-                    "hidden": "!data.ftpEnabled"
+                    "hidden": "!data.ftpEnabled",
+                    "xs": 12,
+                    "sm": 9,
+                    "md": 9,
+                    "lg": 9,
+                    "xl": 9
                 },
                 "_ftpTestBtn": {
                     "type": "sendTo",
                     "command": "testFtp",
-                    "label": {"en": "Test connection", "de": "Verbindung testen"},
-                    "hidden": "!data.ftpEnabled"
+                    "label": "testConnection",
+                    "hidden": "!data.ftpEnabled",
+                    "xs": 12,
+                    "sm": 3,
+                    "md": 3,
+                    "lg": 3,
+                    "xl": 3
                 }
             }
         },
         "tabSmb": {
             "type": "panel",
-            "label": {"en": "SMB (v2)", "de": "SMB (v2)"},
+            "label": "smbSection",
             "items": {
                 "smbEnabled": {
                     "type": "checkbox",
-                    "label": {"en": "Enable SMB", "de": "SMB aktivieren"}
+                    "label": "smbEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "_smbInfo": {
                     "type": "staticText",
-                    "text": {"en": "Only SMB2 is supported.", "de": "Es wird nur SMB2 unterstützt."},
-                    "hidden": "!data.smbEnabled"
+                    "text": "smbInfo",
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
-                "_divSmb": {"type": "divider"},
+                "_divSmb": {
+                    "type": "divider"
+                },
                 "smbHost": {
                     "type": "text",
-                    "label": {"en": "Host / IP", "de": "Host / IP"},
+                    "label": "smbHost",
                     "placeholder": "192.168.1.100",
-                    "hidden": "!data.smbEnabled"
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "smbShare": {
                     "type": "text",
-                    "label": {"en": "Share name", "de": "Freigabename"},
+                    "label": "smbShare",
                     "placeholder": "Backups",
-                    "hidden": "!data.smbEnabled"
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "smbPath": {
                     "type": "text",
-                    "label": {"en": "Sub-path (optional)", "de": "Unterordner (optional)"},
-                    "hidden": "!data.smbEnabled"
+                    "label": "smbPath",
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "smbDomain": {
                     "type": "text",
-                    "label": {"en": "Domain (optional)", "de": "Domain (optional)"},
-                    "hidden": "!data.smbEnabled"
+                    "label": "smbDomain",
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "smbUser": {
                     "type": "text",
-                    "label": {"en": "User", "de": "Benutzer"},
-                    "hidden": "!data.smbEnabled"
+                    "label": "smbUser",
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "smbPassword": {
                     "type": "password",
-                    "label": {"en": "Password", "de": "Passwort"},
-                    "hidden": "!data.smbEnabled"
+                    "label": "smbPassword",
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "_smbTestBtn": {
                     "type": "sendTo",
                     "command": "testSmb",
-                    "label": {"en": "Test connection", "de": "Verbindung testen"},
-                    "hidden": "!data.smbEnabled"
+                    "label": "testConnection",
+                    "hidden": "!data.smbEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 }
             }
         },
         "tabHttp": {
             "type": "panel",
-            "label": "HTTP/HTTPS",
+            "label": "httpSection",
             "items": {
                 "httpEnabled": {
                     "type": "checkbox",
-                    "label": {"en": "Enable HTTP/HTTPS source", "de": "HTTP/HTTPS-Quelle aktivieren"}
+                    "label": "httpEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "_httpInfo": {
                     "type": "staticText",
-                    "text": {"en": "Enter a direct URL to a .tar.gz backup file in the main tab. The protocol (https://) is added automatically if omitted.", "de": "Im Haupt-Tab eine direkte URL zu einer .tar.gz-Backup-Datei eingeben. Das Protokoll (https://) wird automatisch ergänzt, falls weggelassen."},
-                    "hidden": "!data.httpEnabled"
+                    "text": "httpInfo",
+                    "hidden": "!data.httpEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 }
             }
         },
         "tabSftp": {
             "type": "panel",
-            "label": "SFTP",
+            "label": "sftpSection",
             "items": {
                 "sftpEnabled": {
                     "type": "checkbox",
-                    "label": {"en": "Enable SFTP", "de": "SFTP aktivieren"}
+                    "label": "sftpEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
-                "_divSftp": {"type": "divider"},
+                "_divSftp": {
+                    "type": "divider"
+                },
                 "sftpHost": {
                     "type": "text",
-                    "label": {"en": "Host / IP", "de": "Host / IP"},
+                    "label": "sftpHost",
                     "placeholder": "192.168.1.100",
-                    "hidden": "!data.sftpEnabled"
+                    "hidden": "!data.sftpEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "sftpPort": {
                     "type": "number",
-                    "label": {"en": "Port", "de": "Port"},
+                    "label": "sftpPort",
                     "placeholder": "22",
                     "min": 1,
                     "max": 65535,
-                    "hidden": "!data.sftpEnabled"
+                    "hidden": "!data.sftpEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "sftpUser": {
                     "type": "text",
-                    "label": {"en": "User", "de": "Benutzer"},
-                    "hidden": "!data.sftpEnabled"
+                    "label": "sftpUser",
+                    "hidden": "!data.sftpEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "sftpPassword": {
                     "type": "password",
-                    "label": {"en": "Password", "de": "Passwort"},
-                    "hidden": "!data.sftpEnabled"
+                    "label": "sftpPassword",
+                    "hidden": "!data.sftpEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "sftpPath": {
                     "type": "text",
-                    "label": {"en": "Path", "de": "Pfad"},
+                    "label": "sftpPath",
                     "placeholder": "/",
-                    "hidden": "!data.sftpEnabled"
+                    "hidden": "!data.sftpEnabled",
+                    "xs": 12,
+                    "sm": 9,
+                    "md": 9,
+                    "lg": 9,
+                    "xl": 9
                 },
                 "_sftpTestBtn": {
                     "type": "sendTo",
                     "command": "testSftp",
-                    "label": {"en": "Test connection", "de": "Verbindung testen"},
-                    "hidden": "!data.sftpEnabled"
+                    "label": "testConnection",
+                    "hidden": "!data.sftpEnabled",
+                    "xs": 12,
+                    "sm": 3,
+                    "md": 3,
+                    "lg": 3,
+                    "xl": 3
                 }
             }
         },
         "tabWebdav": {
             "type": "panel",
-            "label": "WebDAV",
+            "label": "webdavSection",
             "items": {
                 "webdavEnabled": {
                     "type": "checkbox",
-                    "label": {"en": "Enable WebDAV", "de": "WebDAV aktivieren"}
+                    "label": "webdavEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
-                "_divWebdav": {"type": "divider"},
+                "_divWebdav": {
+                    "type": "divider"
+                },
                 "webdavUrl": {
                     "type": "text",
-                    "label": {"en": "Server URL", "de": "Server-URL"},
+                    "label": "webdavUrl",
                     "placeholder": "https://cloud.example.com/remote.php/webdav",
-                    "hidden": "!data.webdavEnabled"
+                    "hidden": "!data.webdavEnabled",
+                    "xs": 12,
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 },
                 "webdavUser": {
                     "type": "text",
-                    "label": {"en": "User", "de": "Benutzer"},
-                    "hidden": "!data.webdavEnabled"
+                    "label": "webdavUser",
+                    "hidden": "!data.webdavEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "webdavPassword": {
                     "type": "password",
-                    "label": {"en": "Password", "de": "Passwort"},
-                    "hidden": "!data.webdavEnabled"
+                    "label": "webdavPassword",
+                    "hidden": "!data.webdavEnabled",
+                    "xs": 12,
+                    "sm": 6,
+                    "md": 6,
+                    "lg": 6,
+                    "xl": 6
                 },
                 "webdavPath": {
                     "type": "text",
-                    "label": {"en": "Path", "de": "Pfad"},
+                    "label": "webdavPath",
                     "placeholder": "/",
-                    "hidden": "!data.webdavEnabled"
+                    "hidden": "!data.webdavEnabled",
+                    "xs": 12,
+                    "sm": 9,
+                    "md": 9,
+                    "lg": 9,
+                    "xl": 9
                 },
                 "_webdavTestBtn": {
                     "type": "sendTo",
                     "command": "testWebdav",
-                    "label": {"en": "Test connection", "de": "Verbindung testen"},
-                    "hidden": "!data.webdavEnabled"
+                    "label": "testConnection",
+                    "hidden": "!data.webdavEnabled",
+                    "xs": 12,
+                    "sm": 3,
+                    "md": 3,
+                    "lg": 3,
+                    "xl": 3
                 }
             }
         }
