@@ -18,13 +18,19 @@
 	<script type="text/javascript" src="words.js"></script>
 
 	<script type="text/javascript">
+		// Checkboxes that are true by default when not yet configured
+		var defaultTrue = ['localEnabled'];
+
 		function load(settings, onChange) {
 			if (!settings) return;
 			$('.value').each(function () {
 				var $key = $(this);
 				var id = $key.attr('id');
 				if ($key.attr('type') === 'checkbox') {
-					$key.prop('checked', settings[id] || false).on('change', function () {
+					var val = defaultTrue.indexOf(id) !== -1
+						? settings[id] !== false
+						: (settings[id] || false);
+					$key.prop('checked', val).on('change', function () {
 						onChange();
 						updateSections();
 					});
