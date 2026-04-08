@@ -354,7 +354,7 @@
 			</div>
 			<div id="httpInputWrapper" style="display:none; align-items:center; gap:6px;">
 				<input type="text" id="httpUrlInput" placeholder="https://..." style="padding:0.35rem 0.6rem; border:1px solid #ced4da; border-radius:4px; font-size:0.875rem; min-width:260px; font-family:inherit;">
-				<button class="btn btn-outline" onclick="loadHttpUrl()">🌐 URL laden</button>
+				<button type="button" class="btn btn-outline" onclick="loadHttpUrl()">🌐 URL laden</button>
 			</div>
 			<button id="zipBtn" class="btn btn-outline" onclick="downloadZip()" style="display:none;">📦 ZIP</button>
 			<span class="status-msg" id="statusMsg">Backup laden oder Quelle wählen</span>
@@ -857,14 +857,17 @@
 		// === HTTP URL ===
 		function loadHttpUrl() {
 			const url = document.getElementById('httpUrlInput').value.trim();
-			if (!url) return;
+			if (!url) { alert('Bitte eine URL eingeben.'); return; }
 			const filename = url.split('/').pop() || 'backup';
 			showLoaderSpinner('Lade URL...');
 			sendTo('parseHttpUrl', { url }, function(result) {
 				hideLoader();
-				if (result && result.error) {
+				if (!result) {
+					setStatus('Fehler: Keine Antwort vom Adapter. Läuft script-restore.' + instance + '?', 'error');
+				} else if (result.error) {
 					setStatus('Fehler: ' + result.error, 'error');
-				} else if (result && result.scripts) {
+					alert('Fehler beim Laden: ' + result.error);
+				} else if (result.scripts) {
 					loadScripts(result.scripts);
 					saveLastBackup('HTTP', filename);
 					setStatus(result.scripts.length + ' Skripte geladen von URL', 'success');
