@@ -62,7 +62,15 @@ class ScriptRestore extends utils.Adapter {
 				case "parseUploadedFile":
 					await this.handleParseUploadedFile(obj);
 					break;
-				case "listFtpFiles":
+				case "getSourceConfig":
+				this.sendTo(
+					obj.from,
+					obj.command,
+					{ ftpEnabled: !!this.config.ftpEnabled, smbEnabled: !!this.config.smbEnabled },
+					obj.callback,
+				);
+				break;
+			case "listFtpFiles":
 					await this.handleListFtpFiles(obj);
 					break;
 				case "parseFtpFile":

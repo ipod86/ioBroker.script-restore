@@ -225,7 +225,7 @@
 		@keyframes spin { 100% { transform: rotate(360deg); } }
 		#loaderText { color: #495057; font-size: 0.95rem; }
 
-		/* Local files dropdown */
+		/* Files dropdown */
 		.dropdown-wrapper { position: relative; }
 		.dropdown-menu {
 			display: none; position: absolute; top: 100%; left: 0; z-index: 1000;
@@ -322,12 +322,24 @@
 				<input type="file" id="fileInput" accept=".tar,.gz,.tar.gz,.json,.jsonl">
 			</label>
 			<div class="dropdown-wrapper" id="localDropdown">
-				<button class="btn btn-outline" onclick="toggleLocalFiles()">
+				<button class="btn btn-outline" onclick="toggleDropdown('local')">
 					🗂️ Lokale Backups ▾
 				</button>
 				<div class="dropdown-menu" id="localMenu"></div>
 			</div>
-			<span class="status-msg" id="statusMsg">Backup laden oder lokale Datei wählen</span>
+			<div class="dropdown-wrapper" id="ftpDropdown" style="display:none;">
+				<button class="btn btn-outline" onclick="toggleDropdown('ftp')">
+					🌐 FTP Backups ▾
+				</button>
+				<div class="dropdown-menu" id="ftpMenu"></div>
+			</div>
+			<div class="dropdown-wrapper" id="smbDropdown" style="display:none;">
+				<button class="btn btn-outline" onclick="toggleDropdown('smb')">
+					🖧 SMB Backups ▾
+				</button>
+				<div class="dropdown-menu" id="smbMenu"></div>
+			</div>
+			<span class="status-msg" id="statusMsg">Backup laden oder Quelle wählen</span>
 		</div>
 	</div>
 
@@ -712,53 +724,82 @@
 			this.value = '';
 		});
 
-		// === Local Files ===
-		let localMenuOpen = false;
+		// === Source Config ===
+		function loadSourceConfig() {
+			sendTo('getSourceConfig', {}, function(result) {
+				if (!result || result.error) return;
+				if (result.ftpEnabled) document.getElementById('ftpDropdown').style.display = '';
+				if (result.smbEnabled) document.getElementById('smbDropdown').style.display = '';
+			});
+		}
+		loadSourceConfig();
 
-		function toggleLocalFiles() {
-			const menu = document.getElementById('localMenu');
-			localMenuOpen = !localMenuOpen;
-			if (localMenuOpen) {
+		// === Dropdowns (local / ftp / smb) ===
+		const dropdownState = { local: false, ftp: false, smb: false };
+		const dropdownConfig = {
+			local: { listCmd: 'listLocalFiles', parseCmd: 'parseLocalFile', menuId: 'localMenu', wrapperId: 'localDropdown' },
+			ftp:   { listCmd: 'listFtpFiles',   parseCmd: 'parseFtpFile',   menuId: 'ftpMenu',   wrapperId: 'ftpDropdown'   },
+			smb:   { listCmd: 'listSmbFiles',   parseCmd: 'parseSmbFile',   menuId: 'smbMenu',   wrapperId: 'smbDropdown'   },
+		};
+
+		function toggleDropdown(src) {
+			const cfg = dropdownConfig[src];
+			const menu = document.getElementById(cfg.menuId);
+			const isOpen = dropdownState[src];
+
+			// Close all other open dropdowns first
+			Object.keys(dropdownState).forEach(k => {
+				if (k !== src && dropdownState[k]) {
+					dropdownState[k] = false;
+					document.getElementById(dropdownConfig[k].menuId).classList.remove('open');
+				}
+			});
+
+			dropdownState[src] = !isOpen;
+			if (dropdownState[src]) {
 				menu.classList.add('open');
 				menu.innerHTML = '<div class="dropdown-loading">⏳ Lade Dateiliste...</div>';
-				sendTo('listLocalFiles', {}, function(result) {
+				sendTo(cfg.listCmd, {}, function(result) {
 					if (result && result.error) {
 						menu.innerHTML = '<div class="dropdown-empty">⚠️ ' + escapeHTML(result.error) + '</div>';
 					} else if (result && result.files && result.files.length > 0) {
 						menu.innerHTML = result.files.map(f =>
-							'<div class="dropdown-item" data-file="' + escapeHTML(f) + '">' +
-							escapeHTML(f) + '</div>'
+							'<div class="dropdown-item" data-file="' + escapeHTML(f) + '">' + escapeHTML(f) + '</div>'
 						).join('');
 						menu.querySelectorAll('.dropdown-item').forEach(el => {
-							el.addEventListener('click', function() { loadLocalFile(this.dataset.file); });
+							el.addEventListener('click', function() { loadRemoteFile(src, this.dataset.file); });
 						});
 					} else {
 						menu.innerHTML = '<div class="dropdown-empty">Keine Dateien gefunden in:<br>' + escapeHTML((result && result.path) || '') + '</div>';
 					}
 				});
-				// Close when clicking outside
-				setTimeout(() => document.addEventListener('click', closeLocalMenuOutside), 0);
+				setTimeout(() => document.addEventListener('click', closeDropdownOutside), 0);
 			} else {
 				menu.classList.remove('open');
-				document.removeEventListener('click', closeLocalMenuOutside);
 			}
 		}
 
-		function closeLocalMenuOutside(e) {
-			const wrapper = document.getElementById('localDropdown');
-			if (!wrapper.contains(e.target)) {
-				document.getElementById('localMenu').classList.remove('open');
-				localMenuOpen = false;
-				document.removeEventListener('click', closeLocalMenuOutside);
-			}
+		function closeDropdownOutside(e) {
+			let anyOpen = false;
+			Object.keys(dropdownState).forEach(src => {
+				if (!dropdownState[src]) return;
+				const wrapper = document.getElementById(dropdownConfig[src].wrapperId);
+				if (!wrapper.contains(e.target)) {
+					dropdownState[src] = false;
+					document.getElementById(dropdownConfig[src].menuId).classList.remove('open');
+				} else {
+					anyOpen = true;
+				}
+			});
+			if (!anyOpen) document.removeEventListener('click', closeDropdownOutside);
 		}
 
-		function loadLocalFile(filename) {
-			document.getElementById('localMenu').classList.remove('open');
-			localMenuOpen = false;
-			document.removeEventListener('click', closeLocalMenuOutside);
+		function loadRemoteFile(src, filename) {
+			const cfg = dropdownConfig[src];
+			document.getElementById(cfg.menuId).classList.remove('open');
+			dropdownState[src] = false;
 			showLoaderSpinner('Lade und verarbeite ' + filename + '...');
-			sendTo('parseLocalFile', { filename: filename }, function(result) {
+			sendTo(cfg.parseCmd, { filename: filename }, function(result) {
 				hideLoader();
 				if (result && result.error) {
 					setStatus('Fehler: ' + result.error, 'error');
