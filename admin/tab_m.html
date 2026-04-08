@@ -705,7 +705,7 @@
 						const scripts = parseJsonContent(reader.result, file.name);
 						hideLoader();
 						loadScripts(scripts);
-						saveLastBackup('Upload', file.name); setStatus(scripts.length + ' Skripte geladen aus: ' + file.name, 'success');
+						setStatus(scripts.length + ' Skripte geladen aus: ' + file.name, 'success');
 					} catch(e) {
 						hideLoader();
 						setStatus('Fehler beim Parsen: ' + e.message, 'error');
@@ -728,7 +728,7 @@
 					const scripts = await parseArchiveInBrowser(archiveReader.result, file.name); // result is ArrayBuffer
 					hideLoader();
 					loadScripts(scripts);
-					saveLastBackup('Upload', file.name); setStatus(scripts.length + ' Skripte geladen aus: ' + file.name, 'success');
+					setStatus(scripts.length + ' Skripte geladen aus: ' + file.name, 'success');
 				} catch(e) {
 					hideLoader();
 					setStatus('Fehler: ' + e.message, 'error');
@@ -742,18 +742,6 @@
 			this.value = '';
 		});
 
-		// === localStorage: last loaded backup ===
-		const LS_KEY = 'scriptRestore_lastBackup';
-		function saveLastBackup(source, label) {
-			try { localStorage.setItem(LS_KEY, JSON.stringify({ source, label })); } catch {}
-		}
-		function restoreLastBackup() {
-			try {
-				const d = JSON.parse(localStorage.getItem(LS_KEY) || 'null');
-				if (d) setStatus('Zuletzt geladen: [' + escapeHTML(d.source) + '] ' + escapeHTML(d.label), '');
-			} catch {}
-		}
-		restoreLastBackup();
 
 		// === Source Config ===
 		function loadSourceConfig(attempt) {
@@ -846,7 +834,6 @@
 					setStatus('Fehler: ' + result.error, 'error');
 				} else if (result && result.scripts) {
 					loadScripts(result.scripts);
-					saveLastBackup(src.toUpperCase(), filename);
 					setStatus(result.scripts.length + ' Skripte geladen aus: ' + filename, 'success');
 				} else {
 					setStatus('Keine Skripte gefunden.', 'error');
@@ -869,7 +856,6 @@
 					alert('Fehler beim Laden: ' + result.error);
 				} else if (result.scripts) {
 					loadScripts(result.scripts);
-					saveLastBackup('HTTP', filename);
 					setStatus(result.scripts.length + ' Skripte geladen von URL', 'success');
 				} else {
 					setStatus('Keine Skripte gefunden.', 'error');
