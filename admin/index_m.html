@@ -24,11 +24,15 @@
 				var $key = $(this);
 				var id = $key.attr('id');
 				if ($key.attr('type') === 'checkbox') {
-					$key.prop('checked', settings[id]).on('change', () => onChange());
+					$key.prop('checked', settings[id] || false).on('change', function () {
+						onChange();
+						updateSections();
+					});
 				} else {
-					$key.val(settings[id]).on('change', () => onChange()).on('keyup', () => onChange());
+					$key.val(settings[id] || '').on('change', () => onChange()).on('keyup', () => onChange());
 				}
 			});
+			updateSections();
 			onChange(false);
 			if (M) M.updateTextFields();
 		}
@@ -39,11 +43,21 @@
 				var $this = $(this);
 				if ($this.attr('type') === 'checkbox') {
 					obj[$this.attr('id')] = $this.prop('checked');
+				} else if ($this.attr('type') === 'number') {
+					obj[$this.attr('id')] = parseInt($this.val(), 10) || 0;
 				} else {
 					obj[$this.attr('id')] = $this.val();
 				}
 			});
 			callback(obj);
+		}
+
+		function updateSections() {
+			var ftpEnabled = $('#ftpEnabled').prop('checked');
+			var smbEnabled = $('#smbEnabled').prop('checked');
+			$('#ftpDetails').toggle(ftpEnabled);
+			$('#smbDetails').toggle(smbEnabled);
+			if (M) M.updateTextFields();
 		}
 	</script>
 
@@ -59,11 +73,104 @@
 			</div>
 		</div>
 
+		<!-- Local backup path -->
 		<div class="row">
 			<div class="input-field col s12 m8 l6">
 				<input class="value" id="backupPath" type="text" placeholder="/opt/iobroker/backups">
 				<label for="backupPath" class="translate">backupPath</label>
 				<span class="translate helper-text">backupPathHint</span>
+			</div>
+		</div>
+
+		<!-- FTP Section -->
+		<div class="row" style="margin-top: 24px;">
+			<div class="col s12">
+				<h6 class="translate" style="font-weight:600; border-bottom: 1px solid #ccc; padding-bottom: 4px;">ftpSection</h6>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<label>
+					<input class="value" id="ftpEnabled" type="checkbox">
+					<span class="translate">ftpEnabled</span>
+				</label>
+			</div>
+		</div>
+		<div id="ftpDetails" style="display:none;">
+			<div class="row">
+				<div class="input-field col s12 m5 l4">
+					<input class="value" id="ftpHost" type="text" placeholder="192.168.1.100">
+					<label for="ftpHost" class="translate">ftpHost</label>
+				</div>
+				<div class="input-field col s6 m2 l1">
+					<input class="value" id="ftpPort" type="number" placeholder="21" min="1" max="65535">
+					<label for="ftpPort" class="translate">ftpPort</label>
+				</div>
+				<div class="col s6 m3 l2" style="padding-top: 20px;">
+					<label>
+						<input class="value" id="ftpSecure" type="checkbox">
+						<span class="translate">ftpSecure</span>
+					</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m4 l3">
+					<input class="value" id="ftpUser" type="text" placeholder="anonymous">
+					<label for="ftpUser" class="translate">ftpUser</label>
+				</div>
+				<div class="input-field col s12 m4 l3">
+					<input class="value" id="ftpPassword" type="password" placeholder="">
+					<label for="ftpPassword" class="translate">ftpPassword</label>
+				</div>
+				<div class="input-field col s12 m4 l3">
+					<input class="value" id="ftpPath" type="text" placeholder="/backups">
+					<label for="ftpPath" class="translate">ftpPath</label>
+				</div>
+			</div>
+		</div>
+
+		<!-- SMB Section -->
+		<div class="row" style="margin-top: 24px;">
+			<div class="col s12">
+				<h6 class="translate" style="font-weight:600; border-bottom: 1px solid #ccc; padding-bottom: 4px;">smbSection</h6>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s12">
+				<label>
+					<input class="value" id="smbEnabled" type="checkbox">
+					<span class="translate">smbEnabled</span>
+				</label>
+			</div>
+		</div>
+		<div id="smbDetails" style="display:none;">
+			<div class="row">
+				<div class="input-field col s12 m5 l4">
+					<input class="value" id="smbHost" type="text" placeholder="192.168.1.100">
+					<label for="smbHost" class="translate">smbHost</label>
+				</div>
+				<div class="input-field col s12 m4 l3">
+					<input class="value" id="smbShare" type="text" placeholder="Backups">
+					<label for="smbShare" class="translate">smbShare</label>
+				</div>
+				<div class="input-field col s12 m3 l2">
+					<input class="value" id="smbPath" type="text" placeholder="">
+					<label for="smbPath" class="translate">smbPath</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m4 l3">
+					<input class="value" id="smbUser" type="text" placeholder="">
+					<label for="smbUser" class="translate">smbUser</label>
+				</div>
+				<div class="input-field col s12 m4 l3">
+					<input class="value" id="smbPassword" type="password" placeholder="">
+					<label for="smbPassword" class="translate">smbPassword</label>
+				</div>
+				<div class="input-field col s12 m4 l3">
+					<input class="value" id="smbDomain" type="text" placeholder="">
+					<label for="smbDomain" class="translate">smbDomain</label>
+				</div>
 			</div>
 		</div>
 

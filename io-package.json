@@ -127,7 +127,21 @@
     ]
   },
   "native": {
-    "backupPath": "/opt/iobroker/backups"
+    "backupPath": "/opt/iobroker/backups",
+    "ftpEnabled": false,
+    "ftpHost": "",
+    "ftpPort": 21,
+    "ftpUser": "",
+    "ftpPassword": "",
+    "ftpPath": "/",
+    "ftpSecure": false,
+    "smbEnabled": false,
+    "smbHost": "",
+    "smbShare": "",
+    "smbPath": "",
+    "smbUser": "",
+    "smbPassword": "",
+    "smbDomain": ""
   },
   "objects": [],
   "instanceObjects": []

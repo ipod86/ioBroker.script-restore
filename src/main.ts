@@ -12,6 +12,11 @@ import * as path from "node:path";
 import * as os from "node:os";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
+import * as ftp from "basic-ftp";
+import { Writable } from "node:stream";
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const SMB2 = require("@marsaud/smb2");
 
 const execAsync = promisify(exec);
 
@@ -20,10 +25,6 @@ interface ScriptEntry {
 	path: string;
 	type: string;
 	source: string;
-}
-
-interface AdapterConfig {
-	backupPath: string;
 }
 
 class ScriptRestore extends utils.Adapter {
@@ -38,8 +39,7 @@ class ScriptRestore extends utils.Adapter {
 	}
 
 	private onReady(): void {
-		const cfg = this.config as unknown as AdapterConfig;
-		this.log.info(`Script Restore ready. Backup path: ${cfg.backupPath || "/opt/iobroker/backups"}`);
+		this.log.info(`Script Restore ready. Backup path: ${this.config.backupPath || "/opt/iobroker/backups"}`);
 	}
 
 	private onUnload(callback: () => void): void {
@@ -62,6 +62,18 @@ class ScriptRestore extends utils.Adapter {
 				case "parseUploadedFile":
 					await this.handleParseUploadedFile(obj);
 					break;
+				case "listFtpFiles":
+					await this.handleListFtpFiles(obj);
+					break;
+				case "parseFtpFile":
+					await this.handleParseFtpFile(obj);
+					break;
+				case "listSmbFiles":
+					await this.handleListSmbFiles(obj);
+					break;
+				case "parseSmbFile":
+					await this.handleParseSmbFile(obj);
+					break;
 				default:
 					this.sendTo(obj.from, obj.command, { error: "Unknown command" }, obj.callback);
 			}
@@ -71,9 +83,10 @@ class ScriptRestore extends utils.Adapter {
 		}
 	}
 
+	// ─── Local ───────────────────────────────────────────────────────────────
+
 	private async handleListLocalFiles(obj: ioBroker.Message): Promise<void> {
-		const cfg = this.config as unknown as AdapterConfig;
-		const backupPath = cfg.backupPath || "/opt/iobroker/backups";
+		const backupPath = this.config.backupPath || "/opt/iobroker/backups";
 		try {
 			const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
 			const entries = rawEntries as unknown as Dirent[];
@@ -91,20 +104,13 @@ class ScriptRestore extends utils.Adapter {
 				.reverse();
 			this.sendTo(obj.from, obj.command, { files, path: backupPath }, obj.callback);
 		} catch (e) {
-			this.sendTo(
-				obj.from,
-				obj.command,
-				{ error: `Verzeichnis nicht lesbar: ${(e as Error).message}` },
-				obj.callback,
-			);
+			this.sendTo(obj.from, obj.command, { error: `Verzeichnis nicht lesbar: ${(e as Error).message}` }, obj.callback);
 		}
 	}
 
 	private async handleParseLocalFile(obj: ioBroker.Message): Promise<void> {
-		const cfg = this.config as unknown as AdapterConfig;
-		const backupPath = cfg.backupPath || "/opt/iobroker/backups";
+		const backupPath = this.config.backupPath || "/opt/iobroker/backups";
 		const msg = obj.message as { filename: string };
-		// Security: only allow simple filenames, no path traversal
 		const filename = path.basename(msg.filename);
 		const filepath = path.join(backupPath, filename);
 		try {
@@ -127,6 +133,161 @@ class ScriptRestore extends utils.Adapter {
 		}
 	}
 
+	// ─── FTP ─────────────────────────────────────────────────────────────────
+
+	private createFtpClient(): ftp.Client {
+		const client = new ftp.Client();
+		client.ftp.verbose = false;
+		return client;
+	}
+
+	private async ftpConnect(client: ftp.Client): Promise<void> {
+		await client.access({
+			host: this.config.ftpHost,
+			port: this.config.ftpPort || 21,
+			user: this.config.ftpUser || "anonymous",
+			password: this.config.ftpPassword || "",
+			secure: this.config.ftpSecure || false,
+		});
+	}
+
+	private async handleListFtpFiles(obj: ioBroker.Message): Promise<void> {
+		if (!this.config.ftpEnabled) {
+			this.sendTo(obj.from, obj.command, { error: "FTP not enabled" }, obj.callback);
+			return;
+		}
+		const client = this.createFtpClient();
+		try {
+			await this.ftpConnect(client);
+			const remotePath = this.config.ftpPath || "/";
+			const list = await client.list(remotePath);
+			const files = list
+				.filter(item => {
+					const n = item.name;
+					return (
+						item.type === ftp.FileType.File &&
+						(n.startsWith("iobroker") || n.startsWith("javascript")) &&
+						(n.endsWith(".tar.gz") || n.endsWith(".tar") || n.endsWith(".json") || n.endsWith(".jsonl"))
+					);
+				})
+				.map(item => item.name)
+				.sort()
+				.reverse();
+			this.sendTo(obj.from, obj.command, { files, path: remotePath }, obj.callback);
+		} catch (e) {
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
+		} finally {
+			client.close();
+		}
+	}
+
+	private async handleParseFtpFile(obj: ioBroker.Message): Promise<void> {
+		if (!this.config.ftpEnabled) {
+			this.sendTo(obj.from, obj.command, { error: "FTP not enabled" }, obj.callback);
+			return;
+		}
+		const msg = obj.message as { filename: string };
+		const filename = path.basename(msg.filename);
+		const remotePath = path.posix.join(this.config.ftpPath || "/", filename);
+		const client = this.createFtpClient();
+		try {
+			await this.ftpConnect(client);
+			const chunks: Buffer[] = [];
+			const writable = new Writable({
+				write(chunk, _enc, cb) {
+					chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk as string));
+					cb();
+				},
+			});
+			await client.downloadTo(writable, remotePath);
+			const buf = Buffer.concat(chunks);
+			const scripts = await this.parseBuffer(buf, filename);
+			this.sendTo(obj.from, obj.command, { scripts }, obj.callback);
+		} catch (e) {
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
+		} finally {
+			client.close();
+		}
+	}
+
+	// ─── SMB ─────────────────────────────────────────────────────────────────
+
+	private createSmbClient(): typeof SMB2 {
+		return new SMB2({
+			share: `\\\\${this.config.smbHost}\\${this.config.smbShare}`,
+			username: this.config.smbUser || "",
+			password: this.config.smbPassword || "",
+			domain: this.config.smbDomain || "",
+		});
+	}
+
+	private smbReaddir(smb: typeof SMB2, dirPath: string): Promise<string[]> {
+		return new Promise((resolve, reject) => {
+			smb.readdir(dirPath, (err: Error | null, files: string[]) => {
+				if (err) reject(err);
+				else resolve(files);
+			});
+		});
+	}
+
+	private smbReadFile(smb: typeof SMB2, filePath: string): Promise<Buffer> {
+		return new Promise((resolve, reject) => {
+			smb.readFile(filePath, (err: Error | null, data: Buffer) => {
+				if (err) reject(err);
+				else resolve(data);
+			});
+		});
+	}
+
+	private async handleListSmbFiles(obj: ioBroker.Message): Promise<void> {
+		if (!this.config.smbEnabled) {
+			this.sendTo(obj.from, obj.command, { error: "SMB not enabled" }, obj.callback);
+			return;
+		}
+		const smb = this.createSmbClient();
+		try {
+			const smbPath = this.config.smbPath || "";
+			const entries = await this.smbReaddir(smb, smbPath);
+			const files = entries
+				.filter(n => {
+					return (
+						(n.startsWith("iobroker") || n.startsWith("javascript")) &&
+						(n.endsWith(".tar.gz") || n.endsWith(".tar") || n.endsWith(".json") || n.endsWith(".jsonl"))
+					);
+				})
+				.sort()
+				.reverse();
+			this.sendTo(obj.from, obj.command, { files, path: smbPath }, obj.callback);
+		} catch (e) {
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
+		} finally {
+			smb.disconnect();
+		}
+	}
+
+	private async handleParseSmbFile(obj: ioBroker.Message): Promise<void> {
+		if (!this.config.smbEnabled) {
+			this.sendTo(obj.from, obj.command, { error: "SMB not enabled" }, obj.callback);
+			return;
+		}
+		const msg = obj.message as { filename: string };
+		const filename = path.basename(msg.filename);
+		const smbPath = this.config.smbPath || "";
+		const filePath = smbPath ? `${smbPath}\\${filename}` : filename;
+		const smb = this.createSmbClient();
+		try {
+			const buf = await this.smbReadFile(smb, filePath);
+			const scripts = await this.parseBuffer(buf, filename);
+			this.sendTo(obj.from, obj.command, { scripts }, obj.callback);
+		} catch (e) {
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
+		} finally {
+			smb.disconnect();
+		}
+	}
+
+	// ─── Parsing ─────────────────────────────────────────────────────────────
+
 	private async parseBuffer(buf: Buffer, filename: string): Promise<ScriptEntry[]> {
 		const name = filename.toLowerCase();
 		if (name.endsWith(".tar.gz") || name.endsWith(".tgz") || name.endsWith(".tar")) {
@@ -142,7 +303,6 @@ class ScriptRestore extends utils.Adapter {
 			await fs.writeFile(tmpFile, buf);
 
 			const extractFlag = isPlainTar ? "-xf" : "-xzf";
-			// Extract only matching files to avoid extracting entire large archives
 			try {
 				await execAsync(
 					`tar ${extractFlag} "${tmpFile}" -C "${tmpDir}" --wildcards` +
@@ -150,7 +310,6 @@ class ScriptRestore extends utils.Adapter {
 						` 2>/dev/null`,
 				);
 			} catch {
-				// Try without wildcards filter (some tar versions behave differently)
 				await execAsync(`tar ${extractFlag} "${tmpFile}" -C "${tmpDir}" 2>/dev/null`).catch(() => {});
 			}
 
@@ -173,10 +332,7 @@ class ScriptRestore extends utils.Adapter {
 		const walk = async (d: string): Promise<string | null> => {
 			let entries: Dirent[];
 			try {
-				entries = (await fs.readdir(d, {
-					withFileTypes: true,
-					encoding: "utf8",
-				})) as unknown as Dirent[];
+				entries = (await fs.readdir(d, { withFileTypes: true, encoding: "utf8" })) as unknown as Dirent[];
 			} catch {
 				return null;
 			}
@@ -184,9 +340,7 @@ class ScriptRestore extends utils.Adapter {
 				const p = path.join(d, String(e.name));
 				if (e.isDirectory()) {
 					const found = await walk(p);
-					if (found) {
-						return found;
-					}
+					if (found) return found;
 				} else if (names.includes(String(e.name))) {
 					return p;
 				}
@@ -200,7 +354,6 @@ class ScriptRestore extends utils.Adapter {
 		const scripts: ScriptEntry[] = [];
 		const trimmed = content.trimStart();
 
-		// Detect JSONL format: file ends with .jsonl or starts with single JSON object per line
 		const isJsonl =
 			filename.endsWith(".jsonl") ||
 			(trimmed.startsWith("{") && !trimmed.startsWith('{\n  "') && trimmed.includes("\n{"));
@@ -208,9 +361,7 @@ class ScriptRestore extends utils.Adapter {
 		if (isJsonl) {
 			for (const line of content.split("\n")) {
 				const l = line.trim();
-				if (!l) {
-					continue;
-				}
+				if (!l) continue;
 				try {
 					const item = JSON.parse(l) as Record<string, unknown>;
 					this.processItem(
@@ -233,22 +384,14 @@ class ScriptRestore extends utils.Adapter {
 	}
 
 	private processItem(key: string, val: unknown, scripts: ScriptEntry[]): void {
-		if (!key || typeof val !== "object" || val === null) {
-			return;
-		}
+		if (!key || typeof val !== "object" || val === null) return;
 		const v = val as Record<string, unknown>;
 
-		if (["channel", "device", "folder", "meta"].includes(v.type as string)) {
-			return;
-		}
-		if (v.type !== "script" && !key.startsWith("script.js.")) {
-			return;
-		}
+		if (["channel", "device", "folder", "meta"].includes(v.type as string)) return;
+		if (v.type !== "script" && !key.startsWith("script.js.")) return;
 
 		const c = v.common as Record<string, unknown> | undefined;
-		if (!c || (c.engineType === undefined && c.source === undefined)) {
-			return;
-		}
+		if (!c || (c.engineType === undefined && c.source === undefined)) return;
 
 		const rawEngineType = typeof c.engineType === "string" ? c.engineType : "JS";
 		const engineType = rawEngineType.toLowerCase();
