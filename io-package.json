@@ -157,6 +157,14 @@
     "smbPassword": "",
     "smbDomain": ""
   },
+  "protectedNative": [
+    "ftpPassword",
+    "smbPassword"
+  ],
+  "encryptedNative": [
+    "ftpPassword",
+    "smbPassword"
+  ],
   "objects": [],
   "instanceObjects": []
 }
