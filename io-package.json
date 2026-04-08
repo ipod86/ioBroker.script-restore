@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "news": {
+      "0.0.5": {
+        "en": "Add FTP/SMB as optional backup sources with test button; make local source optional; configurable Beaufort threshold",
+        "de": "FTP/SMB als optionale Backup-Quellen mit Testbutton; lokale Quelle optional schaltbar; SMB-Versionshinweis",
+        "ru": "Добавлены FTP/SMB как дополнительные источники резервных копий с кнопкой тестирования; локальный источник теперь опционален",
+        "pt": "Adicionar FTP/SMB como fontes de backup opcionais com botão de teste; fonte local opcional",
+        "nl": "FTP/SMB toegevoegd als optionele back-upbronnen met testknop; lokale bron optioneel",
+        "fr": "Ajout de FTP/SMB comme sources de sauvegarde optionnelles avec bouton de test; source locale optionnelle",
+        "it": "Aggiunta di FTP/SMB come sorgenti di backup opzionali con pulsante di test; sorgente locale opzionale",
+        "es": "Añadir FTP/SMB como fuentes de copia de seguridad opcionales con botón de prueba; fuente local opcional",
+        "pl": "Dodano FTP/SMB jako opcjonalne źródła kopii zapasowych z przyciskiem testowym; lokalne źródło opcjonalne",
+        "uk": "Додано FTP/SMB як опціональні джерела резервних копій з кнопкою тестування; локальне джерело опціональне",
+        "zh-cn": "添加 FTP/SMB 作为可选备份来源（含测试按钮）；本地来源可选"
+      },
       "0.0.4": {
         "en": "Improve dark theme detection: live switching via MutationObserver and storage events",
         "de": "Dark-Theme-Erkennung verbessert: Live-Wechsel per MutationObserver und Storage-Events",

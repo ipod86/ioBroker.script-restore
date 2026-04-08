@@ -75,6 +75,11 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.0.5 (2026-04-08)
+* (ipod86) add FTP and SMB as optional backup sources with connection test button
+* (ipod86) make local backup source optional (enable/disable in settings)
+* (ipod86) add SMB version info (SMB2 only) in settings
+
 ### 0.0.4 (2026-04-06)
 * (ipod86) improve dark theme detection: live switching via MutationObserver and storage events
 
