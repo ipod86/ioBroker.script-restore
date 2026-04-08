@@ -1,6 +1,6 @@
 {
   "name": "iobroker.script-restore",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Restore ioBroker scripts from backup archives",
   "author": {
     "name": "ipod86",

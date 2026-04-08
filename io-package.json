@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "news": {
+      "0.0.8": {
+        "en": "Migrate settings UI to jsonConfig (admin 5+); fix node:fs import; update Dependabot schedule; migrate automerge workflow",
+        "de": "Einstellungen auf jsonConfig (Admin 5+) migriert; node:fs-Import korrigiert; Dependabot-Schedule aktualisiert; Automerge-Workflow migriert",
+        "ru": "Миграция UI настроек на jsonConfig (admin 5+); исправлен импорт node:fs; обновлён Dependabot; миграция automerge workflow",
+        "pt": "Migrar UI de configurações para jsonConfig (admin 5+); corrigir importação node:fs; atualizar Dependabot; migrar workflow automerge",
+        "nl": "Instellingen UI migreren naar jsonConfig (admin 5+); node:fs import gecorrigeerd; Dependabot schedule bijgewerkt; automerge workflow gemigreerd",
+        "fr": "Migration de l'UI des paramètres vers jsonConfig (admin 5+); correction de l'import node:fs; mise à jour Dependabot; migration du workflow automerge",
+        "it": "Migrazione UI impostazioni a jsonConfig (admin 5+); corretto import node:fs; aggiornato Dependabot; migrato workflow automerge",
+        "es": "Migrar UI de configuración a jsonConfig (admin 5+); corregir importación node:fs; actualizar Dependabot; migrar workflow automerge",
+        "pl": "Migracja UI ustawień do jsonConfig (admin 5+); poprawka importu node:fs; aktualizacja Dependabot; migracja workflow automerge",
+        "uk": "Міграція UI налаштувань на jsonConfig (admin 5+); виправлено імпорт node:fs; оновлено Dependabot; міграція automerge workflow",
+        "zh-cn": "将设置 UI 迁移至 jsonConfig（admin 5+）；修复 node:fs 导入；更新 Dependabot 计划；迁移 automerge 工作流"
+      },
       "0.0.7": {
         "en": "Fix HTTP URL loading without protocol prefix; remove localStorage backup persistence",
         "de": "HTTP-URL-Laden ohne Protokoll-Präfix behoben; localStorage-Backup-Persistenz entfernt",
@@ -135,7 +148,7 @@
     "connectionType": "local",
     "dataSource": "push",
     "adminUI": {
-      "config": "materialize",
+      "config": "json",
       "tab": "materialize"
     },
     "adminTab": {

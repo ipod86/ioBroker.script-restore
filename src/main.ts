@@ -7,7 +7,7 @@
 
 import type { Dirent } from "node:fs";
 import * as utils from "@iobroker/adapter-core";
-import * as fs from "fs/promises";
+import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import * as os from "node:os";
 import { exec } from "node:child_process";
@@ -197,67 +197,48 @@ class ScriptRestore extends utils.Adapter {
 	// ─── Tests ───────────────────────────────────────────────────────────────
 
 	private async handleTestFtp(obj: ioBroker.Message): Promise<void> {
-		const msg = obj.message as {
-			host: string;
-			port: number;
-			user: string;
-			password: string;
-			path: string;
-			secure: boolean;
-		};
 		const client = new ftp.Client();
 		client.ftp.verbose = false;
 		try {
 			await client.access({
-				host: msg.host,
-				port: msg.port || 21,
-				user: msg.user || "anonymous",
-				password: msg.password || "",
-				secure: msg.secure || false,
+				host: this.config.ftpHost,
+				port: this.config.ftpPort || 21,
+				user: this.config.ftpUser || "anonymous",
+				password: this.config.ftpPassword || "",
+				secure: this.config.ftpSecure || false,
 			});
-			const list = await client.list(msg.path || "/");
+			const list = await client.list(this.config.ftpPath || "/");
 			const count = list.filter(i => i.type === ftp.FileType.File).length;
 			this.sendTo(
 				obj.from,
 				obj.command,
-				{ success: true, message: `Verbunden! ${count} Datei(en) gefunden in: ${msg.path || "/"}` },
+				`✓ Verbunden! ${count} Datei(en) in: ${this.config.ftpPath || "/"}`,
 				obj.callback,
 			);
 		} catch (e) {
-			this.sendTo(obj.from, obj.command, { success: false, message: (e as Error).message }, obj.callback);
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
 		} finally {
 			client.close();
 		}
 	}
 
 	private async handleTestSmb(obj: ioBroker.Message): Promise<void> {
-		const msg = obj.message as {
-			host: string;
-			share: string;
-			path: string;
-			user: string;
-			password: string;
-			domain: string;
-		};
 		const smb = new SMB2({
-			share: `\\\\${msg.host}\\${msg.share}`,
-			username: msg.user || "",
-			password: msg.password || "",
-			domain: msg.domain || "",
+			share: `\\\\${this.config.smbHost}\\${this.config.smbShare}`,
+			username: this.config.smbUser || "",
+			password: this.config.smbPassword || "",
+			domain: this.config.smbDomain || "",
 		});
 		try {
-			const files = await this.smbReaddir(smb, msg.path || "");
+			const files = await this.smbReaddir(smb, this.config.smbPath || "");
 			this.sendTo(
 				obj.from,
 				obj.command,
-				{
-					success: true,
-					message: `Verbunden! ${files.length} Einträge in: \\\\${msg.host}\\${msg.share}${msg.path ? `\\${msg.path}` : ""}`,
-				},
+				`✓ Verbunden! ${files.length} Einträge in: \\\\${this.config.smbHost}\\${this.config.smbShare}${this.config.smbPath ? `\\${this.config.smbPath}` : ""}`,
 				obj.callback,
 			);
 		} catch (e) {
-			this.sendTo(obj.from, obj.command, { success: false, message: (e as Error).message }, obj.callback);
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
 		} finally {
 			smb.disconnect();
 		}
@@ -589,13 +570,13 @@ class ScriptRestore extends utils.Adapter {
 		for (const p of candidates) {
 			try {
 				await fs.access(p);
-				this.sendTo(obj.from, obj.command, { path: p }, obj.callback);
+				this.sendTo(obj.from, obj.command, p, obj.callback);
 				return;
 			} catch {
 				// not accessible
 			}
 		}
-		this.sendTo(obj.from, obj.command, { path: null }, obj.callback);
+		this.sendTo(obj.from, obj.command, "", obj.callback);
 	}
 
 	// ─── HTTP ────────────────────────────────────────────────────────────────
@@ -636,20 +617,24 @@ class ScriptRestore extends utils.Adapter {
 	// ─── SFTP ────────────────────────────────────────────────────────────────
 
 	private async handleTestSftp(obj: ioBroker.Message): Promise<void> {
-		const msg = obj.message as { host: string; port: number; user: string; password: string; path: string };
 		const sftp = new SftpClient();
 		try {
-			await sftp.connect({ host: msg.host, port: msg.port || 22, username: msg.user, password: msg.password });
-			const list = await sftp.list(msg.path || "/");
+			await sftp.connect({
+				host: this.config.sftpHost,
+				port: this.config.sftpPort || 22,
+				username: this.config.sftpUser,
+				password: this.config.sftpPassword,
+			});
+			const list = await sftp.list(this.config.sftpPath || "/");
 			const count = list.filter(i => i.type === "-").length;
 			this.sendTo(
 				obj.from,
 				obj.command,
-				{ success: true, message: `Verbunden! ${count} Datei(en) in: ${msg.path || "/"}` },
+				`✓ Verbunden! ${count} Datei(en) in: ${this.config.sftpPath || "/"}`,
 				obj.callback,
 			);
 		} catch (e) {
-			this.sendTo(obj.from, obj.command, { success: false, message: (e as Error).message }, obj.callback);
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
 		} finally {
 			await sftp.end();
 		}
@@ -719,20 +704,22 @@ class ScriptRestore extends utils.Adapter {
 	// ─── WebDAV ──────────────────────────────────────────────────────────────
 
 	private async handleTestWebdav(obj: ioBroker.Message): Promise<void> {
-		const msg = obj.message as { url: string; user: string; password: string; path: string };
 		try {
 			const { createClient: createWebdavClient } = await import("webdav");
-			const client = createWebdavClient(msg.url, { username: msg.user, password: msg.password });
-			const list = await client.getDirectoryContents(msg.path || "/");
+			const client = createWebdavClient(this.config.webdavUrl, {
+				username: this.config.webdavUser,
+				password: this.config.webdavPassword,
+			});
+			const list = await client.getDirectoryContents(this.config.webdavPath || "/");
 			const arr = Array.isArray(list) ? list : (list as { data: unknown[] }).data;
 			this.sendTo(
 				obj.from,
 				obj.command,
-				{ success: true, message: `Verbunden! ${arr.length} Einträge in: ${msg.path || "/"}` },
+				`✓ Verbunden! ${arr.length} Einträge in: ${this.config.webdavPath || "/"}`,
 				obj.callback,
 			);
 		} catch (e) {
-			this.sendTo(obj.from, obj.command, { success: false, message: (e as Error).message }, obj.callback);
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
 		}
 	}
 

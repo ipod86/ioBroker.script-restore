@@ -75,6 +75,12 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.0.8 (2026-04-08)
+* (ipod86) migrate settings UI to jsonConfig (admin 5+) — fixes S5022
+* (ipod86) fix: use `node:fs` instead of `fs` — fixes S5043
+* (ipod86) update Dependabot schedule from monthly to weekly — fixes S8906
+* (ipod86) rename automerge workflow to automerge-dependabot.yml — fixes S8911
+
 ### 0.0.7 (2026-04-08)
 * (ipod86) fix HTTP URL loading without protocol prefix (auto-prepend https://)
 * (ipod86) remove localStorage persistence for last loaded backup
