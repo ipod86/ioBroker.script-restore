@@ -4,6 +4,7 @@
 declare global {
 	namespace ioBroker {
 		interface AdapterConfig {
+			localEnabled: boolean;
 			backupPath: string;
 			ftpEnabled: boolean;
 			ftpHost: string;

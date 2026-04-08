@@ -53,8 +53,10 @@
 		}
 
 		function updateSections() {
+			var localEnabled = $('#localEnabled').prop('checked');
 			var ftpEnabled = $('#ftpEnabled').prop('checked');
 			var smbEnabled = $('#smbEnabled').prop('checked');
+			$('#localDetails').toggle(localEnabled);
 			$('#ftpDetails').toggle(ftpEnabled);
 			$('#smbDetails').toggle(smbEnabled);
 			if (M) M.updateTextFields();
@@ -131,10 +133,18 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s12 m8 l6">
-				<input class="value" id="backupPath" type="text" placeholder="/opt/iobroker/backups">
-				<label for="backupPath" class="translate">backupPath</label>
-				<span class="translate helper-text">backupPathHint</span>
+			<div class="col s12">
+				<input class="value filled-in" id="localEnabled" type="checkbox">
+				<label for="localEnabled" class="translate">localEnabled</label>
+			</div>
+		</div>
+		<div id="localDetails">
+			<div class="row">
+				<div class="input-field col s12 m8 l6">
+					<input class="value" id="backupPath" type="text" placeholder="/opt/iobroker/backups">
+					<label for="backupPath" class="translate">backupPath</label>
+					<span class="translate helper-text">backupPathHint</span>
+				</div>
 			</div>
 		</div>
 

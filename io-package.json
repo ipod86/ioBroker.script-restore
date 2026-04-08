@@ -127,6 +127,7 @@
     ]
   },
   "native": {
+    "localEnabled": true,
     "backupPath": "/opt/iobroker/backups",
     "ftpEnabled": false,
     "ftpHost": "",

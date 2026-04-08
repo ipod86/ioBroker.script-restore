@@ -66,7 +66,11 @@ class ScriptRestore extends utils.Adapter {
           this.sendTo(
             obj.from,
             obj.command,
-            { ftpEnabled: !!this.config.ftpEnabled, smbEnabled: !!this.config.smbEnabled },
+            {
+              localEnabled: this.config.localEnabled !== false,
+              ftpEnabled: !!this.config.ftpEnabled,
+              smbEnabled: !!this.config.smbEnabled
+            },
             obj.callback
           );
           break;
@@ -98,6 +102,10 @@ class ScriptRestore extends utils.Adapter {
   }
   // ─── Local ───────────────────────────────────────────────────────────────
   async handleListLocalFiles(obj) {
+    if (this.config.localEnabled === false) {
+      this.sendTo(obj.from, obj.command, { error: "Local source not enabled" }, obj.callback);
+      return;
+    }
     const backupPath = this.config.backupPath || "/opt/iobroker/backups";
     try {
       const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
@@ -112,6 +120,10 @@ class ScriptRestore extends utils.Adapter {
     }
   }
   async handleParseLocalFile(obj) {
+    if (this.config.localEnabled === false) {
+      this.sendTo(obj.from, obj.command, { error: "Local source not enabled" }, obj.callback);
+      return;
+    }
     const backupPath = this.config.backupPath || "/opt/iobroker/backups";
     const msg = obj.message;
     const filename = path.basename(msg.filename);

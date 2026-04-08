@@ -732,6 +732,7 @@
 					if (attempt < 10) setTimeout(function() { loadSourceConfig(attempt + 1); }, 500);
 					return;
 				}
+				if (result.localEnabled === false) document.getElementById('localDropdown').style.display = 'none';
 				if (result.ftpEnabled) document.getElementById('ftpDropdown').style.display = '';
 				if (result.smbEnabled) document.getElementById('smbDropdown').style.display = '';
 			});
