@@ -20,8 +20,6 @@ The script-restore adapter adds a tab to the ioBroker admin interface that lets 
 
 The archive is parsed entirely in the browser — no files are written to disk during browsing.
 
-**Note:** This adapter does not automatically restore scripts into ioBroker. It only allows you to view and download them so you can manually re-import them via the JavaScript adapter.
-
 ## Features
 
 - Browse backup archives directly from the ioBroker admin tab
@@ -29,10 +27,12 @@ The archive is parsed entirely in the browser — no files are written to disk d
 - Upload archive files directly from your computer
 - Supported formats: `.tar.gz`, `.tar`, `.json`, `.jsonl`
 - Tree view of all scripts organized by folder
-- Search across all script names
+- Filter scripts by type: JS, TypeScript, Blockly, Rules
+- Full-text search across script names, paths and source code
 - View source code (JS/TS/Blockly/Rules)
 - Copy source code to clipboard or download as file
 - Fully browser-based parsing — no server roundtrip for uploads
+- **Restore scripts directly into ioBroker** with a configurable suffix (default: `_rcvr`) — existing scripts are never overwritten
 
 ## Configuration
 
@@ -75,6 +75,11 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ipod86) add type filter (JS/TS/Blockly/Rules) in script sidebar
+* (ipod86) add direct restore into ioBroker with suffix input and confirm modal
+* (ipod86) remove obsolete admin/words.js and .prettierignore
+
 ### 0.0.10 (2026-04-08)
 * (ipod86) fix jsonConfig responsive sizes lg/xl for backupPath (E5509)
 * (ipod86) trim news entries to 7 (W1032)

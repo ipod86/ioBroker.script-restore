@@ -20,8 +20,6 @@ Der script-restore Adapter fügt dem ioBroker-Admin-Interface einen Tab hinzu, �
 
 Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden keine Dateien auf die Festplatte geschrieben.
 
-**Hinweis:** Dieser Adapter stellt Skripte nicht automatisch in ioBroker wieder her. Er dient ausschließlich zur Ansicht und zum Download, damit die Skripte anschließend manuell über den JavaScript-Adapter reimportiert werden können.
-
 ## Funktionen
 
 - Backup-Archive direkt im ioBroker-Admin-Tab durchsuchen
@@ -29,12 +27,14 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 - Archivdateien direkt vom Computer hochladen
 - Unterstützte Formate: `.tar.gz`, `.tar`, `.json`, `.jsonl`
 - Baumansicht aller Skripte nach Ordner sortiert
-- Suche über alle Skriptnamen
+- Skripte nach Typ filtern: JS, TypeScript, Blockly, Rules
+- Volltextsuche über Skriptnamen, Pfade und Quellcode
 - Quellcode anzeigen (JS/TS/Blockly/Rules)
 - Quellcode in die Zwischenablage kopieren oder als Datei herunterladen
 - Vollständig browserbasiertes Parsen — kein Server-Roundtrip bei Uploads
 - Mehrere Skripte mit Strg+Klick auswählen und als ZIP herunterladen
 - Optionale Quellen: Lokal, FTP, SMB, HTTP, SFTP, WebDAV
+- **Skripte direkt in ioBroker laden** mit konfigurierbarem Suffix (Standard: `_rcvr`) — bestehende Skripte werden nie überschrieben
 
 ## Konfiguration
 
@@ -77,6 +77,10 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ipod86) Typ-Filter (JS/TS/Blockly/Rules) in der Skript-Sidebar hinzugefügt
+* (ipod86) Direktes Laden in ioBroker mit Suffix-Eingabe und Bestätigungs-Modal hinzugefügt
+* (ipod86) Veraltete admin/words.js und .prettierignore entfernt
 
 ### 0.0.10 (2026-04-08)
 * (ipod86) jsonConfig: responsive Größen lg/xl für backupPath korrigiert (E5509)
