@@ -320,6 +320,43 @@
 		body.dark .btn-type:hover { background: #3a3a5c; }
 		body.dark .btn-type.active { background: #3a3a5c; border-color: #7070a0; }
 
+		/* Restore Modal */
+		.restore-modal-overlay {
+			display: none; position: fixed; inset: 0;
+			background: rgba(0,0,0,0.5); z-index: 10000;
+			align-items: center; justify-content: center;
+		}
+		.restore-modal-overlay.open { display: flex; }
+		.restore-modal {
+			background: white; border-radius: 8px; padding: 24px;
+			min-width: 360px; max-width: 520px; width: 90%;
+			box-shadow: 0 8px 32px rgba(0,0,0,0.25); font-family: var(--font-main);
+		}
+		.restore-modal h3 { margin: 0 0 16px; font-size: 1.1rem; color: #111; }
+		.restore-modal-meta { background: #f8f9fa; border-radius: 4px; padding: 10px 12px; margin-bottom: 16px; font-size: 0.85rem; }
+		.restore-modal-meta div { color: #555; margin-bottom: 4px; }
+		.restore-modal-meta div:last-child { margin-bottom: 0; }
+		.restore-modal-meta strong { color: #111; }
+		.restore-modal label { display: block; font-size: 0.85rem; color: #555; margin-bottom: 6px; }
+		.restore-modal input[type=text] {
+			width: 100%; padding: 8px 10px; border: 1px solid #ced4da; border-radius: 4px;
+			font-size: 0.95rem; font-family: var(--font-main); box-sizing: border-box;
+		}
+		.restore-modal input[type=text]:focus { outline: none; border-color: var(--primary); }
+		.restore-modal-preview {
+			margin-top: 10px; font-size: 0.8rem; color: #6c757d;
+			font-family: 'Consolas', monospace; word-break: break-all;
+		}
+		.restore-modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+		body.dark .restore-modal { background: #252537; }
+		body.dark .restore-modal h3 { color: #e0e0e0; }
+		body.dark .restore-modal-meta { background: #1a1a2e; }
+		body.dark .restore-modal-meta div { color: #aaa; }
+		body.dark .restore-modal-meta strong { color: #e0e0e0; }
+		body.dark .restore-modal label { color: #aaa; }
+		body.dark .restore-modal input[type=text] { background: #1a1a2e; border-color: #4a4a6a; color: #e0e0e0; }
+		body.dark .restore-modal-preview { color: #7a7aaa; }
+
 		/* Responsive */
 		@media (max-width: 768px) {
 			.toolbar { padding: 6px 8px; }
@@ -337,6 +374,26 @@
 		</div>
 		<div id="spinnerEl" class="spinner" style="display:none;"></div>
 		<div id="loaderText">Lade Backup...</div>
+	</div>
+
+	<!-- Restore Modal -->
+	<div class="restore-modal-overlay" id="restoreModalOverlay" onclick="closeRestoreModal(event)">
+		<div class="restore-modal" onclick="event.stopPropagation()">
+			<h3>In ioBroker laden</h3>
+			<div class="restore-modal-meta">
+				<div>Skript: <strong id="rmScriptName"></strong></div>
+				<div>Pfad: <strong id="rmScriptPath"></strong></div>
+				<div>Typ: <strong id="rmScriptType"></strong></div>
+			</div>
+			<label for="rmSuffix">Suffix (wird an den Skriptnamen angehängt)</label>
+			<input type="text" id="rmSuffix" value="_rcvr" oninput="updateRestorePreview()">
+			<div class="restore-modal-preview" id="rmPreview"></div>
+			<div class="restore-modal-footer">
+				<span id="rmMsg" style="flex:1;font-size:0.85rem;align-self:center;"></span>
+				<button class="btn btn-outline" onclick="closeRestoreModal()">Abbrechen</button>
+				<button class="btn btn-outline-success" id="rmConfirmBtn" onclick="confirmRestoreScript()">Laden</button>
+			</div>
+		</div>
 	</div>
 
 	<div class="toolbar">
@@ -407,11 +464,7 @@
 				<div class="action-bar-inner">
 					<div class="btn-group" id="viewSwitcher"></div>
 					<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-						<div id="restoreRow" style="display:flex;align-items:center;gap:6px;">
-							<input type="text" id="restoreSuffix" value="_rcvr" class="restore-suffix-input" title="Suffix für den Skriptnamen">
-							<button onclick="restoreCurrentScript()" class="btn btn-outline-success">In ioBroker laden</button>
-							<span id="restoreMsg" style="font-size:0.8rem;"></span>
-						</div>
+						<button onclick="openRestoreModal()" class="btn btn-outline-success" id="restoreBtn">In ioBroker laden</button>
 						<button onclick="copyCode(this)" class="btn btn-outline-light">Code Kopieren</button>
 						<button onclick="downloadActive()" class="btn btn-primary" id="dlBtn">Download</button>
 					</div>
@@ -1191,21 +1244,54 @@
 			renderList();
 		}
 
-		// === Restore to ioBroker ===
-		function restoreCurrentScript() {
+		// === Restore Modal ===
+		function openRestoreModal() {
 			if (cur.index < 0) return;
 			const s = scriptsData[cur.index];
-			const suffix = document.getElementById('restoreSuffix').value.trim() || '_rcvr';
-			const msgEl = document.getElementById('restoreMsg');
+			document.getElementById('rmScriptName').textContent = s.name;
+			document.getElementById('rmScriptPath').textContent = s.path;
+			document.getElementById('rmScriptType').textContent = s.type;
+			document.getElementById('rmSuffix').value = '_rcvr';
+			document.getElementById('rmMsg').textContent = '';
+			document.getElementById('rmMsg').style.color = '';
+			document.getElementById('rmConfirmBtn').disabled = false;
+			updateRestorePreview();
+			document.getElementById('restoreModalOverlay').classList.add('open');
+			setTimeout(() => document.getElementById('rmSuffix').focus(), 50);
+		}
+
+		function closeRestoreModal(e) {
+			if (e && e.target !== document.getElementById('restoreModalOverlay')) return;
+			document.getElementById('restoreModalOverlay').classList.remove('open');
+		}
+
+		function updateRestorePreview() {
+			if (cur.index < 0) return;
+			const s = scriptsData[cur.index];
+			const suffix = document.getElementById('rmSuffix').value.trim();
+			const parts = s.path.split('.');
+			parts[parts.length - 1] = parts[parts.length - 1] + suffix;
+			document.getElementById('rmPreview').textContent = '→ script.js.' + parts.join('.');
+		}
+
+		function confirmRestoreScript() {
+			if (cur.index < 0) return;
+			const s = scriptsData[cur.index];
+			const suffix = document.getElementById('rmSuffix').value.trim() || '_rcvr';
+			const msgEl = document.getElementById('rmMsg');
+			const confirmBtn = document.getElementById('rmConfirmBtn');
 			msgEl.style.color = '#aaa';
 			msgEl.textContent = '⏳ Laden...';
+			confirmBtn.disabled = true;
 			sendTo('restoreScript', { path: s.path, name: s.name, type: s.type, source: s.source, suffix }, function(result) {
+				confirmBtn.disabled = false;
 				if (result && result.error) {
 					msgEl.style.color = '#dc3545';
 					msgEl.textContent = '✗ ' + result.error;
 				} else if (result && result.success) {
 					msgEl.style.color = '#198754';
-					msgEl.textContent = '✓ ' + result.id;
+					msgEl.textContent = '✓ Geladen!';
+					setTimeout(() => document.getElementById('restoreModalOverlay').classList.remove('open'), 1200);
 				} else {
 					msgEl.style.color = '#dc3545';
 					msgEl.textContent = '✗ Unbekannter Fehler';
