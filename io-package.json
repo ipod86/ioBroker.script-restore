@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "news": {
+      "0.0.11": {
+        "en": "add type filter (JS/TS/Blockly/Rules) in script sidebar\nadd direct restore into ioBroker with suffix input and confirm modal\nremove obsolete admin/words.js and .prettierignore",
+        "de": "typfilter (JS/TS/Blockly/Rules) in Skript-Seitenleiste hinzufügen\ndirekte Wiederherstellung in ioBroker mit Suffix-Eingang und bestätigen\nentfernen obsolete admin/words.js und .prettierignore",
+        "ru": "добавить фильтр типа (JS/TS/Blockly/Rules) на боковой панели сценария\nдобавить прямое восстановление в ioBroker с вводом суффикса и подтвердить модаль\nудалить устаревшие admin/words.js и .prettierignore",
+        "pt": "adicionar filtro do tipo (JS/TS/Blockly/Regras) na barra lateral do script\nadicionar restauração direta no ioBroker com entrada sufixo e confirmar modal\nremover o obsoleto admin/words.js e .prettierignore",
+        "nl": "typefilter (JS/TS/Blockly/Rules) toevoegen in script zijbalk\ndirect herstellen toevoegen aan ioBroker met achtervoegsel ingang en bevestigen modal\nverouderde admin/words.js en .prettierignore verwijderen",
+        "fr": "ajouter un filtre de type (JS/TS/Blockly/Rules) dans la barre latérale du script\najouter la restauration directe dans ioBroker avec suffixe entrée et confirmer modal\nsupprimer admin/words.js obsolète et .prettierignore",
+        "it": "aggiungere il filtro di tipo (JS/TS/Blockly/Rules) nella barra laterale dello script\naggiungere il ripristino diretto in ioBroker con ingresso suffisso e confermare modal\nrimuovere obsoleti admin/words.js e .prettierignore",
+        "es": "añadir filtro tipo (JS/TS/Blockly/Rules) en barra lateral de script\nañadir la restauración directa en ioBroker con entrada de sufijo y confirmar modal\neliminar obsoletos admin/words.js y .prettierignore",
+        "pl": "dodaj filtr typu (JS / TS / Blockly / Rules) w pasku bocznym skryptu\ndodaj bezpośrednie przywracanie do joBrokera z wejściem przyrostowym i potwierdź modal\nusunąć przestarzałe admin / words.js i .prettierignore",
+        "uk": "додати фільтр типу (JS/TS/Blockly/Rules) в бічній панелі скриптів\nдодати прямий відновлення в ioBroker з входом Suffix і підтвердити модаль\nвидалити obsolete admin/words.js і .prettierignore",
+        "zh-cn": "在脚本边栏中添加类型过滤器( JS/ TS/ Blockly/ Rules)\n在 ioBroker 中添加带有后缀输入的直接还原并确认模式\n删除过时的管理员/名词.js和. pretierignore"
+      },
       "0.0.10": {
         "en": "Fix jsonConfig responsive sizes (E5509); trim news to 7 entries; add Dependabot cooldown",
         "de": "jsonConfig Responsive-Größen korrigiert (E5509); News auf 7 Einträge reduziert; Dependabot-Cooldown ergänzt",

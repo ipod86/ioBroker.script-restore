@@ -75,7 +75,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.0.11 (2026-04-13)
 * (ipod86) add type filter (JS/TS/Blockly/Rules) in script sidebar
 * (ipod86) add direct restore into ioBroker with suffix input and confirm modal
 * (ipod86) remove obsolete admin/words.js and .prettierignore
@@ -100,26 +100,6 @@ The archive is parsed entirely in the browser — no files are written to disk d
 ### 0.0.7 (2026-04-08)
 * (ipod86) fix HTTP URL loading without protocol prefix (auto-prepend https://)
 * (ipod86) remove localStorage persistence for last loaded backup
-
-### 0.0.6 (2026-04-08)
-* (ipod86) add HTTP, SFTP and WebDAV as optional backup sources
-* (ipod86) multi-select scripts with Ctrl+click and download as ZIP
-* (ipod86) remember last loaded backup in browser (localStorage)
-* (ipod86) auto-detect local backup path from backitup adapter
-
-### 0.0.5 (2026-04-08)
-* (ipod86) add FTP and SMB as optional backup sources with connection test button
-* (ipod86) make local backup source optional (enable/disable in settings)
-* (ipod86) add SMB version info (SMB2 only) in settings
-
-### 0.0.4 (2026-04-06)
-* (ipod86) improve dark theme detection: live switching via MutationObserver and storage events
-
-### 0.0.3 (2026-04-06)
-* (ipod86) add dark theme support for admin tab UI
-
-### 0.0.1 (2026-04-06)
-* (ipod86) initial release
 
 ## License
 MIT License
