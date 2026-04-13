@@ -122,6 +122,9 @@ class ScriptRestore extends utils.Adapter {
 				case "parseSmbFile":
 					await this.handleParseSmbFile(obj);
 					break;
+				case "restoreScript":
+					await this.handleRestoreScript(obj);
+					break;
 				default:
 					this.sendTo(obj.from, obj.command, { error: "Unknown command" }, obj.callback);
 			}
@@ -774,6 +777,82 @@ class ScriptRestore extends utils.Adapter {
 			this.sendTo(obj.from, obj.command, { scripts }, obj.callback);
 		} catch (e) {
 			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
+		}
+	}
+
+	// ─── Restore to ioBroker ─────────────────────────────────────────────────
+
+	private async handleRestoreScript(obj: ioBroker.Message): Promise<void> {
+		const msg = obj.message as { path: string; name: string; type: string; source: string; suffix: string };
+		const suffix = msg.suffix || "_rcvr";
+
+		// Append suffix to the last path segment (same logic as scriptRecovery.js)
+		const parts = msg.path.split(".");
+		parts[parts.length - 1] = parts[parts.length - 1] + suffix;
+		const newScriptPath = parts.join(".");
+		const newId = `script.js.${newScriptPath}`;
+		const newName = msg.name + suffix;
+
+		// Do not overwrite existing scripts
+		let existing: ioBroker.Object | null | undefined;
+		try {
+			existing = await this.getForeignObjectAsync(newId);
+		} catch {
+			existing = null;
+		}
+		if (existing) {
+			this.sendTo(obj.from, obj.command, { error: `Skript existiert bereits: ${newId}` }, obj.callback);
+			return;
+		}
+
+		const engineTypeMap: Record<string, string> = {
+			TypeScript: "TypeScript/ts",
+			Blockly: "Blockly",
+			Rules: "Rules",
+			JS: "JavaScript/js",
+		};
+		const engineType = engineTypeMap[msg.type] || "JavaScript/js";
+
+		try {
+			await this.ensureScriptFolders(newId);
+			await this.setForeignObjectAsync(newId, {
+				type: "script",
+				common: {
+					name: newName,
+					engineType,
+					engine: "system.adapter.javascript.0",
+					source: msg.source || "",
+					enabled: false,
+					debug: false,
+					verbose: false,
+				} as unknown as ioBroker.ScriptCommon,
+				native: {},
+			});
+			this.log.info(`Script restored: ${newId}`);
+			this.sendTo(obj.from, obj.command, { success: true, id: newId }, obj.callback);
+		} catch (e) {
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
+		}
+	}
+
+	private async ensureScriptFolders(scriptId: string): Promise<void> {
+		// scriptId = "script.js.folderA.folderB.scriptName"
+		// Create folder objects for each intermediate path segment
+		const parts = scriptId.split(".");
+		for (let i = 2; i < parts.length - 1; i++) {
+			const folderId = parts.slice(0, i + 1).join(".");
+			try {
+				const existing = await this.getForeignObjectAsync(folderId);
+				if (!existing) {
+					await this.setForeignObjectAsync(folderId, {
+						type: "folder",
+						common: { name: parts[i] } as ioBroker.ObjectCommon,
+						native: {},
+					});
+				}
+			} catch {
+				// ignore individual folder creation errors
+			}
 		}
 	}
 }

@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "news": {
+      "0.0.11": {
+        "en": "Add type filter (JS/TS/Blockly/Rules) and direct restore to ioBroker with configurable suffix",
+        "de": "Typ-Filter (JS/TS/Blockly/Rules) und direktes Laden in ioBroker mit konfigurierbarem Suffix hinzugefügt"
+      },
       "0.0.10": {
         "en": "Fix jsonConfig responsive sizes (E5509); trim news to 7 entries; add Dependabot cooldown",
         "de": "jsonConfig Responsive-Größen korrigiert (E5509); News auf 7 Einträge reduziert; Dependabot-Cooldown ergänzt",
@@ -80,19 +84,6 @@
         "pl": "Dodano FTP/SMB jako opcjonalne źródła kopii zapasowych z przyciskiem testowym; lokalne źródło opcjonalne",
         "uk": "Додано FTP/SMB як опціональні джерела резервних копій з кнопкою тестування; локальне джерело опціональне",
         "zh-cn": "添加 FTP/SMB 作为可选备份来源（含测试按钮）；本地来源可选"
-      },
-      "0.0.4": {
-        "en": "Improve dark theme detection: live switching via MutationObserver and storage events",
-        "de": "Dark-Theme-Erkennung verbessert: Live-Wechsel per MutationObserver und Storage-Events",
-        "ru": "Улучшено определение тёмной темы: переключение в реальном времени через MutationObserver и storage-события",
-        "pt": "Melhoria na detecção do tema escuro: troca em tempo real via MutationObserver e eventos de armazenamento",
-        "nl": "Verbeterde detectie van donker thema: live wisseling via MutationObserver en opslag-events",
-        "fr": "Amélioration de la détection du thème sombre : changement en direct via MutationObserver et événements de stockage",
-        "it": "Migliorata la rilevazione del tema scuro: cambio in tempo reale tramite MutationObserver ed eventi di archiviazione",
-        "es": "Mejora en la detección del tema oscuro: cambio en vivo mediante MutationObserver y eventos de almacenamiento",
-        "pl": "Ulepszone wykrywanie ciemnego motywu: przełączanie na żywo przez MutationObserver i zdarzenia storage",
-        "uk": "Покращено визначення темної теми: перемикання в реальному часі через MutationObserver та події сховища",
-        "zh-cn": "改进暗色主题检测：通过 MutationObserver 和存储事件实现实时切换"
       }
     },
     "titleLang": {

@@ -122,6 +122,9 @@ class ScriptRestore extends utils.Adapter {
         case "parseSmbFile":
           await this.handleParseSmbFile(obj);
           break;
+        case "restoreScript":
+          await this.handleRestoreScript(obj);
+          break;
         default:
           this.sendTo(obj.from, obj.command, { error: "Unknown command" }, obj.callback);
       }
@@ -683,6 +686,70 @@ class ScriptRestore extends utils.Adapter {
       this.sendTo(obj.from, obj.command, { scripts }, obj.callback);
     } catch (e) {
       this.sendTo(obj.from, obj.command, { error: e.message }, obj.callback);
+    }
+  }
+  // ─── Restore to ioBroker ─────────────────────────────────────────────────
+  async handleRestoreScript(obj) {
+    const msg = obj.message;
+    const suffix = msg.suffix || "_rcvr";
+    const parts = msg.path.split(".");
+    parts[parts.length - 1] = parts[parts.length - 1] + suffix;
+    const newScriptPath = parts.join(".");
+    const newId = `script.js.${newScriptPath}`;
+    const newName = msg.name + suffix;
+    let existing;
+    try {
+      existing = await this.getForeignObjectAsync(newId);
+    } catch {
+      existing = null;
+    }
+    if (existing) {
+      this.sendTo(obj.from, obj.command, { error: `Skript existiert bereits: ${newId}` }, obj.callback);
+      return;
+    }
+    const engineTypeMap = {
+      TypeScript: "TypeScript/ts",
+      Blockly: "Blockly",
+      Rules: "Rules",
+      JS: "JavaScript/js"
+    };
+    const engineType = engineTypeMap[msg.type] || "JavaScript/js";
+    try {
+      await this.ensureScriptFolders(newId);
+      await this.setForeignObjectAsync(newId, {
+        type: "script",
+        common: {
+          name: newName,
+          engineType,
+          engine: "system.adapter.javascript.0",
+          source: msg.source || "",
+          enabled: false,
+          debug: false,
+          verbose: false
+        },
+        native: {}
+      });
+      this.log.info(`Script restored: ${newId}`);
+      this.sendTo(obj.from, obj.command, { success: true, id: newId }, obj.callback);
+    } catch (e) {
+      this.sendTo(obj.from, obj.command, { error: e.message }, obj.callback);
+    }
+  }
+  async ensureScriptFolders(scriptId) {
+    const parts = scriptId.split(".");
+    for (let i = 2; i < parts.length - 1; i++) {
+      const folderId = parts.slice(0, i + 1).join(".");
+      try {
+        const existing = await this.getForeignObjectAsync(folderId);
+        if (!existing) {
+          await this.setForeignObjectAsync(folderId, {
+            type: "folder",
+            common: { name: parts[i] },
+            native: {}
+          });
+        }
+      } catch {
+      }
     }
   }
 }

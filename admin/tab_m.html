@@ -297,6 +297,29 @@
 		body.dark .progress-inner { background: rgba(26,26,46,0.95); }
 		body.dark #loaderText { color: #c0c0d0; }
 
+		/* Type Filter Bar */
+		.type-filter-bar {
+			display: flex; gap: 4px; padding: 5px 8px;
+			border-bottom: 1px solid var(--border); flex-shrink: 0; flex-wrap: wrap;
+		}
+		.btn-type {
+			background: transparent; border: 1px solid #ced4da; border-radius: 3px;
+			padding: 2px 8px; cursor: pointer; font-size: 0.8rem; color: #495057;
+			transition: 0.15s; font-family: var(--font-main);
+		}
+		.btn-type:hover { background: #f0f0f0; }
+		.btn-type.active { background: #e9ecef; border-color: #999; font-weight: 600; }
+		.btn-type .type-badge { margin: 0; pointer-events: none; }
+		.restore-suffix-input {
+			width: 70px; padding: 2px 6px; border: 1px solid #555;
+			background: #1e1e1e; color: #d4d4d4; border-radius: 3px; font-size: 0.85rem;
+			font-family: var(--font-main);
+		}
+		body.dark .type-filter-bar { border-bottom-color: #3a3a5c; }
+		body.dark .btn-type { color: #c0c0d0; border-color: #4a4a6a; }
+		body.dark .btn-type:hover { background: #3a3a5c; }
+		body.dark .btn-type.active { background: #3a3a5c; border-color: #7070a0; }
+
 		/* Responsive */
 		@media (max-width: 768px) {
 			.toolbar { padding: 6px 8px; }
@@ -367,6 +390,13 @@
 				<input type="text" id="q" placeholder="Suche in Namen, Ordner &amp; Code...">
 				<button class="btn-icon" id="expandToggleBtn" onclick="toggleExpandAll()" title="Alle Ordner aufklappen">📂</button>
 			</div>
+			<div class="type-filter-bar">
+				<button class="btn-type active" onclick="setTypeFilter(this, '')">Alle</button>
+				<button class="btn-type" onclick="setTypeFilter(this, 'JS')"><span class="type-badge badge-JS">JS</span></button>
+				<button class="btn-type" onclick="setTypeFilter(this, 'TypeScript')"><span class="type-badge badge-TypeScript">TS</span></button>
+				<button class="btn-type" onclick="setTypeFilter(this, 'Blockly')"><span class="type-badge badge-Blockly">Blockly</span></button>
+				<button class="btn-type" onclick="setTypeFilter(this, 'Rules')"><span class="type-badge badge-Rules">Rules</span></button>
+			</div>
 			<div id="list" class="script-list"></div>
 		</div>
 
@@ -376,7 +406,19 @@
 			<div class="action-bar" id="actionBar">
 				<div class="action-bar-inner">
 					<div class="btn-group" id="viewSwitcher"></div>
-					<div style="display:flex;gap:6px;">
+					<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+						<div id="restoreRow" style="display:flex;align-items:center;gap:8px;">
+							<label style="display:flex;align-items:center;gap:5px;color:#d4d4d4;font-size:0.85rem;cursor:pointer;white-space:nowrap;">
+								<input type="checkbox" id="restoreEnabled" onchange="toggleRestoreOptions()">
+								In ioBroker laden
+							</label>
+							<div id="restoreOptions" style="display:none;align-items:center;gap:6px;">
+								<span style="color:#aaa;font-size:0.8rem;">Suffix:</span>
+								<input type="text" id="restoreSuffix" value="_rcvr" class="restore-suffix-input">
+								<button onclick="restoreCurrentScript()" class="btn btn-outline-success" style="font-size:0.8rem;padding:3px 10px;">Laden</button>
+								<span id="restoreMsg" style="font-size:0.8rem;"></span>
+							</div>
+						</div>
 						<button onclick="copyCode(this)" class="btn btn-outline-light">Code Kopieren</button>
 						<button onclick="downloadActive()" class="btn btn-primary" id="dlBtn">Download</button>
 					</div>
@@ -578,6 +620,7 @@
 		let cur = { index: -1 };
 		const openFolders = new Set();
 		let isAllExpanded = false;
+		let activeTypeFilter = '';
 
 		function escapeHTML(str) {
 			if (!str) return '';
@@ -1023,13 +1066,15 @@
 			const toggleBtn = document.getElementById('expandToggleBtn');
 			const tree = buildTree(scriptsData);
 
-			if (q) {
+			if (q || activeTypeFilter) {
 				toggleBtn.style.display = 'none';
 				const filter = (node, path) => {
 					if (!node.isDir) {
-						return node.script.name.toLowerCase().includes(q) ||
+						const typeOk = !activeTypeFilter || node.script.type === activeTypeFilter;
+						const qOk = !q || node.script.name.toLowerCase().includes(q) ||
 							node.script.path.toLowerCase().includes(q) ||
 							(node.script.source && node.script.source.toLowerCase().includes(q));
+						return typeOk && qOk;
 					}
 					let has = false;
 					for (const k in node.children) {
@@ -1144,6 +1189,42 @@
 		}
 
 		document.getElementById('q').addEventListener('keyup', renderList);
+
+		// === Type Filter ===
+		function setTypeFilter(btn, type) {
+			activeTypeFilter = type;
+			document.querySelectorAll('.btn-type').forEach(b => b.classList.remove('active'));
+			btn.classList.add('active');
+			renderList();
+		}
+
+		// === Restore to ioBroker ===
+		function toggleRestoreOptions() {
+			const enabled = document.getElementById('restoreEnabled').checked;
+			document.getElementById('restoreOptions').style.display = enabled ? 'flex' : 'none';
+			document.getElementById('restoreMsg').textContent = '';
+		}
+
+		function restoreCurrentScript() {
+			if (cur.index < 0) return;
+			const s = scriptsData[cur.index];
+			const suffix = document.getElementById('restoreSuffix').value.trim() || '_rcvr';
+			const msgEl = document.getElementById('restoreMsg');
+			msgEl.style.color = '#aaa';
+			msgEl.textContent = '⏳ Laden...';
+			sendTo('restoreScript', { path: s.path, name: s.name, type: s.type, source: s.source, suffix }, function(result) {
+				if (result && result.error) {
+					msgEl.style.color = '#dc3545';
+					msgEl.textContent = '✗ ' + result.error;
+				} else if (result && result.success) {
+					msgEl.style.color = '#198754';
+					msgEl.textContent = '✓ ' + result.id;
+				} else {
+					msgEl.style.color = '#dc3545';
+					msgEl.textContent = '✗ Unbekannter Fehler';
+				}
+			});
+		}
 	</script>
 </body>
 </html>
