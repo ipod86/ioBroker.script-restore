@@ -407,17 +407,10 @@
 				<div class="action-bar-inner">
 					<div class="btn-group" id="viewSwitcher"></div>
 					<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-						<div id="restoreRow" style="display:flex;align-items:center;gap:8px;">
-							<label style="display:flex;align-items:center;gap:5px;color:#d4d4d4;font-size:0.85rem;cursor:pointer;white-space:nowrap;">
-								<input type="checkbox" id="restoreEnabled" onchange="toggleRestoreOptions()">
-								In ioBroker laden
-							</label>
-							<div id="restoreOptions" style="display:none;align-items:center;gap:6px;">
-								<span style="color:#aaa;font-size:0.8rem;">Suffix:</span>
-								<input type="text" id="restoreSuffix" value="_rcvr" class="restore-suffix-input">
-								<button onclick="restoreCurrentScript()" class="btn btn-outline-success" style="font-size:0.8rem;padding:3px 10px;">Laden</button>
-								<span id="restoreMsg" style="font-size:0.8rem;"></span>
-							</div>
+						<div id="restoreRow" style="display:flex;align-items:center;gap:6px;">
+							<input type="text" id="restoreSuffix" value="_rcvr" class="restore-suffix-input" title="Suffix für den Skriptnamen">
+							<button onclick="restoreCurrentScript()" class="btn btn-outline-success">In ioBroker laden</button>
+							<span id="restoreMsg" style="font-size:0.8rem;"></span>
 						</div>
 						<button onclick="copyCode(this)" class="btn btn-outline-light">Code Kopieren</button>
 						<button onclick="downloadActive()" class="btn btn-primary" id="dlBtn">Download</button>
@@ -1199,12 +1192,6 @@
 		}
 
 		// === Restore to ioBroker ===
-		function toggleRestoreOptions() {
-			const enabled = document.getElementById('restoreEnabled').checked;
-			document.getElementById('restoreOptions').style.display = enabled ? 'flex' : 'none';
-			document.getElementById('restoreMsg').textContent = '';
-		}
-
 		function restoreCurrentScript() {
 			if (cur.index < 0) return;
 			const s = scriptsData[cur.index];
