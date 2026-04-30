@@ -2,6 +2,10 @@
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
+## 0.0.7 (2026-04-08)
+* (ipod86) fix HTTP URL loading without protocol prefix (auto-prepend https://)
+* (ipod86) remove localStorage persistence for last loaded backup
+
 ## 0.0.6 (2026-04-08)
 * (ipod86) add HTTP, SFTP and WebDAV as optional backup sources
 * (ipod86) multi-select scripts with Ctrl+click and download as ZIP

@@ -75,7 +75,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.0.12 (2026-04-30)
 * (ipod86) add common.singleton to prevent multiple instances
 * (ipod86) complete i18n translations for all supported languages (fr, es, it, nl, pl, pt, ru, uk, zh-cn)
 
@@ -100,10 +100,6 @@ The archive is parsed entirely in the browser — no files are written to disk d
 * (ipod86) fix: use `node:fs` instead of `fs` — fixes S5043
 * (ipod86) update Dependabot schedule from monthly to weekly — fixes S8906
 * (ipod86) rename automerge workflow to automerge-dependabot.yml — fixes S8911
-
-### 0.0.7 (2026-04-08)
-* (ipod86) fix HTTP URL loading without protocol prefix (auto-prepend https://)
-* (ipod86) remove localStorage persistence for last loaded backup
 
 ## License
 MIT License

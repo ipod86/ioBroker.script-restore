@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "news": {
+      "0.0.12": {
+        "en": "add common.singleton to prevent multiple instances\ncomplete i18n translations for all supported languages (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "de": "fügen sie gemeinsam hinzu. singleton, um mehrere instanzen zu verhindern\nvollständige i18n übersetzungen für alle unterstützten sprachen (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "ru": "добавить общий. синглтон для предотвращения нескольких случаев\nполный перевод i18n для всех поддерживаемых языков (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "pt": "adicionar comum. singleton para prevenir múltiplas instâncias\ntraduções completas i18n para todas as línguas suportadas (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "nl": "voeg gewoon toe. singleton om meerdere instanties te voorkomen\ncomplete i18n vertalingen voor alle ondersteunde talen (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "fr": "ajouter commune. singleton pour prévenir plusieurs instances\ntraduction complète i18n pour toutes les langues prises en charge (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "it": "aggiungere comune. singleton per prevenire più istanze\ntraduzioni i18n complete per tutte le lingue supportate (en, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "es": "añadir común. singleton para prevenir múltiples casos\ncompleta i18n traducciones para todos los idiomas compatibles (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "pl": "dodać wspólne. singleton zapobiec wielu instancji\npełne tłumaczenie i18n dla wszystkich obsługiwanych języków (fr, es, it, nl, pl, pt, ru, uk, zh- cn)",
+        "uk": "додати загальний. однотон для запобігання декількох екземплярів\nповний переклад i18n для всіх підтримуваних мов (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
+        "zh-cn": "添加常见。 用于防止多个实例的单调\n完成所有支持语言的i18n翻译(fr, es, it, nl, pl, pt, ru, uk, zh- cn)"
+      },
       "0.0.11": {
         "en": "add type filter (JS/TS/Blockly/Rules) in script sidebar\nadd direct restore into ioBroker with suffix input and confirm modal\nremove obsolete admin/words.js and .prettierignore",
         "de": "typfilter (JS/TS/Blockly/Rules) in Skript-Seitenleiste hinzufügen\ndirekte Wiederherstellung in ioBroker mit Suffix-Eingang und bestätigen\nentfernen obsolete admin/words.js und .prettierignore",
@@ -80,19 +93,6 @@
         "pl": "Źródła HTTP/SFTP/WebDAV; wielokrotny wybór Ctrl+klik i pobieranie ZIP; zapamiętywanie ostatniego backupu; auto-wykrywanie ścieżki",
         "uk": "Джерела HTTP/SFTP/WebDAV; множинний вибір Ctrl+клік та ZIP-завантаження; запам'ятовування останнього бекапу; авто-визначення шляху",
         "zh-cn": "添加 HTTP/SFTP/WebDAV 备份来源；Ctrl+单击多选及 ZIP 下载；记住最后加载的备份；自动检测本地备份路径"
-      },
-      "0.0.5": {
-        "en": "Add FTP/SMB as optional backup sources with test button; make local source optional; configurable Beaufort threshold",
-        "de": "FTP/SMB als optionale Backup-Quellen mit Testbutton; lokale Quelle optional schaltbar; SMB-Versionshinweis",
-        "ru": "Добавлены FTP/SMB как дополнительные источники резервных копий с кнопкой тестирования; локальный источник теперь опционален",
-        "pt": "Adicionar FTP/SMB como fontes de backup opcionais com botão de teste; fonte local opcional",
-        "nl": "FTP/SMB toegevoegd als optionele back-upbronnen met testknop; lokale bron optioneel",
-        "fr": "Ajout de FTP/SMB comme sources de sauvegarde optionnelles avec bouton de test; source locale optionnelle",
-        "it": "Aggiunta di FTP/SMB come sorgenti di backup opzionali con pulsante di test; sorgente locale opzionale",
-        "es": "Añadir FTP/SMB como fuentes de copia de seguridad opcionales con botón de prueba; fuente local opcional",
-        "pl": "Dodano FTP/SMB jako opcjonalne źródła kopii zapasowych z przyciskiem testowym; lokalne źródło opcjonalne",
-        "uk": "Додано FTP/SMB як опціональні джерела резервних копій з кнопкою тестування; локальне джерело опціональне",
-        "zh-cn": "添加 FTP/SMB 作为可选备份来源（含测试按钮）；本地来源可选"
       }
     },
     "titleLang": {
