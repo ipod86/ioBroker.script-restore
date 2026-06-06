@@ -75,7 +75,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.5 (2026-06-06)
 * (ipod86) fix: update @alcalzone/release-script to ^5.2.1 (E0036)
 * (ipod86) fix: add missing placeholder i18n keys to all 11 language files (W5612)
 * (ipod86) fix: migrate i18n to short format, add npm provenance signing (S5601, S2008)
@@ -102,12 +102,6 @@ The archive is parsed entirely in the browser — no files are written to disk d
 * (ipod86) allow overwriting existing scripts during restore (confirmation dialog with path display)
 * (ipod86) allow empty suffix to restore script under its original name
 * (ipod86) prompt to start script immediately after successful restore
-
-### 0.1.0 (2026-05-13)
-* (ipod86) drop Node.js 20 support (EOL 2026-04-30), require >= 22
-* (ipod86) fix: move @iobroker/types to production dependencies to fix CI integration test
-* (ipod86) add .npmrc with legacy-peer-deps to resolve peer dependency conflicts
-* (ipod86) update dependencies: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config
 
 Older changelogs are available in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 

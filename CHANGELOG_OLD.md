@@ -1,5 +1,11 @@
 # Older Changelog
 
+### 0.1.0 (2026-05-13)
+* (ipod86) drop Node.js 20 support (EOL 2026-04-30), require >= 22
+* (ipod86) fix: move @iobroker/types to production dependencies to fix CI integration test
+* (ipod86) add .npmrc with legacy-peer-deps to resolve peer dependency conflicts
+* (ipod86) update dependencies: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config
+
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
 ## 0.0.12 (2026-04-30)
