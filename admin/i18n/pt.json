@@ -1,6 +1,10 @@
 {
+    "/": "/",
     "/backups": "/backups",
     "/opt/iobroker/backups": "/opt/iobroker/backups",
+    "192.168.1.100": "192.168.1.100",
+    "21": "21",
+    "22": "22",
     "Backups": "Backups",
     "anonymous": "anonymous",
     "backupPath": "Caminho da cópia de segurança",
