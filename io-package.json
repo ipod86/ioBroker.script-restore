@@ -67,32 +67,6 @@
         "pl": "drop Node.js 20 support (EOL 2026- 04- 30), require > = 22\nfix: move @ iobroker / types to production dependences to fix CI integration test\ndodaj .npmrc z legacy- peer- deps w celu rozwiązania konfliktów wzajemnej zależności\naktualizacje zależności: webdav, basic- ftp, typescript, @ types / node, @ iobroker / eslint- config",
         "uk": "javaScript licenses API Веб-сайт Go1.13.8\nвиправити: перемістити @iobroker/types до виробництва залежностей для фіксації тесту інтеграції CI\nдодати .npmrc з спадкоємно-перцевими депсами для вирішення конфліктів залежностей\njavascript licenses api веб-сайт go1.13.8",
         "zh-cn": "drop Node.js 20 支持(EOL 2026-04-30), 需要 >= 22\n固定 : 将 @iobroduc/ types 移动到生产依赖, 以固定 CI 集成测试\n添加 .npmrc 和 least- peer- deps 以解决同伴依赖冲突\n更新依赖性:webdav, basic-ftp, typescript, @types/node, @iobroster/eslint-config"
-      },
-      "0.0.12": {
-        "en": "add common.singleton to prevent multiple instances\ncomplete i18n translations for all supported languages (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "de": "fügen sie gemeinsam hinzu. singleton, um mehrere instanzen zu verhindern\nvollständige i18n übersetzungen für alle unterstützten sprachen (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "ru": "добавить общий. синглтон для предотвращения нескольких случаев\nполный перевод i18n для всех поддерживаемых языков (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "pt": "adicionar comum. singleton para prevenir múltiplas instâncias\ntraduções completas i18n para todas as línguas suportadas (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "nl": "voeg gewoon toe. singleton om meerdere instanties te voorkomen\ncomplete i18n vertalingen voor alle ondersteunde talen (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "fr": "ajouter commune. singleton pour prévenir plusieurs instances\ntraduction complète i18n pour toutes les langues prises en charge (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "it": "aggiungere comune. singleton per prevenire più istanze\ntraduzioni i18n complete per tutte le lingue supportate (en, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "es": "añadir común. singleton para prevenir múltiples casos\ncompleta i18n traducciones para todos los idiomas compatibles (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "pl": "dodać wspólne. singleton zapobiec wielu instancji\npełne tłumaczenie i18n dla wszystkich obsługiwanych języków (fr, es, it, nl, pl, pt, ru, uk, zh- cn)",
-        "uk": "додати загальний. однотон для запобігання декількох екземплярів\nповний переклад i18n для всіх підтримуваних мов (fr, es, it, nl, pl, pt, ru, uk, zh-cn)",
-        "zh-cn": "添加常见。 用于防止多个实例的单调\n完成所有支持语言的i18n翻译(fr, es, it, nl, pl, pt, ru, uk, zh- cn)"
-      },
-      "0.0.11": {
-        "en": "add type filter (JS/TS/Blockly/Rules) in script sidebar\nadd direct restore into ioBroker with suffix input and confirm modal\nremove obsolete admin/words.js and .prettierignore",
-        "de": "typfilter (JS/TS/Blockly/Rules) in Skript-Seitenleiste hinzufügen\ndirekte Wiederherstellung in ioBroker mit Suffix-Eingang und bestätigen\nentfernen obsolete admin/words.js und .prettierignore",
-        "ru": "добавить фильтр типа (JS/TS/Blockly/Rules) на боковой панели сценария\nдобавить прямое восстановление в ioBroker с вводом суффикса и подтвердить модаль\nудалить устаревшие admin/words.js и .prettierignore",
-        "pt": "adicionar filtro do tipo (JS/TS/Blockly/Regras) na barra lateral do script\nadicionar restauração direta no ioBroker com entrada sufixo e confirmar modal\nremover o obsoleto admin/words.js e .prettierignore",
-        "nl": "typefilter (JS/TS/Blockly/Rules) toevoegen in script zijbalk\ndirect herstellen toevoegen aan ioBroker met achtervoegsel ingang en bevestigen modal\nverouderde admin/words.js en .prettierignore verwijderen",
-        "fr": "ajouter un filtre de type (JS/TS/Blockly/Rules) dans la barre latérale du script\najouter la restauration directe dans ioBroker avec suffixe entrée et confirmer modal\nsupprimer admin/words.js obsolète et .prettierignore",
-        "it": "aggiungere il filtro di tipo (JS/TS/Blockly/Rules) nella barra laterale dello script\naggiungere il ripristino diretto in ioBroker con ingresso suffisso e confermare modal\nrimuovere obsoleti admin/words.js e .prettierignore",
-        "es": "añadir filtro tipo (JS/TS/Blockly/Rules) en barra lateral de script\nañadir la restauración directa en ioBroker con entrada de sufijo y confirmar modal\neliminar obsoletos admin/words.js y .prettierignore",
-        "pl": "dodaj filtr typu (JS / TS / Blockly / Rules) w pasku bocznym skryptu\ndodaj bezpośrednie przywracanie do joBrokera z wejściem przyrostowym i potwierdź modal\nusunąć przestarzałe admin / words.js i .prettierignore",
-        "uk": "додати фільтр типу (JS/TS/Blockly/Rules) в бічній панелі скриптів\nдодати прямий відновлення в ioBroker з входом Suffix і підтвердити модаль\nвидалити obsolete admin/words.js і .prettierignore",
-        "zh-cn": "在脚本边栏中添加类型过滤器( JS/ TS/ Blockly/ Rules)\n在 ioBroker 中添加带有后缀输入的直接还原并确认模式\n删除过时的管理员/名词.js和. pretierignore"
       }
     },
     "titleLang": {
