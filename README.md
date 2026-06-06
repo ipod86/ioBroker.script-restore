@@ -75,6 +75,16 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+* (ipod86) fix: update @alcalzone/release-script to ^5.2.1 (E0036)
+* (ipod86) fix: add missing placeholder i18n keys to all 11 language files (W5612)
+* (ipod86) fix: migrate i18n to short format, add npm provenance signing (S5601, S2008)
+* (ipod86) fix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)
+* (ipod86) fix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)
+* (ipod86) fix: resolve adapter checker warnings W0069, W8917, S6022
+* (ipod86) chore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)
+* (ipod86) chore: bump typescript-eslint and @types/node
+
 ### 0.1.4 (2026-05-24)
 * (ipod86) add syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps
 * (ipod86) fix language detection: read ioBroker system language via adapter (system.config) instead of browser/DOM
