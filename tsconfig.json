@@ -32,7 +32,10 @@
 		// "useUnknownInCatchVariables": false,
 
 		"sourceMap": true,
-		"inlineSourceMap": false
+		"inlineSourceMap": false,
+
+		// TypeScript 6+ no longer auto-includes transitive @types; list test runner explicitly
+		"types": ["node", "mocha"]
 	},
 	"include": ["src/**/*.ts", "test/**/*.ts"],
 	"exclude": ["build/**", "node_modules/**", "widgets/**"]
