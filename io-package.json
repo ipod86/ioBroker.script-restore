@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.5",
+    "version": "0.1.6",
     "news": {
+      "0.1.6": {
+        "en": "upgrade typescript to 6.0 with explicit mocha types for TypeScript 6 compatibility (W0083)",
+        "de": "TypeScript auf 6.0 aktualisiert mit expliziten Mocha-Typen für TypeScript 6-Kompatibilität (W0083)",
+        "ru": "обновление TypeScript до 6.0 с явными типами mocha для совместимости с TypeScript 6 (W0083)",
+        "pt": "atualização do TypeScript para 6.0 com tipos mocha explícitos para compatibilidade com TypeScript 6 (W0083)",
+        "nl": "TypeScript bijgewerkt naar 6.0 met expliciete mocha-typen voor TypeScript 6-compatibiliteit (W0083)",
+        "fr": "mise à jour de TypeScript vers 6.0 avec types mocha explicites pour la compatibilité TypeScript 6 (W0083)",
+        "it": "aggiornamento di TypeScript a 6.0 con tipi mocha espliciti per la compatibilità con TypeScript 6 (W0083)",
+        "es": "actualización de TypeScript a 6.0 con tipos mocha explícitos para compatibilidad con TypeScript 6 (W0083)",
+        "pl": "aktualizacja TypeScript do 6.0 z jawnymi typami mocha dla kompatybilności z TypeScript 6 (W0083)",
+        "uk": "оновлення TypeScript до 6.0 з явними типами mocha для сумісності з TypeScript 6 (W0083)",
+        "zh-cn": "将 TypeScript 升级到 6.0，添加显式 mocha 类型以兼容 TypeScript 6 (W0083)"
+      },
       "0.1.5": {
         "en": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
         "de": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",

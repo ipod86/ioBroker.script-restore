@@ -75,6 +75,9 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.1.6 (2026-06-27)
+* (ipod86) fix: upgrade typescript to ^6.0.3 with explicit mocha types for TypeScript 6 compatibility (W0083)
+
 ### 0.1.5 (2026-06-06)
 * (ipod86) fix: update @alcalzone/release-script to ^5.2.1 (E0036)
 * (ipod86) fix: add missing placeholder i18n keys to all 11 language files (W5612)
