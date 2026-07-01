@@ -12,10 +12,11 @@ updates:
       - ipod86
     versioning-strategy: increase
     cooldown:
-      default: 7
+      default-days: 7
     ignore:
       - dependency-name: "@types/node"
-        update-types: ["version-update:semver-major"]
+        update-types:
+          - "version-update:semver-major"
 
   - package-ecosystem: github-actions
     directory: "/"
