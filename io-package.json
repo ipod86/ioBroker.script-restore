@@ -1,226 +1,226 @@
 {
-  "common": {
-    "name": "script-restore",
-    "version": "0.1.6",
-    "news": {
-      "0.1.6": {
-        "en": "upgrade typescript to 6.0 with explicit mocha types for TypeScript 6 compatibility (W0083)",
-        "de": "TypeScript auf 6.0 aktualisiert mit expliziten Mocha-Typen für TypeScript 6-Kompatibilität (W0083)",
-        "ru": "обновление TypeScript до 6.0 с явными типами mocha для совместимости с TypeScript 6 (W0083)",
-        "pt": "atualização do TypeScript para 6.0 com tipos mocha explícitos para compatibilidade com TypeScript 6 (W0083)",
-        "nl": "TypeScript bijgewerkt naar 6.0 met expliciete mocha-typen voor TypeScript 6-compatibiliteit (W0083)",
-        "fr": "mise à jour de TypeScript vers 6.0 avec types mocha explicites pour la compatibilité TypeScript 6 (W0083)",
-        "it": "aggiornamento di TypeScript a 6.0 con tipi mocha espliciti per la compatibilità con TypeScript 6 (W0083)",
-        "es": "actualización de TypeScript a 6.0 con tipos mocha explícitos para compatibilidad con TypeScript 6 (W0083)",
-        "pl": "aktualizacja TypeScript do 6.0 z jawnymi typami mocha dla kompatybilności z TypeScript 6 (W0083)",
-        "uk": "оновлення TypeScript до 6.0 з явними типами mocha для сумісності з TypeScript 6 (W0083)",
-        "zh-cn": "将 TypeScript 升级到 6.0，添加显式 mocha 类型以兼容 TypeScript 6 (W0083)"
-      },
-      "0.1.5": {
-        "en": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "de": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "ru": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "pt": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "nl": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "fr": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "it": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "es": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "pl": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "uk": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
-        "zh-cn": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node"
-      },
-      "0.1.4": {
-        "en": "add syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\nfix language detection: read ioBroker system language via adapter (system.config) instead of browser/DOM\ntranslate all remaining loader texts (reading file/archive, extracting, loading URL)",
-        "de": "syntax-Highlighting für JS/TS, Blockly (XML) und Rules (JSON) hinzufügen — pure JS, keine externen Deps\nspracherkennung fix: ioBroker Systemsprache über Adapter (system.config) anstelle von Browser/DOM lesen\nalle übrigen Loadertexte übersetzen (Datei/Archiv lesen, extrahieren, URL laden)",
-        "ru": "добавить подсветку синтаксиса для JS/TS, Blockly (XML) и Rules (JSON) — чистый JS, без внешних депсов\nисправить обнаружение языка: читать язык системы ioBroker через адаптер (system.config) вместо браузера/DOM\nперевод всех оставшихся текстов загрузчика (чтение файла / архива, извлечение, загрузка URL)",
-        "pt": "adicionar realce de sintaxe para JS/TS, Blockly (XML) e Rules (JSON) — puro JS, sem deps externos\ndetecção de linguagem de correção: ler ioBroker linguagem do sistema via adaptador (system.config) em vez de navegador / DOM\ntraduzir todos os textos restantes do carregador (lendo arquivo/arquivo, extraindo, carregando URL)",
-        "nl": "syntaxismarkeringen toevoegen voor JS/TS, Blockly (XML) en Rules (JSON)\nfix taaldetectie: lees ioBroker systeemtaal via adapter (system.config) in plaats van browser/DOM\nalle overgebleven laderteksten vertalen (bestand/archief lezen, uitpakken, laden van URL)",
-        "fr": "ajouter la mise en surbrillance syntaxique pour JS/TS, Blockly (XML) et Rules (JSON) — JS pur, pas de deps externes\ncorrection de la détection du langage: lire ioBroker langage système via adaptateur (system.config) au lieu de navigateur/DOM\ntraduire tous les textes restants du chargeur (lecture de fichier/archive, extraction, chargement d'URL)",
-        "it": "aggiungere l'evidenziazione della sintassi per JS/TS, Blockly (XML) e Regole (JSON) — JS puro, nessun deps esterno\nfix language detection: read ioBroker system language via adapter (system.config) anziché browser/DOM\ntradurre tutti i restanti testi di carica (lettura file/archive, estrazione, caricamento URL)",
-        "es": "añadir syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\ndetección del lenguaje de fijación: leer el lenguaje del sistema ioBroker a través del adaptador (system.config) en lugar del navegador/DOM\ntraducir todos los textos de carga restantes (leer archivo/archive, extraer, cargar URL)",
-        "pl": "dodaj podświetlanie składni dla JS / TS, Blockly (XML) i Rules (JSON) - czysty JS, brak zewnętrznych deb\nwykrywanie języka: czytaj jOBroker system language poprzez adapter (system.config) zamiast przeglądarki / DOM\nprzetłumaczyć wszystkie pozostałe teksty ładowarki (czytanie pliku / archiwum, pobieranie, wczytywanie URL)",
-        "uk": "додати синтаксис виділення для JS / T, Blockly (XML) і Правил (JSON) — чистий JS, не зовнішній депс\nenglish languageEspañol idioma中文 语言Русский языкУкраїнська моваPortuguese idioma\nперевести всі інші тексти навантажувача (читати файл/архів, вилучення, завантаження URL)",
-        "zh-cn": "增加JS/TS、Blockly(XML)和Rules(JSON)的语法重点——纯JS,没有外部解析\n固定语言检测:通过适配器(system.config)读取ioBroker系统语言,而不是浏览器/DOM\n翻译所有剩余的加载器文本(读取文件/存档、提取、加载 URL)"
-      },
-      "0.1.3": {
-        "en": "fix language flash: skip socket override when language already detected from admin frame\nreplace all hardcoded status strings with translated t() calls\nadd codeHint translation key in all 11 languages",
-        "de": "fixer sprachblitz: überschreiben der sprachfassung, wenn die sprache bereits von admin-rahmen erkannt wurde\nalle hardcoded status strings durch übersetzte t()-anrufe ersetzen\ncode hinzufügenHint Übersetzungsschlüssel in allen 11 Sprachen",
-        "ru": "исправьте языковую вспышку: пропустите переопределение сокетов, когда язык уже обнаружен в рамке администратора\nзаменить все жестко закодированные строки состояния переводными вызовами t()\nдобавить ключ перевода codeHint на все 11 языков",
-        "pt": "flash da linguagem de correção: sobreposição do socket pule quando a linguagem já detectada do frame do administrador\nsubstituir todas as cadeias de estado codificadas por chamadas traduzidas em t()\nadicionar códigoHint chave de tradução em todos os 11 idiomas",
-        "nl": "fix taalflits: sla socket over wanneer taal al gedetecteerd vanuit admin frame\nvervangen alle hardcoded status strings door vertaalde t() calls\ncodeHint vertaalsleutel toevoegen in alle 11 talen",
-        "fr": "résoudre le flash de langue: sauter la préséance socket lorsque la langue déjà détectée à partir du cadre admin\nremplacer toutes les chaînes d'état codées en dur par des appels traduit t()\najouter codeHint clé de traduction dans les 11 langues",
-        "it": "fix lingua flash: saltare socket override quando la lingua già rilevata dalla cornice di amministrazione\nsostituire tutte le stringhe di stato codificate con le chiamate t() tradotte\naggiungere codice Chiave di traduzione in tutte le 11 lingue",
-        "es": "solucionar el flash del lenguaje: saltar la anulación de la toma cuando el lenguaje ya detectado desde el marco de administración\nreemplazar todas las cadenas de estado codificadas con llamadas t( traducido)\nañadir codeHint traducción clave en los 11 idiomas",
-        "pl": "fix flash język: skip derogator gniazda, gdy język już wykryty z ramki admin\nzastąp wszystkie zaszyfrowane łańcuchy stanu translated t () calls\ndodaj klucz tłumaczeniowy CodeHint we wszystkich 11 językach",
-        "uk": "фіксувати мовне спалах: пропустити розетку перенапругою, коли мова вже виявлена з адмін кадру\nзамінити всі жорсткікодовані рядки стану з перекладеними t() дзвінки\nadd codeПеревірити ключ у всіх 11 мовах",
-        "zh-cn": "修补语言闪存: 当语言已经从管理员框架中检测到时跳过套接字覆盖\n将所有硬码状态字符串替换为已翻译的 t() 调用\n在所有11种语言中添加代码Hint翻译密钥"
-      },
-      "0.1.2": {
-        "en": "add full i18n to tab UI: all strings translated into de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "de": "fügen Sie volle i18n zu Tab UI: alle Strings übersetzt in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "ru": "добавить полный i18n в вкладку UI: все строки переведены в de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "pt": "adicionar i18n completo à guia UI: todas as strings traduzidas para de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "nl": "volledige i18n toevoegen aan tab UI: alle tekenreeksen vertaald in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "fr": "ajouter i18n complet à l'onglet UI: toutes les chaînes traduites en de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "it": "aggiungere i18n completo alla scheda UI: tutte le stringhe tradotte in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "es": "añadir i18n completo a la pestaña UI: todas las cadenas traducidas a de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
-        "pl": "dodaj pełny i18n do zakładki Interfejs: wszystkie struny przetłumaczone na de / en / fr / es / it / nl / pl / pt / ru / uk / zh- cn",
-        "uk": "додати повну i18n в закладку UI: всі рядки, перекладені в de/en/fr/es/nl/pl/pt/ru/uk/zh-cn",
-        "zh-cn": "将完整 i18n 添加到 Tab UI 中: 所有字符串翻译为 de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn"
-      },
-      "0.1.1": {
-        "en": "allow overwriting existing scripts during restore (confirmation dialog with path display)\nallow empty suffix to restore script under its original name\nprompt to start script immediately after successful restore",
-        "de": "das überschreiben bestehender skripte während der wiederherstellung (bestätigungsdialog mit pfadanzeige)\nleere suffix erlauben, skript unter seinem ursprünglichen namen wiederherzustellen\nscript sofort nach erfolgreicher wiederherstellung starten",
-        "ru": "позволяет перезаписывать существующие скрипты во время восстановления (подтверждающий диалог с отображением пути)\nпустой суффикс позволяет восстановить скрипт под оригинальным названием\nсценарий сразу после успешного восстановления",
-        "pt": "permitir sobrescrever scripts existentes durante a restauração (diálogo de confirmação com exibição de caminho)\npermite que o sufixo vazio restaure o script sob o seu nome original\nprompt para iniciar o script imediatamente após a restauração bem- sucedida",
-        "nl": "laat bestaande scripts overschrijven tijdens het herstellen (bevestigingsdialoog met padweergave)\nlaat leeg achtervoegsel toe om script te herstellen onder de oorspronkelijke naam\nprompt om het script direct na succesvol herstel te starten",
-        "fr": "permettre d'écraser les scripts existants pendant la restauration (dialogue de confirmation avec affichage du chemin)\npermettre au suffixe vide de restaurer le script sous son nom d'origine\ninvite à démarrer le script immédiatement après la restauration réussie",
-        "it": "consentire la sovrascrittura degli script esistenti durante il ripristino (conferma finestra di dialogo con il display del percorso)\nconsentire il suffisso vuoto per ripristinare lo script sotto il suo nome originale\nprompt per avviare lo script immediatamente dopo il ripristino di successo",
-        "es": "permite sobreescribir scripts existentes durante la restauración ( diálogo de confirmación con pantalla de ruta)\npermitir sufijo vacío para restaurar script bajo su nombre original\nprompt para iniciar script inmediatamente después de la restauración exitosa",
-        "pl": "pozwala na nadpisanie istniejących skryptów podczas przywracania (okno potwierdzenia z wyświetlaczem ścieżki)\npozwala pustym przyrostkiem przywrócić skrypt pod pierwotną nazwą\nnaciśnij przycisk, aby rozpocząć skrypt natychmiast po pomyślnym przywróceniu",
-        "uk": "дозволити перезаписувати існуючі сценарії під час відновлення (підтвердження діалогу з відображенням шляху)\nдозволити порожній suffix для відновлення сценарію під його оригінальною назвою\nнегайно після успішного відновлення",
-        "zh-cn": "允许在恢复时覆盖已有脚本( 用路径显示确认对话框)\n允许空后缀以原名恢复脚本\n成功恢复后立即启动脚本"
-      },
-      "0.1.0": {
-        "en": "drop Node.js 20 support (EOL 2026-04-30), require >= 22\nfix: move @iobroker/types to production dependencies to fix CI integration test\nadd .npmrc with legacy-peer-deps to resolve peer dependency conflicts\nupdate dependencies: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
-        "de": "drop Node.js 20 Unterstützung (EOL 2026-04-30), benötigen >= 22\nfix: bewegen @iobroker/Typen zu Produktionsabhängigkeiten, um CI Integration Test zu beheben\nhinzufügen .npmrc mit legacy-peer-deps, um peer abhängigkeitskonflikte zu lösen\nupdate abhängigkeiten: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
-        "ru": "отбрасывать поддержку Node.js 20 (EOL 2026-04-30), требовать >= 22\nисправление: перемещение @iobroker/types в производственные зависимости для исправления теста интеграции CI\nдобавить .npmrc с унаследованными одноранговыми депсами для разрешения конфликтов зависимостей сверстников\nзависимости обновления: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
-        "pt": "drop Node.js 20 suporte (EOL 2026-04-30), exigir >= 22\ncorreção: mover @iobroker/types para dependências de produção para corrigir teste de integração CI\nadicionar .npmrc com legacy-peer-deps para resolver conflitos de dependência entre pares\ndependências de atualização: webdav, basic- ftp, digitação, @types/node, @iobroker/eslint-config",
-        "nl": "voor de toepassing van deze onderverdeling wordt verstaan onder:\nfix: verplaats @iobroker/types naar productie afhankelijkheden om CI integratie test vast te stellen\n.npmrc toevoegen met legacy-peer-deps om peer afhankelijkheidsconflicten op te lossen\nupdate afhankelijkheden: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
-        "fr": "nœud de chute.js 20 support (EOL 2026-04-30), besoin >= 22\ncorrection : déplacer @iobroker/types aux dépendances de production pour fixer le test d'intégration CI\najouter .npmrc avec legacy-peer-deps pour résoudre les conflits de dépendance entre pairs\nles dépendances de mise à jour: webdav, basic-ftp, typscript, @types/node, @iobroker/eslint-config",
-        "it": "drop Node.js 20 supporto (EOL 2026-04-30), richiedono >= 22\nfix: spostare @iobroker/tipi alle dipendenze di produzione per fissare il test di integrazione CI\naggiungere .npmrc con legacy-peer-deps per risolvere i conflitti di dipendenza tra pari\naggiornamento dipendenze: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
-        "es": "drop Node.js 20 soporte (EOL 2026-04-30), requerir ≤ 22\narreglar: mover @iobroker/tipos a las dependencias de producción para fijar la prueba de integración de CI\nañadir .npmrc con legado-peer-deps para resolver conflictos de dependencia entre pares\ndependencias de actualización: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
-        "pl": "drop Node.js 20 support (EOL 2026- 04- 30), require > = 22\nfix: move @ iobroker / types to production dependences to fix CI integration test\ndodaj .npmrc z legacy- peer- deps w celu rozwiązania konfliktów wzajemnej zależności\naktualizacje zależności: webdav, basic- ftp, typescript, @ types / node, @ iobroker / eslint- config",
-        "uk": "javaScript licenses API Веб-сайт Go1.13.8\nвиправити: перемістити @iobroker/types до виробництва залежностей для фіксації тесту інтеграції CI\nдодати .npmrc з спадкоємно-перцевими депсами для вирішення конфліктів залежностей\njavascript licenses api веб-сайт go1.13.8",
-        "zh-cn": "drop Node.js 20 支持(EOL 2026-04-30), 需要 >= 22\n固定 : 将 @iobroduc/ types 移动到生产依赖, 以固定 CI 集成测试\n添加 .npmrc 和 least- peer- deps 以解决同伴依赖冲突\n更新依赖性:webdav, basic-ftp, typescript, @types/node, @iobroster/eslint-config"
-      }
-    },
-    "titleLang": {
-      "en": "Script Restore",
-      "de": "Script Restore",
-      "ru": "Script Restore",
-      "pt": "Script Restore",
-      "nl": "Script Restore",
-      "fr": "Script Restore",
-      "it": "Script Restore",
-      "es": "Script Restore",
-      "pl": "Script Restore",
-      "uk": "Script Restore",
-      "zh-cn": "Script Restore"
-    },
-    "desc": {
-      "en": "Restore ioBroker scripts from backup archives",
-      "de": "ioBroker-Skripte aus Backup-Archiven wiederherstellen",
-      "ru": "Восстановление скриптов ioBroker из резервных архивов",
-      "pt": "Restaurar scripts ioBroker de arquivos de backup",
-      "nl": "Herstel ioBroker-scripts vanuit back-uparchieven",
-      "fr": "Restaurer les scripts ioBroker à partir des archives de sauvegarde",
-      "it": "Ripristina gli script ioBroker dagli archivi di backup",
-      "es": "Restaurar scripts de ioBroker desde archivos de respaldo",
-      "pl": "Przywróć skrypty ioBroker z archiwów kopii zapasowych",
-      "uk": "Відновлення скриптів ioBroker з резервних архівів",
-      "zh-cn": "从备份存档中恢复 ioBroker 脚本"
-    },
-    "authors": [
-      "ipod86 <david@graef.email>"
-    ],
-    "keywords": [
-      "backup",
-      "restore",
-      "scripts",
-      "javascript"
-    ],
-    "licenseInformation": {
-      "type": "free",
-      "license": "MIT"
-    },
-    "platform": "Javascript/Node.js",
-    "icon": "script-restore.svg",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/ipod86/ioBroker.script-restore/main/admin/script-restore.svg",
-    "readme": "https://github.com/ipod86/ioBroker.script-restore/blob/main/README.md",
-    "loglevel": "info",
-    "tier": 3,
-    "mode": "daemon",
-    "type": "utility",
-    "compact": true,
-    "singleton": true,
-    "messagebox": true,
-    "connectionType": "local",
-    "dataSource": "push",
-    "adminUI": {
-      "config": "json",
-      "tab": "materialize"
-    },
-    "adminTab": {
-      "singleton": true,
-      "name": {
-        "en": "Script Restore",
-        "de": "Script Restore",
-        "ru": "Script Restore",
-        "pt": "Script Restore",
-        "nl": "Script Restore",
-        "fr": "Script Restore",
-        "it": "Script Restore",
-        "es": "Script Restore",
-        "pl": "Script Restore",
-        "uk": "Script Restore",
-        "zh-cn": "Script Restore"
-      }
-    },
-    "dependencies": [
-      {
-        "js-controller": ">=6.0.11"
-      }
-    ],
-    "globalDependencies": [
-      {
-        "admin": ">=7.6.20"
-      }
-    ]
-  },
-  "native": {
-    "localEnabled": true,
-    "backupPath": "/opt/iobroker/backups",
-    "ftpEnabled": false,
-    "ftpHost": "",
-    "ftpPort": 21,
-    "ftpUser": "",
-    "ftpPassword": "",
-    "ftpPath": "/",
-    "ftpSecure": false,
-    "smbEnabled": false,
-    "smbHost": "",
-    "smbShare": "",
-    "smbPath": "",
-    "smbUser": "",
-    "smbPassword": "",
-    "smbDomain": "",
-    "httpEnabled": false,
-    "sftpEnabled": false,
-    "sftpHost": "",
-    "sftpPort": 22,
-    "sftpUser": "",
-    "sftpPassword": "",
-    "sftpPath": "/",
-    "webdavEnabled": false,
-    "webdavUrl": "",
-    "webdavUser": "",
-    "webdavPassword": "",
-    "webdavPath": "/"
-  },
-  "protectedNative": [
-    "ftpPassword",
-    "smbPassword",
-    "sftpPassword",
-    "webdavPassword"
-  ],
-  "encryptedNative": [
-    "ftpPassword",
-    "smbPassword",
-    "sftpPassword",
-    "webdavPassword"
-  ],
-  "objects": [],
-  "instanceObjects": []
+	"common": {
+		"name": "script-restore",
+		"version": "0.1.6",
+		"news": {
+			"0.1.6": {
+				"en": "upgrade typescript to 6.0 with explicit mocha types for TypeScript 6 compatibility (W0083)",
+				"de": "TypeScript auf 6.0 aktualisiert mit expliziten Mocha-Typen für TypeScript 6-Kompatibilität (W0083)",
+				"ru": "обновление TypeScript до 6.0 с явными типами mocha для совместимости с TypeScript 6 (W0083)",
+				"pt": "atualização do TypeScript para 6.0 com tipos mocha explícitos para compatibilidade com TypeScript 6 (W0083)",
+				"nl": "TypeScript bijgewerkt naar 6.0 met expliciete mocha-typen voor TypeScript 6-compatibiliteit (W0083)",
+				"fr": "mise à jour de TypeScript vers 6.0 avec types mocha explicites pour la compatibilité TypeScript 6 (W0083)",
+				"it": "aggiornamento di TypeScript a 6.0 con tipi mocha espliciti per la compatibilità con TypeScript 6 (W0083)",
+				"es": "actualización de TypeScript a 6.0 con tipos mocha explícitos para compatibilidad con TypeScript 6 (W0083)",
+				"pl": "aktualizacja TypeScript do 6.0 z jawnymi typami mocha dla kompatybilności z TypeScript 6 (W0083)",
+				"uk": "оновлення TypeScript до 6.0 з явними типами mocha для сумісності з TypeScript 6 (W0083)",
+				"zh-cn": "将 TypeScript 升级到 6.0，添加显式 mocha 类型以兼容 TypeScript 6 (W0083)"
+			},
+			"0.1.5": {
+				"en": "fix: update @alcalzone/release-script to ^5.2.1 (E0036)\nfix: add missing placeholder i18n keys to all 11 language files (W5612)\nfix: migrate i18n to short format, add npm provenance signing (S5601, S2008)\nfix: upgrade to @tsconfig/node22, pin @types/node to ^22 (W0086, W0090, W0066)\nfix: reorganize dependencies — types/eslint/prettier to devDependencies (W5060, W0078, E3031)\nfix: resolve adapter checker warnings W0069, W8917, S6022\nchore: bump ioBroker/testing-action-check from v1 to v2, keep deploy action at v1 (W3017)\nchore: bump typescript-eslint and @types/node",
+				"de": "fix: @alcalzone/release-script auf ^5.2.1 aktualisiert (E0036)\nfix: Fehlende Platzhalter-i18n-Schlüssel in alle 11 Sprachdateien eingefügt (W5612)\nfix: i18n auf Kurzformat migriert, npm-Provenance-Signierung hinzugefügt (S5601, S2008)\nfix: Auf @tsconfig/node22 aktualisiert, @types/node auf ^22 fixiert (W0086, W0090, W0066)\nfix: Abhängigkeiten neu geordnet — types/eslint/prettier in devDependencies verschoben (W5060, W0078, E3031)\nfix: Adapter-Checker-Warnungen W0069, W8917, S6022 behoben\nchore: ioBroker/testing-action-check von v1 auf v2 aktualisiert, deploy action bei v1 belassen (W3017)\nchore: typescript-eslint und @types/node aktualisiert",
+				"ru": "fix: обновлён @alcalzone/release-script до ^5.2.1 (E0036)\nfix: добавлены отсутствующие ключи i18n для заполнителей во все 11 языковых файлов (W5612)\nfix: i18n перенесён на короткий формат, добавлена подпись провенанса npm (S5601, S2008)\nfix: обновлено до @tsconfig/node22, @types/node зафиксирован на ^22 (W0086, W0090, W0066)\nfix: зависимости реорганизованы — types/eslint/prettier перенесены в devDependencies (W5060, W0078, E3031)\nfix: устранены предупреждения проверщика W0069, W8917, S6022\nchore: ioBroker/testing-action-check обновлён с v1 до v2, deploy action на v1 (W3017)\nchore: обновлены typescript-eslint и @types/node",
+				"pt": "fix: atualizado @alcalzone/release-script para ^5.2.1 (E0036)\nfix: adicionadas chaves i18n de espaço reservado ausentes em todos os 11 arquivos de idioma (W5612)\nfix: migrado i18n para formato curto, adicionada assinatura de proveniência npm (S5601, S2008)\nfix: atualizado para @tsconfig/node22, @types/node fixado em ^22 (W0086, W0090, W0066)\nfix: reorganizadas dependências — types/eslint/prettier movidos para devDependencies (W5060, W0078, E3031)\nfix: resolvidos avisos do verificador W0069, W8917, S6022\nchore: ioBroker/testing-action-check atualizado de v1 para v2, deploy action em v1 (W3017)\nchore: atualizados typescript-eslint e @types/node",
+				"nl": "fix: @alcalzone/release-script bijgewerkt naar ^5.2.1 (E0036)\nfix: ontbrekende plaatshouder i18n-sleutels toegevoegd aan alle 11 taalbestanden (W5612)\nfix: i18n gemigreerd naar kort formaat, npm-herkomstondertekening toegevoegd (S5601, S2008)\nfix: bijgewerkt naar @tsconfig/node22, @types/node vastgezet op ^22 (W0086, W0090, W0066)\nfix: afhankelijkheden gereorganiseerd — types/eslint/prettier naar devDependencies (W5060, W0078, E3031)\nfix: adapter checker waarschuwingen W0069, W8917, S6022 opgelost\nchore: ioBroker/testing-action-check bijgewerkt van v1 naar v2, deploy action op v1 (W3017)\nchore: typescript-eslint en @types/node bijgewerkt",
+				"fr": "fix: mise à jour de @alcalzone/release-script vers ^5.2.1 (E0036)\nfix: ajout des clés i18n de substitution manquantes dans les 11 fichiers de langue (W5612)\nfix: migration de l'i18n au format court, ajout de la signature de provenance npm (S5601, S2008)\nfix: mise à jour vers @tsconfig/node22, @types/node fixé à ^22 (W0086, W0090, W0066)\nfix: réorganisation des dépendances — types/eslint/prettier déplacés vers devDependencies (W5060, W0078, E3031)\nfix: résolution des avertissements du vérificateur W0069, W8917, S6022\nchore: ioBroker/testing-action-check mis à jour de v1 à v2, deploy action maintenue à v1 (W3017)\nchore: mise à jour de typescript-eslint et @types/node",
+				"it": "fix: aggiornato @alcalzone/release-script a ^5.2.1 (E0036)\nfix: aggiunte chiavi i18n segnaposto mancanti in tutti gli 11 file di lingua (W5612)\nfix: migrato i18n al formato breve, aggiunta firma di provenienza npm (S5601, S2008)\nfix: aggiornato a @tsconfig/node22, @types/node fissato a ^22 (W0086, W0090, W0066)\nfix: riorganizzate le dipendenze — types/eslint/prettier spostati in devDependencies (W5060, W0078, E3031)\nfix: risolti avvisi del checker W0069, W8917, S6022\nchore: ioBroker/testing-action-check aggiornato da v1 a v2, deploy action a v1 (W3017)\nchore: aggiornati typescript-eslint e @types/node",
+				"es": "fix: actualizado @alcalzone/release-script a ^5.2.1 (E0036)\nfix: añadidas claves i18n de marcadores faltantes en los 11 archivos de idioma (W5612)\nfix: migrado i18n a formato corto, añadida firma de procedencia npm (S5601, S2008)\nfix: actualizado a @tsconfig/node22, @types/node fijado a ^22 (W0086, W0090, W0066)\nfix: reorganizadas dependencias — types/eslint/prettier movidos a devDependencies (W5060, W0078, E3031)\nfix: resueltas advertencias del comprobador W0069, W8917, S6022\nchore: ioBroker/testing-action-check actualizado de v1 a v2, deploy action en v1 (W3017)\nchore: actualizados typescript-eslint y @types/node",
+				"pl": "fix: zaktualizowano @alcalzone/release-script do ^5.2.1 (E0036)\nfix: dodano brakujące klucze i18n dla symboli zastępczych we wszystkich 11 plikach językowych (W5612)\nfix: zmigrowano i18n do formatu krótkiego, dodano podpisywanie proweniencji npm (S5601, S2008)\nfix: zaktualizowano do @tsconfig/node22, @types/node przypięty do ^22 (W0086, W0090, W0066)\nfix: reorganizacja zależności — types/eslint/prettier przeniesione do devDependencies (W5060, W0078, E3031)\nfix: rozwiązano ostrzeżenia sprawdzarki W0069, W8917, S6022\nchore: ioBroker/testing-action-check zaktualizowany z v1 do v2, deploy action na v1 (W3017)\nchore: zaktualizowano typescript-eslint i @types/node",
+				"uk": "fix: оновлено @alcalzone/release-script до ^5.2.1 (E0036)\nfix: додано відсутні ключі i18n для заповнювачів у всі 11 мовних файлів (W5612)\nfix: i18n перенесено на короткий формат, додано підпис провенансу npm (S5601, S2008)\nfix: оновлено до @tsconfig/node22, @types/node зафіксовано на ^22 (W0086, W0090, W0066)\nfix: залежності реорганізовано — types/eslint/prettier перенесено до devDependencies (W5060, W0078, E3031)\nfix: усунено попередження перевірювача W0069, W8917, S6022\nchore: ioBroker/testing-action-check оновлено з v1 до v2, deploy action на v1 (W3017)\nchore: оновлено typescript-eslint та @types/node",
+				"zh-cn": "fix: 更新 @alcalzone/release-script 至 ^5.2.1 (E0036)\nfix: 向所有 11 个语言文件添加缺失的占位符 i18n 键 (W5612)\nfix: 将 i18n 迁移至短格式，添加 npm 来源签名 (S5601, S2008)\nfix: 升级至 @tsconfig/node22，将 @types/node 固定至 ^22 (W0086, W0090, W0066)\nfix: 重新整理依赖项 — 将 types/eslint/prettier 移至 devDependencies (W5060, W0078, E3031)\nfix: 解决适配器检查器警告 W0069、W8917、S6022\nchore: 将 ioBroker/testing-action-check 从 v1 升级至 v2，deploy action 保留在 v1 (W3017)\nchore: 更新 typescript-eslint 和 @types/node"
+			},
+			"0.1.4": {
+				"en": "add syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\nfix language detection: read ioBroker system language via adapter (system.config) instead of browser/DOM\ntranslate all remaining loader texts (reading file/archive, extracting, loading URL)",
+				"de": "syntax-Highlighting für JS/TS, Blockly (XML) und Rules (JSON) hinzufügen — pure JS, keine externen Deps\nspracherkennung fix: ioBroker Systemsprache über Adapter (system.config) anstelle von Browser/DOM lesen\nalle übrigen Loadertexte übersetzen (Datei/Archiv lesen, extrahieren, URL laden)",
+				"ru": "добавить подсветку синтаксиса для JS/TS, Blockly (XML) и Rules (JSON) — чистый JS, без внешних депсов\nисправить обнаружение языка: читать язык системы ioBroker через адаптер (system.config) вместо браузера/DOM\nперевод всех оставшихся текстов загрузчика (чтение файла / архива, извлечение, загрузка URL)",
+				"pt": "adicionar realce de sintaxe para JS/TS, Blockly (XML) e Rules (JSON) — puro JS, sem deps externos\ndetecção de linguagem de correção: ler ioBroker linguagem do sistema via adaptador (system.config) em vez de navegador / DOM\ntraduzir todos os textos restantes do carregador (lendo arquivo/arquivo, extraindo, carregando URL)",
+				"nl": "syntaxismarkeringen toevoegen voor JS/TS, Blockly (XML) en Rules (JSON)\nfix taaldetectie: lees ioBroker systeemtaal via adapter (system.config) in plaats van browser/DOM\nalle overgebleven laderteksten vertalen (bestand/archief lezen, uitpakken, laden van URL)",
+				"fr": "ajouter la mise en surbrillance syntaxique pour JS/TS, Blockly (XML) et Rules (JSON) — JS pur, pas de deps externes\ncorrection de la détection du langage: lire ioBroker langage système via adaptateur (system.config) au lieu de navigateur/DOM\ntraduire tous les textes restants du chargeur (lecture de fichier/archive, extraction, chargement d'URL)",
+				"it": "aggiungere l'evidenziazione della sintassi per JS/TS, Blockly (XML) e Regole (JSON) — JS puro, nessun deps esterno\nfix language detection: read ioBroker system language via adapter (system.config) anziché browser/DOM\ntradurre tutti i restanti testi di carica (lettura file/archive, estrazione, caricamento URL)",
+				"es": "añadir syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\ndetección del lenguaje de fijación: leer el lenguaje del sistema ioBroker a través del adaptador (system.config) en lugar del navegador/DOM\ntraducir todos los textos de carga restantes (leer archivo/archive, extraer, cargar URL)",
+				"pl": "dodaj podświetlanie składni dla JS / TS, Blockly (XML) i Rules (JSON) - czysty JS, brak zewnętrznych deb\nwykrywanie języka: czytaj jOBroker system language poprzez adapter (system.config) zamiast przeglądarki / DOM\nprzetłumaczyć wszystkie pozostałe teksty ładowarki (czytanie pliku / archiwum, pobieranie, wczytywanie URL)",
+				"uk": "додати синтаксис виділення для JS / T, Blockly (XML) і Правил (JSON) — чистий JS, не зовнішній депс\nenglish languageEspañol idioma中文 语言Русский языкУкраїнська моваPortuguese idioma\nперевести всі інші тексти навантажувача (читати файл/архів, вилучення, завантаження URL)",
+				"zh-cn": "增加JS/TS、Blockly(XML)和Rules(JSON)的语法重点——纯JS,没有外部解析\n固定语言检测:通过适配器(system.config)读取ioBroker系统语言,而不是浏览器/DOM\n翻译所有剩余的加载器文本(读取文件/存档、提取、加载 URL)"
+			},
+			"0.1.3": {
+				"en": "fix language flash: skip socket override when language already detected from admin frame\nreplace all hardcoded status strings with translated t() calls\nadd codeHint translation key in all 11 languages",
+				"de": "fixer sprachblitz: überschreiben der sprachfassung, wenn die sprache bereits von admin-rahmen erkannt wurde\nalle hardcoded status strings durch übersetzte t()-anrufe ersetzen\ncode hinzufügenHint Übersetzungsschlüssel in allen 11 Sprachen",
+				"ru": "исправьте языковую вспышку: пропустите переопределение сокетов, когда язык уже обнаружен в рамке администратора\nзаменить все жестко закодированные строки состояния переводными вызовами t()\nдобавить ключ перевода codeHint на все 11 языков",
+				"pt": "flash da linguagem de correção: sobreposição do socket pule quando a linguagem já detectada do frame do administrador\nsubstituir todas as cadeias de estado codificadas por chamadas traduzidas em t()\nadicionar códigoHint chave de tradução em todos os 11 idiomas",
+				"nl": "fix taalflits: sla socket over wanneer taal al gedetecteerd vanuit admin frame\nvervangen alle hardcoded status strings door vertaalde t() calls\ncodeHint vertaalsleutel toevoegen in alle 11 talen",
+				"fr": "résoudre le flash de langue: sauter la préséance socket lorsque la langue déjà détectée à partir du cadre admin\nremplacer toutes les chaînes d'état codées en dur par des appels traduit t()\najouter codeHint clé de traduction dans les 11 langues",
+				"it": "fix lingua flash: saltare socket override quando la lingua già rilevata dalla cornice di amministrazione\nsostituire tutte le stringhe di stato codificate con le chiamate t() tradotte\naggiungere codice Chiave di traduzione in tutte le 11 lingue",
+				"es": "solucionar el flash del lenguaje: saltar la anulación de la toma cuando el lenguaje ya detectado desde el marco de administración\nreemplazar todas las cadenas de estado codificadas con llamadas t( traducido)\nañadir codeHint traducción clave en los 11 idiomas",
+				"pl": "fix flash język: skip derogator gniazda, gdy język już wykryty z ramki admin\nzastąp wszystkie zaszyfrowane łańcuchy stanu translated t () calls\ndodaj klucz tłumaczeniowy CodeHint we wszystkich 11 językach",
+				"uk": "фіксувати мовне спалах: пропустити розетку перенапругою, коли мова вже виявлена з адмін кадру\nзамінити всі жорсткікодовані рядки стану з перекладеними t() дзвінки\nadd codeПеревірити ключ у всіх 11 мовах",
+				"zh-cn": "修补语言闪存: 当语言已经从管理员框架中检测到时跳过套接字覆盖\n将所有硬码状态字符串替换为已翻译的 t() 调用\n在所有11种语言中添加代码Hint翻译密钥"
+			},
+			"0.1.2": {
+				"en": "add full i18n to tab UI: all strings translated into de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"de": "fügen Sie volle i18n zu Tab UI: alle Strings übersetzt in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"ru": "добавить полный i18n в вкладку UI: все строки переведены в de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"pt": "adicionar i18n completo à guia UI: todas as strings traduzidas para de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"nl": "volledige i18n toevoegen aan tab UI: alle tekenreeksen vertaald in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"fr": "ajouter i18n complet à l'onglet UI: toutes les chaînes traduites en de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"it": "aggiungere i18n completo alla scheda UI: tutte le stringhe tradotte in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"es": "añadir i18n completo a la pestaña UI: todas las cadenas traducidas a de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
+				"pl": "dodaj pełny i18n do zakładki Interfejs: wszystkie struny przetłumaczone na de / en / fr / es / it / nl / pl / pt / ru / uk / zh- cn",
+				"uk": "додати повну i18n в закладку UI: всі рядки, перекладені в de/en/fr/es/nl/pl/pt/ru/uk/zh-cn",
+				"zh-cn": "将完整 i18n 添加到 Tab UI 中: 所有字符串翻译为 de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn"
+			},
+			"0.1.1": {
+				"en": "allow overwriting existing scripts during restore (confirmation dialog with path display)\nallow empty suffix to restore script under its original name\nprompt to start script immediately after successful restore",
+				"de": "das überschreiben bestehender skripte während der wiederherstellung (bestätigungsdialog mit pfadanzeige)\nleere suffix erlauben, skript unter seinem ursprünglichen namen wiederherzustellen\nscript sofort nach erfolgreicher wiederherstellung starten",
+				"ru": "позволяет перезаписывать существующие скрипты во время восстановления (подтверждающий диалог с отображением пути)\nпустой суффикс позволяет восстановить скрипт под оригинальным названием\nсценарий сразу после успешного восстановления",
+				"pt": "permitir sobrescrever scripts existentes durante a restauração (diálogo de confirmação com exibição de caminho)\npermite que o sufixo vazio restaure o script sob o seu nome original\nprompt para iniciar o script imediatamente após a restauração bem- sucedida",
+				"nl": "laat bestaande scripts overschrijven tijdens het herstellen (bevestigingsdialoog met padweergave)\nlaat leeg achtervoegsel toe om script te herstellen onder de oorspronkelijke naam\nprompt om het script direct na succesvol herstel te starten",
+				"fr": "permettre d'écraser les scripts existants pendant la restauration (dialogue de confirmation avec affichage du chemin)\npermettre au suffixe vide de restaurer le script sous son nom d'origine\ninvite à démarrer le script immédiatement après la restauration réussie",
+				"it": "consentire la sovrascrittura degli script esistenti durante il ripristino (conferma finestra di dialogo con il display del percorso)\nconsentire il suffisso vuoto per ripristinare lo script sotto il suo nome originale\nprompt per avviare lo script immediatamente dopo il ripristino di successo",
+				"es": "permite sobreescribir scripts existentes durante la restauración ( diálogo de confirmación con pantalla de ruta)\npermitir sufijo vacío para restaurar script bajo su nombre original\nprompt para iniciar script inmediatamente después de la restauración exitosa",
+				"pl": "pozwala na nadpisanie istniejących skryptów podczas przywracania (okno potwierdzenia z wyświetlaczem ścieżki)\npozwala pustym przyrostkiem przywrócić skrypt pod pierwotną nazwą\nnaciśnij przycisk, aby rozpocząć skrypt natychmiast po pomyślnym przywróceniu",
+				"uk": "дозволити перезаписувати існуючі сценарії під час відновлення (підтвердження діалогу з відображенням шляху)\nдозволити порожній suffix для відновлення сценарію під його оригінальною назвою\nнегайно після успішного відновлення",
+				"zh-cn": "允许在恢复时覆盖已有脚本( 用路径显示确认对话框)\n允许空后缀以原名恢复脚本\n成功恢复后立即启动脚本"
+			},
+			"0.1.0": {
+				"en": "drop Node.js 20 support (EOL 2026-04-30), require >= 22\nfix: move @iobroker/types to production dependencies to fix CI integration test\nadd .npmrc with legacy-peer-deps to resolve peer dependency conflicts\nupdate dependencies: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
+				"de": "drop Node.js 20 Unterstützung (EOL 2026-04-30), benötigen >= 22\nfix: bewegen @iobroker/Typen zu Produktionsabhängigkeiten, um CI Integration Test zu beheben\nhinzufügen .npmrc mit legacy-peer-deps, um peer abhängigkeitskonflikte zu lösen\nupdate abhängigkeiten: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
+				"ru": "отбрасывать поддержку Node.js 20 (EOL 2026-04-30), требовать >= 22\nисправление: перемещение @iobroker/types в производственные зависимости для исправления теста интеграции CI\nдобавить .npmrc с унаследованными одноранговыми депсами для разрешения конфликтов зависимостей сверстников\nзависимости обновления: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
+				"pt": "drop Node.js 20 suporte (EOL 2026-04-30), exigir >= 22\ncorreção: mover @iobroker/types para dependências de produção para corrigir teste de integração CI\nadicionar .npmrc com legacy-peer-deps para resolver conflitos de dependência entre pares\ndependências de atualização: webdav, basic- ftp, digitação, @types/node, @iobroker/eslint-config",
+				"nl": "voor de toepassing van deze onderverdeling wordt verstaan onder:\nfix: verplaats @iobroker/types naar productie afhankelijkheden om CI integratie test vast te stellen\n.npmrc toevoegen met legacy-peer-deps om peer afhankelijkheidsconflicten op te lossen\nupdate afhankelijkheden: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
+				"fr": "nœud de chute.js 20 support (EOL 2026-04-30), besoin >= 22\ncorrection : déplacer @iobroker/types aux dépendances de production pour fixer le test d'intégration CI\najouter .npmrc avec legacy-peer-deps pour résoudre les conflits de dépendance entre pairs\nles dépendances de mise à jour: webdav, basic-ftp, typscript, @types/node, @iobroker/eslint-config",
+				"it": "drop Node.js 20 supporto (EOL 2026-04-30), richiedono >= 22\nfix: spostare @iobroker/tipi alle dipendenze di produzione per fissare il test di integrazione CI\naggiungere .npmrc con legacy-peer-deps per risolvere i conflitti di dipendenza tra pari\naggiornamento dipendenze: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
+				"es": "drop Node.js 20 soporte (EOL 2026-04-30), requerir ≤ 22\narreglar: mover @iobroker/tipos a las dependencias de producción para fijar la prueba de integración de CI\nañadir .npmrc con legado-peer-deps para resolver conflictos de dependencia entre pares\ndependencias de actualización: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
+				"pl": "drop Node.js 20 support (EOL 2026- 04- 30), require > = 22\nfix: move @ iobroker / types to production dependences to fix CI integration test\ndodaj .npmrc z legacy- peer- deps w celu rozwiązania konfliktów wzajemnej zależności\naktualizacje zależności: webdav, basic- ftp, typescript, @ types / node, @ iobroker / eslint- config",
+				"uk": "javaScript licenses API Веб-сайт Go1.13.8\nвиправити: перемістити @iobroker/types до виробництва залежностей для фіксації тесту інтеграції CI\nдодати .npmrc з спадкоємно-перцевими депсами для вирішення конфліктів залежностей\njavascript licenses api веб-сайт go1.13.8",
+				"zh-cn": "drop Node.js 20 支持(EOL 2026-04-30), 需要 >= 22\n固定 : 将 @iobroduc/ types 移动到生产依赖, 以固定 CI 集成测试\n添加 .npmrc 和 least- peer- deps 以解决同伴依赖冲突\n更新依赖性:webdav, basic-ftp, typescript, @types/node, @iobroster/eslint-config"
+			}
+		},
+		"titleLang": {
+			"en": "Script Restore",
+			"de": "Script Restore",
+			"ru": "Script Restore",
+			"pt": "Script Restore",
+			"nl": "Script Restore",
+			"fr": "Script Restore",
+			"it": "Script Restore",
+			"es": "Script Restore",
+			"pl": "Script Restore",
+			"uk": "Script Restore",
+			"zh-cn": "Script Restore"
+		},
+		"desc": {
+			"en": "Restore ioBroker scripts from backup archives",
+			"de": "ioBroker-Skripte aus Backup-Archiven wiederherstellen",
+			"ru": "Восстановление скриптов ioBroker из резервных архивов",
+			"pt": "Restaurar scripts ioBroker de arquivos de backup",
+			"nl": "Herstel ioBroker-scripts vanuit back-uparchieven",
+			"fr": "Restaurer les scripts ioBroker à partir des archives de sauvegarde",
+			"it": "Ripristina gli script ioBroker dagli archivi di backup",
+			"es": "Restaurar scripts de ioBroker desde archivos de respaldo",
+			"pl": "Przywróć skrypty ioBroker z archiwów kopii zapasowych",
+			"uk": "Відновлення скриптів ioBroker з резервних архівів",
+			"zh-cn": "从备份存档中恢复 ioBroker 脚本"
+		},
+		"authors": [
+			"ipod86 <david@graef.email>"
+		],
+		"keywords": [
+			"backup",
+			"restore",
+			"scripts",
+			"javascript"
+		],
+		"licenseInformation": {
+			"type": "free",
+			"license": "MIT"
+		},
+		"platform": "Javascript/Node.js",
+		"icon": "script-restore.svg",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/ipod86/ioBroker.script-restore/main/admin/script-restore.svg",
+		"readme": "https://github.com/ipod86/ioBroker.script-restore/blob/main/README.md",
+		"loglevel": "info",
+		"tier": 3,
+		"mode": "daemon",
+		"type": "utility",
+		"compact": true,
+		"singleton": true,
+		"messagebox": true,
+		"connectionType": "local",
+		"dataSource": "push",
+		"adminUI": {
+			"config": "json",
+			"tab": "materialize"
+		},
+		"adminTab": {
+			"singleton": true,
+			"name": {
+				"en": "Script Restore",
+				"de": "Script Restore",
+				"ru": "Script Restore",
+				"pt": "Script Restore",
+				"nl": "Script Restore",
+				"fr": "Script Restore",
+				"it": "Script Restore",
+				"es": "Script Restore",
+				"pl": "Script Restore",
+				"uk": "Script Restore",
+				"zh-cn": "Script Restore"
+			}
+		},
+		"dependencies": [
+			{
+				"js-controller": ">=6.0.11"
+			}
+		],
+		"globalDependencies": [
+			{
+				"admin": ">=7.6.20"
+			}
+		]
+	},
+	"native": {
+		"localEnabled": true,
+		"backupPath": "/opt/iobroker/backups",
+		"ftpEnabled": false,
+		"ftpHost": "",
+		"ftpPort": 21,
+		"ftpUser": "",
+		"ftpPassword": "",
+		"ftpPath": "/",
+		"ftpSecure": false,
+		"smbEnabled": false,
+		"smbHost": "",
+		"smbShare": "",
+		"smbPath": "",
+		"smbUser": "",
+		"smbPassword": "",
+		"smbDomain": "",
+		"httpEnabled": false,
+		"sftpEnabled": false,
+		"sftpHost": "",
+		"sftpPort": 22,
+		"sftpUser": "",
+		"sftpPassword": "",
+		"sftpPath": "/",
+		"webdavEnabled": false,
+		"webdavUrl": "",
+		"webdavUser": "",
+		"webdavPassword": "",
+		"webdavPath": "/"
+	},
+	"protectedNative": [
+		"ftpPassword",
+		"smbPassword",
+		"sftpPassword",
+		"webdavPassword"
+	],
+	"encryptedNative": [
+		"ftpPassword",
+		"smbPassword",
+		"sftpPassword",
+		"webdavPassword"
+	],
+	"objects": [],
+	"instanceObjects": []
 }
