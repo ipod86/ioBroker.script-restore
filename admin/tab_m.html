@@ -1723,7 +1723,7 @@
 
 		async function downloadZip() {
 			if (selectedIndices.size < 2) return;
-			const { default: JSZip } = await import('https://cdn.jsdelivr.net/npm/jszip@3/dist/jszip.min.js');
+			const { default: JSZip } = await import('./jszip.min.js');
 			const zip = new JSZip();
 			selectedIndices.forEach(idx => {
 				const s = scriptsData[idx];

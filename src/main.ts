@@ -23,6 +23,10 @@ const SMB2 = require("@marsaud/smb2");
 
 const execAsync = promisify(exec);
 
+function sanitizeId(raw: string): string {
+	return raw.replace(/\s/g, "_").replace(/[^a-zA-Z0-9_\-.]/g, "_");
+}
+
 interface ScriptEntry {
 	name: string;
 	path: string;
@@ -222,7 +226,7 @@ class ScriptRestore extends utils.Adapter {
 				host: this.config.ftpHost,
 				port: this.config.ftpPort || 21,
 				user: this.config.ftpUser || "anonymous",
-				password: this.config.ftpPassword || "",
+				password: this.config.ftpPassword,
 				secure: this.config.ftpSecure || false,
 			});
 			const list = await client.list(this.config.ftpPath || "/");
@@ -275,7 +279,7 @@ class ScriptRestore extends utils.Adapter {
 			host: this.config.ftpHost,
 			port: this.config.ftpPort || 21,
 			user: this.config.ftpUser || "anonymous",
-			password: this.config.ftpPassword || "",
+			password: this.config.ftpPassword,
 			secure: this.config.ftpSecure || false,
 		});
 	}
@@ -599,7 +603,7 @@ class ScriptRestore extends utils.Adapter {
 		const url = urlRaw.startsWith("http://") || urlRaw.startsWith("https://") ? urlRaw : `https://${urlRaw}`;
 		return new Promise((resolve, reject) => {
 			const mod = url.startsWith("https") ? https : http;
-			mod.get(url, res => {
+			const req = mod.get(url, { timeout: 30000 }, res => {
 				if (res.statusCode !== 200) {
 					reject(new Error(`HTTP ${res.statusCode}`));
 					return;
@@ -608,7 +612,11 @@ class ScriptRestore extends utils.Adapter {
 				res.on("data", (c: Buffer) => chunks.push(c));
 				res.on("end", () => resolve(Buffer.concat(chunks)));
 				res.on("error", reject);
-			}).on("error", reject);
+			});
+			req.on("error", reject);
+			req.on("timeout", () => {
+				req.destroy(new Error("Request timed out"));
+			});
 		});
 	}
 
@@ -805,7 +813,8 @@ class ScriptRestore extends utils.Adapter {
 		const suffix = msg.suffix ?? "";
 
 		// Append suffix to the last path segment (same logic as scriptRecovery.js)
-		const parts = msg.path.split(".");
+		// Sanitize each segment to prevent invalid object IDs from backup content
+		const parts = msg.path.split(".").map((p: string) => sanitizeId(p));
 		parts[parts.length - 1] = parts[parts.length - 1] + suffix;
 		const newScriptPath = parts.join(".");
 		const newId = `script.js.${newScriptPath}`;
@@ -866,7 +875,7 @@ class ScriptRestore extends utils.Adapter {
 	private async ensureScriptFolders(scriptId: string): Promise<void> {
 		// scriptId = "script.js.folderA.folderB.scriptName"
 		// Create folder objects for each intermediate path segment
-		const parts = scriptId.split(".");
+		const parts = scriptId.split(".").map(p => sanitizeId(p));
 		for (let i = 2; i < parts.length - 1; i++) {
 			const folderId = parts.slice(0, i + 1).join(".");
 			try {

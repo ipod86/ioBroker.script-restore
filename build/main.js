@@ -34,6 +34,9 @@ var http = __toESM(require("node:http"));
 var import_ssh2_sftp_client = __toESM(require("ssh2-sftp-client"));
 const SMB2 = require("@marsaud/smb2");
 const execAsync = (0, import_node_util.promisify)(import_node_child_process.exec);
+function sanitizeId(raw) {
+  return raw.replace(/\s/g, "_").replace(/[^a-zA-Z0-9_\-.]/g, "_");
+}
 class ScriptRestore extends utils.Adapter {
   constructor(options = {}) {
     super({
@@ -208,7 +211,7 @@ class ScriptRestore extends utils.Adapter {
         host: this.config.ftpHost,
         port: this.config.ftpPort || 21,
         user: this.config.ftpUser || "anonymous",
-        password: this.config.ftpPassword || "",
+        password: this.config.ftpPassword,
         secure: this.config.ftpSecure || false
       });
       const list = await client.list(this.config.ftpPath || "/");
@@ -257,7 +260,7 @@ class ScriptRestore extends utils.Adapter {
       host: this.config.ftpHost,
       port: this.config.ftpPort || 21,
       user: this.config.ftpUser || "anonymous",
-      password: this.config.ftpPassword || "",
+      password: this.config.ftpPassword,
       secure: this.config.ftpSecure || false
     });
   }
@@ -533,7 +536,7 @@ class ScriptRestore extends utils.Adapter {
     const url = urlRaw.startsWith("http://") || urlRaw.startsWith("https://") ? urlRaw : `https://${urlRaw}`;
     return new Promise((resolve, reject) => {
       const mod = url.startsWith("https") ? https : http;
-      mod.get(url, (res) => {
+      const req = mod.get(url, { timeout: 3e4 }, (res) => {
         if (res.statusCode !== 200) {
           reject(new Error(`HTTP ${res.statusCode}`));
           return;
@@ -542,7 +545,11 @@ class ScriptRestore extends utils.Adapter {
         res.on("data", (c) => chunks.push(c));
         res.on("end", () => resolve(Buffer.concat(chunks)));
         res.on("error", reject);
-      }).on("error", reject);
+      });
+      req.on("error", reject);
+      req.on("timeout", () => {
+        req.destroy(new Error("Request timed out"));
+      });
     });
   }
   async handleParseHttpUrl(obj) {
@@ -704,7 +711,7 @@ class ScriptRestore extends utils.Adapter {
     var _a;
     const msg = obj.message;
     const suffix = (_a = msg.suffix) != null ? _a : "";
-    const parts = msg.path.split(".");
+    const parts = msg.path.split(".").map((p) => sanitizeId(p));
     parts[parts.length - 1] = parts[parts.length - 1] + suffix;
     const newScriptPath = parts.join(".");
     const newId = `script.js.${newScriptPath}`;
@@ -758,7 +765,7 @@ class ScriptRestore extends utils.Adapter {
     }
   }
   async ensureScriptFolders(scriptId) {
-    const parts = scriptId.split(".");
+    const parts = scriptId.split(".").map((p) => sanitizeId(p));
     for (let i = 2; i < parts.length - 1; i++) {
       const folderId = parts.slice(0, i + 1).join(".");
       try {
