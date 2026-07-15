@@ -1721,12 +1721,22 @@
 			document.getElementById('zipBtn').style.display = selectedIndices.size > 1 ? '' : 'none';
 		}
 
+		function loadJsZip() {
+			if (window.JSZip) return Promise.resolve();
+			return new Promise((resolve, reject) => {
+				const s = document.createElement('script');
+				s.src = new URL('./jszip.min.js', location.href).href;
+				s.onload = resolve;
+				s.onerror = () => reject(new Error('Could not load jszip.min.js'));
+				document.head.appendChild(s);
+			});
+		}
+
 		async function downloadZip() {
 			if (selectedIndices.size < 2) return;
 			try {
-				const jszipUrl = new URL('./jszip.min.js', location.href).href;
-				const { default: JSZip } = await import(jszipUrl);
-				const zip = new JSZip();
+				await loadJsZip();
+				const zip = new window.JSZip();
 				selectedIndices.forEach(idx => {
 					const s = scriptsData[idx];
 					const ext = s.type === 'TypeScript' ? '.ts' : '.js';
