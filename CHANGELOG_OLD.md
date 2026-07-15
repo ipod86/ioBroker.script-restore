@@ -1,5 +1,10 @@
 # Older Changelog
 
+### 0.1.1 (2026-05-13)
+* (ipod86) allow overwriting existing scripts during restore (confirmation dialog with path display)
+* (ipod86) allow empty suffix to restore script under its original name
+* (ipod86) prompt to start script immediately after successful restore
+
 ### 0.1.0 (2026-05-13)
 * (ipod86) drop Node.js 20 support (EOL 2026-04-30), require >= 22
 * (ipod86) fix: move @iobroker/types to production dependencies to fix CI integration test

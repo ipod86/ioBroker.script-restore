@@ -75,6 +75,13 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.1.8 (2026-07-15)
+* (ipod86) fix: sanitize object IDs from backup paths to prevent invalid ioBroker state IDs
+* (ipod86) fix: add 30s timeout to HTTP URL download
+* (ipod86) fix: bundle jszip locally in admin tab — no CDN dependency
+* (ipod86) fix: zip export now works in all browsers (script tag loading, DOM-append before click)
+* (ipod86) fix: remove postinstall lifecycle script from package.json (E0093)
+
 ### 0.1.7 (2026-07-01)
 * (ipod86) fix: translate common.news 0.1.5 entries into all 10 languages (E1144)
 * (ipod86) fix: pin @types/node to ^22, fix dependabot cooldown format (W0066, W8917)

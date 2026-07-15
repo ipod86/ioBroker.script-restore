@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "news": {
+      "0.1.8": {
+        "en": "fix: sanitize object IDs from backup paths; 30s HTTP timeout for URL download; bundle jszip locally (no CDN); fix ZIP export in admin tab",
+        "de": "fix: Objekt-IDs aus Backup-Pfaden bereinigen; 30s HTTP-Timeout; jszip lokal eingebunden (kein CDN); ZIP-Export im Admin-Tab repariert",
+        "ru": "исправление: очистка ID объектов из путей резервных копий; HTTP таймаут 30с; jszip встроен локально; исправлен ZIP-экспорт",
+        "pt": "correção: sanitizar IDs de objetos de caminhos de backup; tempo limite HTTP de 30s; jszip incluído localmente; exportação ZIP corrigida",
+        "nl": "fix: object-IDs opschonen uit backup-paden; 30s HTTP-time-out; jszip lokaal gebundeld; zip-export hersteld",
+        "fr": "correctif: sanitiser les ID d'objets des chemins de sauvegarde; délai HTTP 30s; jszip inclus localement; export ZIP corrigé",
+        "it": "fix: sanificare gli ID oggetto dai percorsi di backup; timeout HTTP 30s; jszip incluso localmente; export ZIP corretto",
+        "es": "corrección: sanear IDs de objetos de rutas de copia de seguridad; tiempo de espera HTTP 30s; jszip incluido localmente; exportación ZIP corregida",
+        "pl": "poprawka: oczyszczanie identyfikatorów obiektów ze ścieżek kopii zapasowych; limit czasu HTTP 30s; jszip dołączony lokalnie; eksport ZIP naprawiony",
+        "uk": "виправлення: очищення ID об'єктів зі шляхів резервних копій; HTTP таймаут 30с; jszip вбудовано локально; виправлено ZIP-експорт",
+        "zh-cn": "修复：清理备份路径中的对象ID；30秒HTTP超时；jszip本地打包（无CDN）；修复管理标签中的ZIP导出"
+      },
       "0.1.7": {
         "en": "fix: translate common.news 0.1.5 entries into all 10 languages (E1144)\nfix: pin @types/node to ^22, fix dependabot cooldown format (W0066, W8917)",
         "de": "Behoben: Übersetzung der Einträge in common.news 0.1.5 in alle 10 Sprachen (E1144)\nFehlerbehebung: @types/node auf ^22 festlegen, Abklingzeitformat von dependabot korrigieren (W0066, W8917)",
@@ -80,19 +93,6 @@
         "pl": "dodaj pełny i18n do zakładki Interfejs: wszystkie struny przetłumaczone na de / en / fr / es / it / nl / pl / pt / ru / uk / zh- cn",
         "uk": "додати повну i18n в закладку UI: всі рядки, перекладені в de/en/fr/es/nl/pl/pt/ru/uk/zh-cn",
         "zh-cn": "将完整 i18n 添加到 Tab UI 中: 所有字符串翻译为 de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn"
-      },
-      "0.1.1": {
-        "en": "allow overwriting existing scripts during restore (confirmation dialog with path display)\nallow empty suffix to restore script under its original name\nprompt to start script immediately after successful restore",
-        "de": "das überschreiben bestehender skripte während der wiederherstellung (bestätigungsdialog mit pfadanzeige)\nleere suffix erlauben, skript unter seinem ursprünglichen namen wiederherzustellen\nscript sofort nach erfolgreicher wiederherstellung starten",
-        "ru": "позволяет перезаписывать существующие скрипты во время восстановления (подтверждающий диалог с отображением пути)\nпустой суффикс позволяет восстановить скрипт под оригинальным названием\nсценарий сразу после успешного восстановления",
-        "pt": "permitir sobrescrever scripts existentes durante a restauração (diálogo de confirmação com exibição de caminho)\npermite que o sufixo vazio restaure o script sob o seu nome original\nprompt para iniciar o script imediatamente após a restauração bem- sucedida",
-        "nl": "laat bestaande scripts overschrijven tijdens het herstellen (bevestigingsdialoog met padweergave)\nlaat leeg achtervoegsel toe om script te herstellen onder de oorspronkelijke naam\nprompt om het script direct na succesvol herstel te starten",
-        "fr": "permettre d'écraser les scripts existants pendant la restauration (dialogue de confirmation avec affichage du chemin)\npermettre au suffixe vide de restaurer le script sous son nom d'origine\ninvite à démarrer le script immédiatement après la restauration réussie",
-        "it": "consentire la sovrascrittura degli script esistenti durante il ripristino (conferma finestra di dialogo con il display del percorso)\nconsentire il suffisso vuoto per ripristinare lo script sotto il suo nome originale\nprompt per avviare lo script immediatamente dopo il ripristino di successo",
-        "es": "permite sobreescribir scripts existentes durante la restauración ( diálogo de confirmación con pantalla de ruta)\npermitir sufijo vacío para restaurar script bajo su nombre original\nprompt para iniciar script inmediatamente después de la restauración exitosa",
-        "pl": "pozwala na nadpisanie istniejących skryptów podczas przywracania (okno potwierdzenia z wyświetlaczem ścieżki)\npozwala pustym przyrostkiem przywrócić skrypt pod pierwotną nazwą\nnaciśnij przycisk, aby rozpocząć skrypt natychmiast po pomyślnym przywróceniu",
-        "uk": "дозволити перезаписувати існуючі сценарії під час відновлення (підтвердження діалогу з відображенням шляху)\nдозволити порожній suffix для відновлення сценарію під його оригінальною назвою\nнегайно після успішного відновлення",
-        "zh-cn": "允许在恢复时覆盖已有脚本( 用路径显示确认对话框)\n允许空后缀以原名恢复脚本\n成功恢复后立即启动脚本"
       }
     },
     "titleLang": {
