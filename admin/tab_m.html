@@ -1723,18 +1723,25 @@
 
 		async function downloadZip() {
 			if (selectedIndices.size < 2) return;
-			const { default: JSZip } = await import('./jszip.min.js');
-			const zip = new JSZip();
-			selectedIndices.forEach(idx => {
-				const s = scriptsData[idx];
-				const ext = s.type === 'TypeScript' ? '.ts' : '.js';
-				zip.file(s.path.replace(/\./g, '/') + ext, s.source || '');
-			});
-			const blob = await zip.generateAsync({ type: 'blob' });
-			const a = document.createElement('a');
-			a.href = URL.createObjectURL(blob);
-			a.download = 'scripts.zip';
-			a.click();
+			try {
+				const jszipUrl = new URL('./jszip.min.js', location.href).href;
+				const { default: JSZip } = await import(jszipUrl);
+				const zip = new JSZip();
+				selectedIndices.forEach(idx => {
+					const s = scriptsData[idx];
+					const ext = s.type === 'TypeScript' ? '.ts' : '.js';
+					zip.file(s.path.replace(/\./g, '/') + ext, s.source || '');
+				});
+				const blob = await zip.generateAsync({ type: 'blob' });
+				const a = document.createElement('a');
+				a.href = URL.createObjectURL(blob);
+				a.download = 'scripts.zip';
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+			} catch (e) {
+				alert('ZIP download failed: ' + e.message);
+			}
 		}
 
 		function loadScripts(scripts) {
