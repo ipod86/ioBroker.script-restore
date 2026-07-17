@@ -31,6 +31,8 @@ The archive is parsed entirely in the browser — no files are written to disk d
 - Full-text search across script names, paths and source code
 - View source code (JS/TS/Blockly/Rules)
 - Copy source code to clipboard or download as file
+- **Select multiple scripts** with the ☐ checkbox and download them as a ZIP archive
+- **Import ZIP archives** from the script-restore export or from the JS adapter's own backup (`2026-07-17-scripts.zip`)
 - Fully browser-based parsing — no server roundtrip for uploads
 - **Restore scripts directly into ioBroker** with a configurable suffix (default: `_rcvr`) — existing scripts are never overwritten
 
@@ -59,6 +61,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 - Click a script in the tree to view its source code
 - Use the **Copy** button to copy the source to the clipboard
 - Use the **Download** button to save the script as a file
+- Click ☐ on the left of a script to select it — select multiple scripts and click **ZIP** to download them all in one archive
 
 ## Supported backup formats
 
@@ -68,6 +71,8 @@ The archive is parsed entirely in the browser — no files are written to disk d
 | `.tar` | Uncompressed tar archive |
 | `.json` | JavaScript adapter script export |
 | `.jsonl` | ioBroker objects export (JSON lines) |
+| `.zip` (scripts.zip) | Script-restore ZIP export (contains `.js`/`.ts` files) |
+| `.zip` (JS adapter backup) | JS adapter internal backup (`YYYY-MM-DD-scripts.zip`, contains `.json` files with script metadata) |
 
 ## Changelog
 

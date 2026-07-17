@@ -31,8 +31,9 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 - Volltextsuche über Skriptnamen, Pfade und Quellcode
 - Quellcode anzeigen (JS/TS/Blockly/Rules)
 - Quellcode in die Zwischenablage kopieren oder als Datei herunterladen
+- **Mehrere Skripte auswählen** per ☐-Checkbox und als ZIP-Archiv herunterladen
+- **ZIP-Archive importieren** — aus dem script-restore-Export oder aus dem internen Backup des JS-Adapters (`2026-07-17-scripts.zip`)
 - Vollständig browserbasiertes Parsen — kein Server-Roundtrip bei Uploads
-- Mehrere Skripte mit Strg+Klick auswählen und als ZIP herunterladen
 - Optionale Quellen: Lokal, FTP, SMB, HTTP, SFTP, WebDAV
 - **Skripte direkt in ioBroker laden** mit konfigurierbarem Suffix (Standard: `_rcvr`) — bestehende Skripte werden nie überschrieben
 
@@ -61,6 +62,7 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 - Ein Skript im Baum anklicken, um den Quellcode anzuzeigen
 - **Kopieren**-Schaltfläche nutzen, um den Quellcode in die Zwischenablage zu kopieren
 - **Herunterladen**-Schaltfläche nutzen, um das Skript als Datei zu speichern
+- ☐ links neben einem Skript anklicken, um es zu markieren — mehrere Skripte markieren und auf **ZIP** klicken, um alle auf einmal herunterzuladen
 
 ## Unterstützte Backup-Formate
 
@@ -70,6 +72,8 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 | `.tar` | Unkomprimiertes Tar-Archiv |
 | `.json` | JavaScript-Adapter Skript-Export |
 | `.jsonl` | ioBroker-Objekte-Export (JSON Lines) |
+| `.zip` (scripts.zip) | script-restore ZIP-Export (enthält `.js`/`.ts`-Dateien) |
+| `.zip` (JS-Adapter-Backup) | Internes Backup des JS-Adapters (`JJJJ-MM-TT-scripts.zip`, enthält `.json`-Dateien mit Skript-Metadaten) |
 
 ## Changelog
 
