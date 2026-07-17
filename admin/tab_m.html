@@ -140,6 +140,14 @@
 			display: flex; justify-content: space-between; align-items: center;
 			border-bottom: 1px solid #f0f0f0;
 		}
+		.sel-box {
+			min-width: 22px; width: 22px; height: 22px; margin-right: 6px;
+			display: flex; align-items: center; justify-content: center;
+			font-size: 15px; color: #ccc; flex-shrink: 0; border-radius: 3px;
+			-webkit-tap-highlight-color: transparent;
+		}
+		.sel-box:hover { color: #e6a800; }
+		.script-item.selected .sel-box { color: #ffc107; }
 		.tree-script { padding-left: 32px; border-bottom: none; }
 		.tree-children .tree-children .tree-script { padding-left: 50px; }
 		.tree-children .tree-children .tree-children .tree-script { padding-left: 68px; }
@@ -288,6 +296,9 @@
 		body.dark .script-item { border-bottom-color: #2e2e4a; }
 		body.dark .script-item:hover { background-color: #2e3a5c; }
 		body.dark .script-item.active { background-color: #1e3a6e; }
+		body.dark .sel-box { color: #555; }
+		body.dark .sel-box:hover { color: #ffc107; }
+		body.dark .script-item.selected .sel-box { color: #ffc107; }
 		body.dark .status-msg { color: #8888aa; }
 		body.dark .resizer { background-color: #3a3a5c; }
 		body.dark .dropdown-menu {
@@ -441,7 +452,7 @@
 		<div class="toolbar-left">
 			<label class="file-input-label">
 				<span data-i18n="uploadLabel">📂 Backup hochladen</span>
-				<input type="file" id="fileInput" accept=".tar,.gz,.tar.gz,.json,.jsonl">
+				<input type="file" id="fileInput" accept=".tar,.gz,.tar.gz,.json,.jsonl,.zip">
 			</label>
 			<div class="dropdown-wrapper" id="localDropdown">
 				<button class="btn btn-outline" onclick="toggleDropdown('local')" data-i18n="localDropdown">
@@ -582,7 +593,7 @@
 				errorReading:         'Fehler beim Lesen der Datei.',
 				errorPrefix:         'Fehler: ',
 				adapterTimeout:         'Fehler: Keine Antwort vom Adapter. Läuft script-restore.{i}?',
-				codeHint:              '// Skript im Baum links auswählen… oder mehrere mit Strg+Klick für ZIP',
+				codeHint:              '// Skript anklicken zum Anzeigen – ☐ links antippen zum Markieren für ZIP',
 				loaderReadingFile:              'Lese Datei...',
 				loaderReadingArchive:              'Lese Archiv...',
 				loaderExtractingArchive:              'Entpacke Archiv...',
@@ -643,7 +654,7 @@
 				errorReading:         'Error reading file.',
 				errorPrefix:         'Error: ',
 				adapterTimeout:         'Error: No response from adapter. Is script-restore.{i} running?',
-				codeHint:              '// Select a script in the tree… or Ctrl+click multiple for ZIP',
+				codeHint:              '// Click a script to view it — tap ☐ on the left to select multiple for ZIP',
 				loaderReadingFile:              'Reading file...',
 				loaderReadingArchive:              'Reading archive...',
 				loaderExtractingArchive:              'Extracting archive...',
@@ -704,7 +715,7 @@
 				errorReading:         'Erreur de lecture du fichier.',
 				errorPrefix:         'Erreur : ',
 				adapterTimeout:         'Erreur : pas de réponse de l\'adaptateur. script-restore.{i} est-il actif ?',
-				codeHint:              '// Sélectionnez un script dans l\'arborescence… ou Ctrl+clic pour plusieurs en ZIP',
+				codeHint:              '// Cliquez sur un script pour l\'afficher — touchez ☐ à gauche pour sélectionner plusieurs en ZIP',
 				loaderReadingFile:              'Lecture du fichier...',
 				loaderReadingArchive:              'Lecture de l\'archive...',
 				loaderExtractingArchive:              'Extraction de l\'archive...',
@@ -765,7 +776,7 @@
 				errorReading:         'Error al leer el archivo.',
 				errorPrefix:         'Error: ',
 				adapterTimeout:         'Error: sin respuesta del adaptador. ¿Está en ejecución script-restore.{i}?',
-				codeHint:              '// Selecciona un script en el árbol… o Ctrl+clic para varios en ZIP',
+				codeHint:              '// Haz clic en un script para verlo — toca ☐ a la izquierda para seleccionar varios para ZIP',
 				loaderReadingFile:              'Leyendo archivo...',
 				loaderReadingArchive:              'Leyendo archivo...',
 				loaderExtractingArchive:              'Extrayendo archivo...',
@@ -826,7 +837,7 @@
 				errorReading:         'Errore nella lettura del file.',
 				errorPrefix:         'Errore: ',
 				adapterTimeout:         'Errore: nessuna risposta dall\'adattatore. script-restore.{i} è in esecuzione?',
-				codeHint:              '// Seleziona uno script nell\'albero… o Ctrl+clic per più script in ZIP',
+				codeHint:              '// Fai clic su uno script per visualizzarlo — tocca ☐ a sinistra per selezionare più script per ZIP',
 				loaderReadingFile:              'Lettura file...',
 				loaderReadingArchive:              'Lettura archivio...',
 				loaderExtractingArchive:              'Estrazione archivio...',
@@ -887,7 +898,7 @@
 				errorReading:         'Fout bij lezen van bestand.',
 				errorPrefix:         'Fout: ',
 				adapterTimeout:         'Fout: geen reactie van adapter. Is script-restore.{i} actief?',
-				codeHint:              '// Selecteer een script in de boom… of Ctrl+klik voor meerdere als ZIP',
+				codeHint:              '// Klik op een script om het te bekijken — tik op ☐ links om meerdere te selecteren voor ZIP',
 				loaderReadingFile:              'Bestand lezen...',
 				loaderReadingArchive:              'Archief lezen...',
 				loaderExtractingArchive:              'Archief uitpakken...',
@@ -948,7 +959,7 @@
 				errorReading:         'Błąd odczytu pliku.',
 				errorPrefix:         'Błąd: ',
 				adapterTimeout:         'Błąd: brak odpowiedzi adaptera. Czy script-restore.{i} działa?',
-				codeHint:              '// Wybierz skrypt w drzewie… lub Ctrl+klik dla wielu jako ZIP',
+				codeHint:              '// Kliknij skrypt, aby go wyświetlić — dotknij ☐ po lewej, aby zaznaczyć kilka do ZIP',
 				loaderReadingFile:              'Odczyt pliku...',
 				loaderReadingArchive:              'Odczyt archiwum...',
 				loaderExtractingArchive:              'Rozpakowywanie archiwum...',
@@ -1009,7 +1020,7 @@
 				errorReading:         'Erro ao ler ficheiro.',
 				errorPrefix:         'Erro: ',
 				adapterTimeout:         'Erro: sem resposta do adaptador. O script-restore.{i} está em execução?',
-				codeHint:              '// Selecione um script na árvore… ou Ctrl+clique para vários em ZIP',
+				codeHint:              '// Clique num script para o ver — toque em ☐ à esquerda para selecionar vários para ZIP',
 				loaderReadingFile:              'A ler ficheiro...',
 				loaderReadingArchive:              'A ler arquivo...',
 				loaderExtractingArchive:              'A extrair arquivo...',
@@ -1070,7 +1081,7 @@
 				errorReading:         'Ошибка чтения файла.',
 				errorPrefix:         'Ошибка: ',
 				adapterTimeout:         'Ошибка: адаптер не отвечает. Запущен ли script-restore.{i}?',
-				codeHint:              '// Выберите скрипт в дереве… или Ctrl+клик для нескольких в ZIP',
+				codeHint:              '// Нажмите на скрипт для просмотра — коснитесь ☐ слева, чтобы выбрать несколько для ZIP',
 				loaderReadingFile:              'Чтение файла...',
 				loaderReadingArchive:              'Чтение архива...',
 				loaderExtractingArchive:              'Распаковка архива...',
@@ -1131,7 +1142,7 @@
 				errorReading:         'Помилка читання файлу.',
 				errorPrefix:         'Помилка: ',
 				adapterTimeout:         'Помилка: адаптер не відповідає. Чи запущено script-restore.{i}?',
-				codeHint:              '// Оберіть скрипт у дереві… або Ctrl+клік для кількох у ZIP',
+				codeHint:              '// Натисніть на скрипт для перегляду — торкніться ☐ ліворуч, щоб вибрати кілька для ZIP',
 				loaderReadingFile:              'Читання файлу...',
 				loaderReadingArchive:              'Читання архіву...',
 				loaderExtractingArchive:              'Розпакування архіву...',
@@ -1192,7 +1203,7 @@
 				errorReading:         '读取文件时出错。',
 				errorPrefix:         '错误：',
 				adapterTimeout:         '错误：适配器无响应。script-restore.{i} 是否正在运行？',
-				codeHint:              '// 在左侧树中选择脚本…或按住 Ctrl 点击多个以下载 ZIP',
+				codeHint:              '// 点击脚本查看 — 点击左侧☐可多选导出ZIP',
 				loaderReadingFile:              '正在读取文件...',
 				loaderReadingArchive:              '正在读取档案...',
 				loaderExtractingArchive:              '正在解压档案...',
@@ -1527,12 +1538,95 @@
 			throw new Error(t('noArchiveFile'));
 		}
 
+		async function parseZipInBrowser(arrayBuffer) {
+			await loadJsZip();
+			const zip = await window.JSZip.loadAsync(arrayBuffer);
+			const files = [];
+			zip.forEach((relativePath, file) => {
+				if (!file.dir) files.push({ path: relativePath, file });
+			});
+			if (!files.length) throw new Error('ZIP is empty');
+			const allJson = files.every(f => f.path.toLowerCase().endsWith('.json'));
+			return allJson ? parseJsAdapterZip(zip, files) : parseExportZip(zip, files);
+		}
+
+		async function parseExportZip(zip, files) {
+			const scripts = [];
+			for (const { path } of files) {
+				const lp = path.toLowerCase();
+				let ext = null;
+				if (lp.endsWith('.ts')) ext = '.ts';
+				else if (lp.endsWith('.js')) ext = '.js';
+				else if (lp.endsWith('.blockly')) ext = '.blockly';
+				else if (lp.endsWith('.rules')) ext = '.rules';
+				if (!ext) continue;
+				const source = await zip.file(path).async('string');
+				const ioPath = path.slice(0, path.length - ext.length).replace(/\//g, '.');
+				const name = ioPath.split('.').pop();
+				let type = 'JS';
+				if (ext === '.ts') type = 'TypeScript';
+				else if (ext === '.blockly') type = 'Blockly';
+				else if (ext === '.rules') type = 'Rules';
+				else if (/\/\/(JTND[A-Za-z0-9+/=%]+)/.test(source)) type = 'Blockly';
+				else if (/\/\/({[^}]*"triggers"[^}]*})/.test(source) || /\/\* const demo =/.test(source)) type = 'Rules';
+				scripts.push({ name, path: ioPath, type, source });
+			}
+			return scripts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+		}
+
+		async function parseJsAdapterZip(zip, files) {
+			const scripts = [];
+			for (const { path } of files) {
+				const content = await zip.file(path).async('string');
+				let obj;
+				try { obj = JSON.parse(content); } catch { continue; }
+				if (!obj || obj.type !== 'script') continue;
+				const c = obj.common;
+				if (!c || typeof c.source !== 'string') continue;
+				const et = (typeof c.engineType === 'string' ? c.engineType : '').toLowerCase();
+				let type = 'JS';
+				if (et.includes('typescript') || et.includes('/ts')) type = 'TypeScript';
+				else if (et.includes('blockly')) type = 'Blockly';
+				else if (et.includes('rules')) type = 'Rules';
+				let ioPath = (obj._id || '');
+				if (ioPath.startsWith('script.js.')) ioPath = ioPath.slice(10);
+				else ioPath = path.slice(0, -5).replace(/\//g, '.');
+				const no = c.name;
+				let name;
+				if (typeof no === 'object' && no !== null) name = no.de || no.en || Object.values(no)[0] || ioPath.split('.').pop();
+				else name = (typeof no === 'string' && no) ? no : ioPath.split('.').pop();
+				scripts.push({ name, path: ioPath, type, source: c.source });
+			}
+			return scripts.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+		}
+
 		// === File Upload ===
 		document.getElementById('fileInput').addEventListener('change', function() {
 			if (!this.files || !this.files.length) return;
 			const file = this.files[0];
 			const name = file.name.toLowerCase();
 			const isArchive = name.endsWith('.tar.gz') || name.endsWith('.tgz') || name.endsWith('.tar');
+			const isZip = name.endsWith('.zip');
+
+			if (isZip) {
+				showLoaderSpinner(t('loaderProcessing'));
+				const reader = new FileReader();
+				reader.onload = async function() {
+					try {
+						const scripts = await parseZipInBrowser(reader.result, file.name);
+						hideLoader();
+						loadScripts(scripts);
+						setStatus(t('scriptsLoaded').replace('{n}', scripts.length).replace('{f}', file.name), 'success');
+					} catch(e) {
+						hideLoader();
+						setStatus(t('errorPrefix') + e.message, 'error');
+					}
+				};
+				reader.onerror = () => { hideLoader(); setStatus(t('errorReading'), 'error'); };
+				reader.readAsArrayBuffer(file);
+				this.value = '';
+				return;
+			}
 
 			// JSON/JSONL: parse directly in browser, no server needed
 			if (!isArchive) {
@@ -1718,6 +1812,8 @@
 				selectedIndices.add(idx);
 				el.classList.add('selected');
 			}
+			const cb = el.querySelector('.sel-box');
+			if (cb) cb.textContent = selectedIndices.has(idx) ? '☑' : '☐';
 			document.getElementById('zipBtn').style.display = selectedIndices.size > 1 ? '' : 'none';
 		}
 
@@ -1862,18 +1958,18 @@
 
 		function createScriptNode(s, idx) {
 			const badgeText = s.type === 'TypeScript' ? 'TS' : (s.type === 'Blockly' ? 'Blockly' : (s.type === 'Rules' ? 'RULES' : 'JS'));
+			const isSelected = selectedIndices.has(idx);
 			const div = document.createElement('div');
-			div.className = 'script-item' + (cur.index === idx ? ' active' : '') + (selectedIndices.has(idx) ? ' selected' : '');
+			div.className = 'script-item' + (cur.index === idx ? ' active' : '') + (isSelected ? ' selected' : '');
 			div.dataset.index = idx;
-			div.onclick = (e) => {
-				if (e.ctrlKey || e.metaKey) {
-					toggleSelect(idx, div);
-				} else {
-					selectScript(idx);
-				}
-			};
-			div.innerHTML = '<div class="script-name" title="' + escapeHTML(s.path) + '">📄 ' + escapeHTML(s.name) + '</div>' +
+			div.onclick = () => selectScript(idx);
+			div.innerHTML = '<span class="sel-box">' + (isSelected ? '☑' : '☐') + '</span>' +
+				'<div class="script-name" title="' + escapeHTML(s.path) + '">📄 ' + escapeHTML(s.name) + '</div>' +
 				'<span class="type-badge badge-' + s.type + '">' + badgeText + '</span>';
+			div.querySelector('.sel-box').onclick = (e) => {
+				e.stopPropagation();
+				toggleSelect(idx, div);
+			};
 			return div;
 		}
 
