@@ -73,83 +73,38 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 
 ## Changelog
 
-<!--
-	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**
--->
+### 0.1.9 (2026-07-17)
+* (ipod86) feat: Checkbox-Mehrfachauswahl für ZIP-Export — ☐ anklicken zum Markieren, Skript-Klick zeigt nur an
+* (ipod86) feat: Import von scripts.zip (unser Adapter-Export) und JS-Adapter-Backup-ZIP (2026-07-17-scripts.zip)
+* (ipod86) fix: Spaltenausrichtung der Skriptliste (Checkbox, Symbol, Name) mit Flex-Layout
+
+### 0.1.8 (2026-07-15)
+* (ipod86) fix: Objekt-IDs aus Backup-Pfaden bereinigt (ungültige ioBroker-State-IDs verhindern)
+* (ipod86) fix: 30s Timeout für HTTP-URL-Download
+* (ipod86) fix: JSZip lokal im Admin-Tab eingebunden — keine CDN-Abhängigkeit
+* (ipod86) fix: ZIP-Export in allen Browsern repariert (Script-Tag-Laden, DOM-Append vor Click)
+* (ipod86) fix: postinstall-Script aus package.json entfernt (E0093)
+
+### 0.1.7 (2026-07-01)
+* (ipod86) fix: common.news-Einträge 0.1.5 in alle 10 Sprachen übersetzt (E1144)
+* (ipod86) fix: @types/node auf ^22 fixiert, dependabot Cooldown-Format korrigiert (W0066, W8917)
+
+### 0.1.6 (2026-06-27)
+* (ipod86) fix: TypeScript auf ^6.0.3 aktualisiert mit expliziten Mocha-Typen für TypeScript-6-Kompatibilität (W0083)
+
+### 0.1.5 (2026-06-06)
+* (ipod86) fix: @alcalzone/release-script auf ^5.2.1 aktualisiert (E0036)
+* (ipod86) fix: Fehlende Platzhalter-i18n-Schlüssel in alle 11 Sprachdateien ergänzt (W5612)
+* (ipod86) fix: i18n auf Kurzformat migriert, npm-Provenance-Signierung hinzugefügt (S5601, S2008)
+* (ipod86) fix: Auf @tsconfig/node22 aktualisiert, @types/node auf ^22 fixiert (W0086, W0090, W0066)
+* (ipod86) fix: Abhängigkeiten neu geordnet — types/eslint/prettier in devDependencies verschoben (W5060, W0078, E3031)
+
 ### 0.1.4 (2026-05-24)
 * (ipod86) Syntaxhervorhebung für JS/TS, Blockly (XML) und Rules (JSON) — reines JS, keine externe Bibliothek
 * (ipod86) Spracherkennung korrigiert: ioBroker-Systemsprache wird über den Adapter (system.config) gelesen statt über Browser/DOM
 * (ipod86) Alle verbleibenden Loader-Texte übersetzt (Datei/Archiv lesen, Entpacken, URL laden)
 
-### 0.1.3 (2026-05-24)
-* (ipod86) Language-Flash behoben: Socket-Override wird übersprungen wenn Sprache bereits vom Admin-Frame erkannt wurde
-* (ipod86) Alle hardcodierten Statusmeldungen durch übersetzte t()-Aufrufe ersetzt
-* (ipod86) codeHint-Übersetzungsschlüssel in alle 11 Sprachen ergänzt
-
-### 0.1.2 (2026-05-24)
-* (ipod86) Vollständige i18n im Admin-Tab: alle Strings in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn übersetzt
-
-### 0.1.1 (2026-05-24)
-* (ipod86) Überschreiben bestehender Skripte beim Restore erlaubt (Bestätigungs-Dialog mit Pfadanzeige)
-* (ipod86) Leeres Suffix erlaubt, um Skript unter dem Originalnamen wiederherzustellen
-* (ipod86) Hinweis nach erfolgreichem Restore: Skript direkt starten?
-
-### 0.1.0 (2026-05-13)
-* (ipod86) Node.js 20-Unterstützung eingestellt (EOL 2026-04-30), mindestens Node.js 22 erforderlich
-* (ipod86) Fix: @iobroker/types in production dependencies verschoben (CI-Integrationstests)
-* (ipod86) .npmrc mit legacy-peer-deps hinzugefügt (Peer-Dependency-Konflikte)
-* (ipod86) Abhängigkeiten aktualisiert: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config
-
-### 0.0.12 (2026-04-30)
-* (ipod86) common.singleton hinzugefügt (verhindert mehrere Instanzen)
-* (ipod86) Vollständige i18n-Übersetzungen für alle unterstützten Sprachen (fr, es, it, nl, pl, pt, ru, uk, zh-cn)
-
-### 0.0.11 (2026-04-13)
-* (ipod86) Typ-Filter (JS/TS/Blockly/Rules) in der Skript-Sidebar hinzugefügt
-* (ipod86) Direktes Laden in ioBroker mit Suffix-Eingabe und Bestätigungs-Modal hinzugefügt
-* (ipod86) Veraltete admin/words.js und .prettierIgnore entfernt
-
-### 0.0.10 (2026-04-08)
-* (ipod86) jsonConfig: responsive Größen lg/xl für backupPath korrigiert (E5509)
-* (ipod86) News-Einträge auf 7 begrenzt (W1032)
-* (ipod86) Dependabot npm cooldown von 7 Tagen hinzugefügt (W8915)
-
-### 0.0.9 (2026-04-08)
-* (ipod86) jsonConfig: responsive Größenattribute ergänzt (E5507)
-* (ipod86) i18n-Übersetzungsdateien hinzugefügt (W5022)
-* (ipod86) veraltete index_m.html und style.css entfernt (W5047)
-* (ipod86) ungültiges copyToField-Attribut entfernt (W5512)
-
-### 0.0.8 (2026-04-08)
-* (ipod86) Einstellungs-UI zu jsonConfig (admin 5+) migriert — behebt S5022
-* (ipod86) `node:fs` statt `fs` verwendet — behebt S5043
-* (ipod86) Dependabot-Zeitplan von monatlich auf wöchentlich geändert — behebt S8906
-* (ipod86) Automerge-Workflow in automerge-dependabot.yml umbenannt — behebt S8911
-
-### 0.0.7 (2026-04-08)
-* (ipod86) HTTP-URL-Laden ohne Protokoll-Präfix korrigiert (https:// wird automatisch ergänzt)
-* (ipod86) localStorage-Speicherung des zuletzt geladenen Backups entfernt
-
-### 0.0.6 (2026-04-08)
-* (ipod86) HTTP, SFTP und WebDAV als optionale Backup-Quellen hinzugefügt
-* (ipod86) Mehrfachauswahl von Skripten mit Strg+Klick und ZIP-Download
-* (ipod86) Zuletzt geladenes Backup im Browser merken (localStorage)
-* (ipod86) Lokalen Backup-Pfad vom backitup-Adapter automatisch erkennen
-
-### 0.0.5 (2026-04-08)
-* (ipod86) FTP und SMB als optionale Backup-Quellen mit Verbindungstest hinzugefügt
-* (ipod86) Lokale Backup-Quelle optional gemacht (in Einstellungen aktivierbar)
-* (ipod86) SMB-Versionshinweis (nur SMB2) in den Einstellungen ergänzt
-
-### 0.0.4 (2026-04-06)
-* (ipod86) Dunkles-Theme-Erkennung verbessert: Live-Umschaltung via MutationObserver und Storage-Events
-
-### 0.0.3 (2026-04-06)
-* (ipod86) Dunkles Theme für Admin-Tab-UI hinzugefügt
-
-### 0.0.1 (2026-04-06)
-* (ipod86) Erstveröffentlichung
+Ältere Changelogs sind in [CHANGELOG_OLD.md](CHANGELOG_OLD.md) verfügbar.
 
 ## Lizenz
 

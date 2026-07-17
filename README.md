@@ -71,10 +71,11 @@ The archive is parsed entirely in the browser — no files are written to disk d
 
 ## Changelog
 
-<!--
-	Placeholder for the next version (at the beginning of the line):
-	### **WORK IN PROGRESS**
--->
+### 0.1.9 (2026-07-17)
+* (ipod86) feat: checkbox multi-select for ZIP export — click ☐ to select, main click still views only
+* (ipod86) feat: import scripts.zip (our adapter export) and JS adapter backup ZIP (2026-07-17-scripts.zip)
+* (ipod86) fix: align script list item columns (checkbox, icon, name) with flex layout
+
 ### 0.1.8 (2026-07-15)
 * (ipod86) fix: sanitize object IDs from backup paths to prevent invalid ioBroker state IDs
 * (ipod86) fix: add 30s timeout to HTTP URL download
@@ -103,11 +104,6 @@ The archive is parsed entirely in the browser — no files are written to disk d
 * (ipod86) add syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps
 * (ipod86) fix language detection: read ioBroker system language via adapter (system.config) instead of browser/DOM
 * (ipod86) translate all remaining loader texts (reading file/archive, extracting, loading URL)
-
-### 0.1.3 (2026-05-24)
-* (ipod86) fix language flash: skip socket override when language already detected from admin frame
-* (ipod86) replace all hardcoded status strings with translated t() calls
-* (ipod86) add codeHint translation key in all 11 languages
 
 Older changelogs are available in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 

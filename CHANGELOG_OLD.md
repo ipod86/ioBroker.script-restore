@@ -1,5 +1,13 @@
 # Older Changelog
 
+### 0.1.3 (2026-05-24)
+* (ipod86) fix language flash: skip socket override when language already detected from admin frame
+* (ipod86) replace all hardcoded status strings with translated t() calls
+* (ipod86) add codeHint translation key in all 11 languages
+
+### 0.1.2 (2026-05-24)
+* (ipod86) add full i18n to tab UI: all strings translated into de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn
+
 ### 0.1.1 (2026-05-13)
 * (ipod86) allow overwriting existing scripts during restore (confirmation dialog with path display)
 * (ipod86) allow empty suffix to restore script under its original name
