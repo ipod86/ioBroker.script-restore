@@ -46,6 +46,7 @@
                     "type": "sendTo",
                     "command": "suggestBackupPath",
                     "label": "suggestPath",
+                    "copyToData": true,
                     "hidden": "!data.localEnabled",
                     "xs": 12,
                     "sm": 6,
