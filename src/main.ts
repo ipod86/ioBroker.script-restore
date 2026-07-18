@@ -663,16 +663,16 @@ class ScriptRestore extends utils.Adapter {
 		} catch {
 			// adapter not installed
 		}
-		const found: string[] = [];
 		for (const p of candidates) {
 			try {
 				await fs.access(p);
-				found.push(p);
+				this.sendTo(obj.from, obj.command, { result: p }, obj.callback);
+				return;
 			} catch {
 				// not accessible
 			}
 		}
-		this.sendTo(obj.from, obj.command, found, obj.callback);
+		this.sendTo(obj.from, obj.command, { result: "" }, obj.callback);
 	}
 
 	// ─── HTTP ────────────────────────────────────────────────────────────────
