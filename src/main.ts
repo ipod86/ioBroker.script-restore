@@ -648,7 +648,7 @@ class ScriptRestore extends utils.Adapter {
 			if (files.length === 0) {
 				this.sendTo(obj.from, obj.command, { error: t("noBackups") }, obj.callback);
 			} else {
-				this.sendTo(obj.from, obj.command, { error: t("backupsFound", files.length) }, obj.callback);
+				this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
 			}
 		} catch {
 			this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);
