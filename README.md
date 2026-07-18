@@ -76,6 +76,8 @@ The archive is parsed entirely in the browser — no files are written to disk d
 
 ## Changelog
 
+### **WORK IN PROGRESS**
+
 ### 0.1.9 (2026-07-17)
 * (ipod86) feat: checkbox multi-select for ZIP export — click ☐ to select, main click still views only
 * (ipod86) feat: import scripts.zip (our adapter export) and JS adapter backup ZIP (2026-07-17-scripts.zip)
