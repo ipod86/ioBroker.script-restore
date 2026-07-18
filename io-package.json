@@ -144,7 +144,6 @@
     "mode": "daemon",
     "type": "utility",
     "compact": true,
-    "singleton": true,
     "messagebox": true,
     "connectionType": "local",
     "dataSource": "push",
