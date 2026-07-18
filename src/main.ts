@@ -633,7 +633,11 @@ class ScriptRestore extends utils.Adapter {
 			return n !== undefined ? m.replace("{n}", String(n)) : m;
 		};
 
-		const backupPath = this.config.backupPath || "/opt/iobroker/backups";
+		const msg = obj.message as Record<string, unknown> | undefined;
+		const backupPath =
+			(typeof msg?.backupPath === "string" && msg.backupPath) ||
+			this.config.backupPath ||
+			"/opt/iobroker/backups";
 		try {
 			const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
 			const files = rawEntries.filter(e => {

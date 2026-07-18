@@ -568,7 +568,8 @@ class ScriptRestore extends utils.Adapter {
       const m = (_d = (_c = (_a2 = msgs[key]) == null ? void 0 : _a2[lang]) != null ? _c : (_b2 = msgs[key]) == null ? void 0 : _b2.en) != null ? _d : key;
       return n !== void 0 ? m.replace("{n}", String(n)) : m;
     };
-    const backupPath = this.config.backupPath || "/opt/iobroker/backups";
+    const msg = obj.message;
+    const backupPath = typeof (msg == null ? void 0 : msg.backupPath) === "string" && msg.backupPath || this.config.backupPath || "/opt/iobroker/backups";
     try {
       const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
       const files = rawEntries.filter((e) => {
