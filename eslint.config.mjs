@@ -19,8 +19,7 @@ export default [
 			'admin/blockly.js',
 			'admin/jszip.min.js',
 			'**/adapter-config.d.ts',
-			'widgets/**/*.js',
-			'admin/custom/**/*.js'
+			'widgets/**/*.js'
 		],
 	},
 	{
