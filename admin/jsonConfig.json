@@ -20,7 +20,9 @@
                     "type": "divider"
                 },
                 "backupPath": {
-                    "type": "text",
+                    "type": "selectSendTo",
+                    "command": "suggestBackupPath",
+                    "manual": true,
                     "label": "backupPath",
                     "placeholder": "/opt/iobroker/backups",
                     "hidden": "!data.localEnabled",
@@ -37,22 +39,10 @@
                     "result": "{result}",
                     "hidden": "!data.localEnabled",
                     "xs": 12,
-                    "sm": 6,
-                    "md": 6,
-                    "lg": 6,
-                    "xl": 6
-                },
-                "_suggestBtn": {
-                    "type": "sendTo",
-                    "command": "suggestBackupPath",
-                    "label": "suggestPath",
-                    "result": "{result}",
-                    "hidden": "!data.localEnabled",
-                    "xs": 12,
-                    "sm": 6,
-                    "md": 6,
-                    "lg": 6,
-                    "xl": 6
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 }
             }
         },
