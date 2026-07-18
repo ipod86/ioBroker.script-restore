@@ -669,13 +669,13 @@ class ScriptRestore extends utils.Adapter {
 		for (const p of candidates) {
 			try {
 				await fs.access(p);
-				this.sendTo(obj.from, obj.command, p, obj.callback);
+				this.sendTo(obj.from, obj.command, { native: { backupPath: p } }, obj.callback);
 				return;
 			} catch {
 				// not accessible
 			}
 		}
-		this.sendTo(obj.from, obj.command, "", obj.callback);
+		this.sendTo(obj.from, obj.command, { native: {} }, obj.callback);
 	}
 
 	// ─── HTTP ────────────────────────────────────────────────────────────────
