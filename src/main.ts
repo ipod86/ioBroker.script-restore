@@ -633,10 +633,8 @@ class ScriptRestore extends utils.Adapter {
 			return n !== undefined ? m.replace("{n}", String(n)) : m;
 		};
 
-		const formData = obj.message as Record<string, unknown> | undefined;
-		const typed = typeof formData?.backupPath === "string" ? formData.backupPath.trim() : "";
-		const backupPath = typed || this.config.backupPath || "/opt/iobroker/backups";
-		this.log.info(`testLocalPath: msg=${JSON.stringify(formData)} typed="${typed}" path="${backupPath}"`);
+		const backupPath = this.config.backupPath?.trim() || "/opt/iobroker/backups";
+		this.log.info(`testLocalPath: path="${backupPath}"`);
 		try {
 			const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
 			const files = rawEntries.filter(e => {
@@ -648,9 +646,9 @@ class ScriptRestore extends utils.Adapter {
 				);
 			});
 			if (files.length === 0) {
-				this.sendTo(obj.from, obj.command, { result: t("noBackups") }, obj.callback);
+				this.sendTo(obj.from, obj.command, t("noBackups"), obj.callback);
 			} else {
-				this.sendTo(obj.from, obj.command, { result: t("backupsFound", files.length) }, obj.callback);
+				this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
 			}
 		} catch {
 			this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);

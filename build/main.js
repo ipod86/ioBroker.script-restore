@@ -515,7 +515,7 @@ class ScriptRestore extends utils.Adapter {
   }
   // ─── Suggest backup path ─────────────────────────────────────────────────
   async handleTestLocalPath(obj) {
-    var _a, _b;
+    var _a, _b, _c;
     const msgs = {
       pathNotFound: {
         en: "Path not found",
@@ -564,14 +564,12 @@ class ScriptRestore extends utils.Adapter {
     } catch {
     }
     const t = (key, n) => {
-      var _a2, _b2, _c, _d;
-      const m = (_d = (_c = (_a2 = msgs[key]) == null ? void 0 : _a2[lang]) != null ? _c : (_b2 = msgs[key]) == null ? void 0 : _b2.en) != null ? _d : key;
+      var _a2, _b2, _c2, _d;
+      const m = (_d = (_c2 = (_a2 = msgs[key]) == null ? void 0 : _a2[lang]) != null ? _c2 : (_b2 = msgs[key]) == null ? void 0 : _b2.en) != null ? _d : key;
       return n !== void 0 ? m.replace("{n}", String(n)) : m;
     };
-    const formData = obj.message;
-    const typed = typeof (formData == null ? void 0 : formData.backupPath) === "string" ? formData.backupPath.trim() : "";
-    const backupPath = typed || this.config.backupPath || "/opt/iobroker/backups";
-    this.log.info(`testLocalPath: msg=${JSON.stringify(formData)} typed="${typed}" path="${backupPath}"`);
+    const backupPath = ((_c = this.config.backupPath) == null ? void 0 : _c.trim()) || "/opt/iobroker/backups";
+    this.log.info(`testLocalPath: path="${backupPath}"`);
     try {
       const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
       const files = rawEntries.filter((e) => {
@@ -579,9 +577,9 @@ class ScriptRestore extends utils.Adapter {
         return e.isFile() && (n.startsWith("iobroker") || n.startsWith("javascript")) && (n.endsWith(".tar.gz") || n.endsWith(".tar") || n.endsWith(".json") || n.endsWith(".jsonl"));
       });
       if (files.length === 0) {
-        this.sendTo(obj.from, obj.command, { result: t("noBackups") }, obj.callback);
+        this.sendTo(obj.from, obj.command, t("noBackups"), obj.callback);
       } else {
-        this.sendTo(obj.from, obj.command, { result: t("backupsFound", files.length) }, obj.callback);
+        this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
       }
     } catch {
       this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);

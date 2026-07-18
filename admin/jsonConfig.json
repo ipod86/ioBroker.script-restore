@@ -34,8 +34,6 @@
                     "type": "sendTo",
                     "command": "testLocalPath",
                     "label": "testLocalPath",
-                    "result": "{result}",
-                    "error": "{error}",
                     "hidden": "!data.localEnabled",
                     "xs": 12,
                     "sm": 6,
