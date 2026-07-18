@@ -21,6 +21,9 @@
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
+## 0.1.6 (2026-06-27)
+* (ipod86) fix: upgrade typescript to ^6.0.3 with explicit mocha types for TypeScript 6 compatibility (W0083)
+
 ## 0.1.5 (2026-06-06)
 * (ipod86) fix: update @alcalzone/release-script to ^5.2.1 (E0036)
 * (ipod86) fix: add missing placeholder i18n keys to all 11 language files (W5612)

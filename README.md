@@ -75,7 +75,7 @@ The archive is parsed entirely in the browser — no files are written to disk d
 | `.zip` (JS adapter backup) | JS adapter internal backup (`YYYY-MM-DD-scripts.zip`, contains `.json` files with script metadata) |
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 0.1.11 (2026-07-18)
 * (ipod86) fix: move @types/tar to devDependencies (W0050, W5060)
 
 ### 0.1.10 (2026-07-18)
@@ -99,9 +99,6 @@ The archive is parsed entirely in the browser — no files are written to disk d
 ### 0.1.7 (2026-07-01)
 * (ipod86) fix: translate common.news 0.1.5 entries into all 10 languages (E1144)
 * (ipod86) fix: pin @types/node to ^22, fix dependabot cooldown format (W0066, W8917)
-
-### 0.1.6 (2026-06-27)
-* (ipod86) fix: upgrade typescript to ^6.0.3 with explicit mocha types for TypeScript 6 compatibility (W0083)
 
 Older changelogs are available in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
 

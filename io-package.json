@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "news": {
+      "0.1.11": {
+        "en": "fix: move @types/tar to devDependencies (W0050, W5060)",
+        "de": "Behebung: @types/tar nach devDependencies verschieben (W0050, W5060)",
+        "ru": "Исправление: переместить @types/tar в devDependencies (W0050, W5060)",
+        "pt": "correção: mover @types/tar para devDependencies (W0050, W5060)",
+        "nl": "fix: verplaats @types/tar naar devDependencies (W0050, W5060)",
+        "fr": "Correction : déplacer @types/tar vers devDependencies (W0050, W5060)",
+        "it": "Correzione: spostare @types/tar in devDependencies (W0050, W5060)",
+        "es": "Corrección: mover @types/tar a devDependencies (W0050, W5060)",
+        "pl": "naprawiono: przeniesiono @types/tar do devDependencies (W0050, W5060)",
+        "uk": "виправлення: переміщення @types/tar до devDependencies (W0050, W5060)",
+        "zh-cn": "修复：将 @types/tar 移至 devDependencies (W0050, W5060)"
+      },
       "0.1.10": {
         "en": "fix: replace shell tar command with pure Node.js tar library for Windows compatibility\nfeat: test local backup path button with result feedback\nfeat: suggest backup path button\nfix: jsonConfig sendTo result format validation",
         "de": "Behebung: Ersetzen Sie den Shell-Befehl `tar` durch die reine Node.js-`tar`-Bibliothek, um die Windows-Kompatibilität zu gewährleisten.\nFunktion: Schaltfläche zum Testen des lokalen Sicherungspfads mit Ergebnisrückmeldung\nFunktion: Schaltfläche „Backup-Pfad vorschlagen“\nBehoben: Validierung des Ergebnisformats von jsonConfig sendTo",
@@ -80,19 +93,6 @@
         "pl": "fix: zaktualizowano @alcalzone/release-script do ^5.2.1 (E0036)\nfix: dodano brakujące klucze i18n dla symboli zastępczych we wszystkich 11 plikach językowych (W5612)\nfix: zmigrowano i18n do formatu krótkiego, dodano podpisywanie proweniencji npm (S5601, S2008)\nfix: zaktualizowano do @tsconfig/node22, @types/node przypięty do ^22 (W0086, W0090, W0066)\nfix: reorganizacja zależności — types/eslint/prettier przeniesione do devDependencies (W5060, W0078, E3031)\nfix: rozwiązano ostrzeżenia sprawdzarki W0069, W8917, S6022\nchore: ioBroker/testing-action-check zaktualizowany z v1 do v2, deploy action na v1 (W3017)\nchore: zaktualizowano typescript-eslint i @types/node",
         "uk": "fix: оновлено @alcalzone/release-script до ^5.2.1 (E0036)\nfix: додано відсутні ключі i18n для заповнювачів у всі 11 мовних файлів (W5612)\nfix: i18n перенесено на короткий формат, додано підпис провенансу npm (S5601, S2008)\nfix: оновлено до @tsconfig/node22, @types/node зафіксовано на ^22 (W0086, W0090, W0066)\nfix: залежності реорганізовано — types/eslint/prettier перенесено до devDependencies (W5060, W0078, E3031)\nfix: усунено попередження перевірювача W0069, W8917, S6022\nchore: ioBroker/testing-action-check оновлено з v1 до v2, deploy action на v1 (W3017)\nchore: оновлено typescript-eslint та @types/node",
         "zh-cn": "fix: 更新 @alcalzone/release-script 至 ^5.2.1 (E0036)\nfix: 向所有 11 个语言文件添加缺失的占位符 i18n 键 (W5612)\nfix: 将 i18n 迁移至短格式，添加 npm 来源签名 (S5601, S2008)\nfix: 升级至 @tsconfig/node22，将 @types/node 固定至 ^22 (W0086, W0090, W0066)\nfix: 重新整理依赖项 — 将 types/eslint/prettier 移至 devDependencies (W5060, W0078, E3031)\nfix: 解决适配器检查器警告 W0069、W8917、S6022\nchore: 将 ioBroker/testing-action-check 从 v1 升级至 v2，deploy action 保留在 v1 (W3017)\nchore: 更新 typescript-eslint 和 @types/node"
-      },
-      "0.1.4": {
-        "en": "add syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\nfix language detection: read ioBroker system language via adapter (system.config) instead of browser/DOM\ntranslate all remaining loader texts (reading file/archive, extracting, loading URL)",
-        "de": "syntax-Highlighting für JS/TS, Blockly (XML) und Rules (JSON) hinzufügen — pure JS, keine externen Deps\nspracherkennung fix: ioBroker Systemsprache über Adapter (system.config) anstelle von Browser/DOM lesen\nalle übrigen Loadertexte übersetzen (Datei/Archiv lesen, extrahieren, URL laden)",
-        "ru": "добавить подсветку синтаксиса для JS/TS, Blockly (XML) и Rules (JSON) — чистый JS, без внешних депсов\nисправить обнаружение языка: читать язык системы ioBroker через адаптер (system.config) вместо браузера/DOM\nперевод всех оставшихся текстов загрузчика (чтение файла / архива, извлечение, загрузка URL)",
-        "pt": "adicionar realce de sintaxe para JS/TS, Blockly (XML) e Rules (JSON) — puro JS, sem deps externos\ndetecção de linguagem de correção: ler ioBroker linguagem do sistema via adaptador (system.config) em vez de navegador / DOM\ntraduzir todos os textos restantes do carregador (lendo arquivo/arquivo, extraindo, carregando URL)",
-        "nl": "syntaxismarkeringen toevoegen voor JS/TS, Blockly (XML) en Rules (JSON)\nfix taaldetectie: lees ioBroker systeemtaal via adapter (system.config) in plaats van browser/DOM\nalle overgebleven laderteksten vertalen (bestand/archief lezen, uitpakken, laden van URL)",
-        "fr": "ajouter la mise en surbrillance syntaxique pour JS/TS, Blockly (XML) et Rules (JSON) — JS pur, pas de deps externes\ncorrection de la détection du langage: lire ioBroker langage système via adaptateur (system.config) au lieu de navigateur/DOM\ntraduire tous les textes restants du chargeur (lecture de fichier/archive, extraction, chargement d'URL)",
-        "it": "aggiungere l'evidenziazione della sintassi per JS/TS, Blockly (XML) e Regole (JSON) — JS puro, nessun deps esterno\nfix language detection: read ioBroker system language via adapter (system.config) anziché browser/DOM\ntradurre tutti i restanti testi di carica (lettura file/archive, estrazione, caricamento URL)",
-        "es": "añadir syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\ndetección del lenguaje de fijación: leer el lenguaje del sistema ioBroker a través del adaptador (system.config) en lugar del navegador/DOM\ntraducir todos los textos de carga restantes (leer archivo/archive, extraer, cargar URL)",
-        "pl": "dodaj podświetlanie składni dla JS / TS, Blockly (XML) i Rules (JSON) - czysty JS, brak zewnętrznych deb\nwykrywanie języka: czytaj jOBroker system language poprzez adapter (system.config) zamiast przeglądarki / DOM\nprzetłumaczyć wszystkie pozostałe teksty ładowarki (czytanie pliku / archiwum, pobieranie, wczytywanie URL)",
-        "uk": "додати синтаксис виділення для JS / T, Blockly (XML) і Правил (JSON) — чистий JS, не зовнішній депс\nenglish languageEspañol idioma中文 语言Русский языкУкраїнська моваPortuguese idioma\nперевести всі інші тексти навантажувача (читати файл/архів, вилучення, завантаження URL)",
-        "zh-cn": "增加JS/TS、Blockly(XML)和Rules(JSON)的语法重点——纯JS,没有外部解析\n固定语言检测:通过适配器(system.config)读取ioBroker系统语言,而不是浏览器/DOM\n翻译所有剩余的加载器文本(读取文件/存档、提取、加载 URL)"
       }
     },
     "titleLang": {
