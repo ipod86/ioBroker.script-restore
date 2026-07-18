@@ -77,6 +77,10 @@ The archive is parsed entirely in the browser — no files are written to disk d
 ## Changelog
 
 ### **WORK IN PROGRESS**
+* (ipod86) fix: replace shell tar command with pure Node.js tar library for Windows compatibility
+* (ipod86) feat: test local backup path button with result feedback
+* (ipod86) feat: suggest backup path button
+* (ipod86) fix: jsonConfig sendTo result format validation
 
 ### 0.1.9 (2026-07-17)
 * (ipod86) feat: checkbox multi-select for ZIP export — click ☐ to select, main click still views only
