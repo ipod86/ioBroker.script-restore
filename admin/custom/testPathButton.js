@@ -1,7 +1,4 @@
 /* Custom jsonConfig component: test local backup path */
-const React = window.React;
-const { useState } = React;
-
 const LABELS = {
     de: 'Pfad testen (vorher speichern)',
     en: 'Test path (save first)',
@@ -17,8 +14,10 @@ const LABELS = {
 };
 
 function TestPathButton({ socket, adapterName, instance, alive, themeType, systemConfig }) {
-    const [open, setOpen] = useState(false);
-    const [msg, setMsg] = useState('');
+    // Access React at render time (not at module load time)
+    const React = window.React;
+    const [open, setOpen] = React.useState(false);
+    const [msg, setMsg] = React.useState('');
 
     function handleClick() {
         socket.sendTo(`${adapterName}.${instance}`, 'testLocalPath', null, function (result) {
