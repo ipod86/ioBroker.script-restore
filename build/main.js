@@ -25,15 +25,13 @@ var utils = __toESM(require("@iobroker/adapter-core"));
 var fs = __toESM(require("node:fs/promises"));
 var path = __toESM(require("node:path"));
 var os = __toESM(require("node:os"));
-var import_node_child_process = require("node:child_process");
-var import_node_util = require("node:util");
+var tar = __toESM(require("tar"));
 var ftp = __toESM(require("basic-ftp"));
 var import_node_stream = require("node:stream");
 var https = __toESM(require("node:https"));
 var http = __toESM(require("node:http"));
 var import_ssh2_sftp_client = __toESM(require("ssh2-sftp-client"));
 const SMB2 = require("@marsaud/smb2");
-const execAsync = (0, import_node_util.promisify)(import_node_child_process.exec);
 function sanitizeId(raw) {
   return raw.replace(/\s/g, "_").replace(/[^a-zA-Z0-9_\-.]/g, "_");
 }
@@ -399,17 +397,17 @@ class ScriptRestore extends utils.Adapter {
     const tmpFile = path.join(tmpDir, `archive.tar${isPlainTar ? "" : ".gz"}`);
     try {
       await fs.writeFile(tmpFile, buf);
-      const extractFlag = isPlainTar ? "-xf" : "-xzf";
-      try {
-        await execAsync(
-          `tar ${extractFlag} "${tmpFile}" -C "${tmpDir}" --wildcards "*/objects.jsonl" "*/objects.json" "*/scripts.json" "*/script.json" 2>/dev/null`
-        );
-      } catch {
-        await execAsync(`tar ${extractFlag} "${tmpFile}" -C "${tmpDir}" 2>/dev/null`).catch(() => {
+      const targets = /* @__PURE__ */ new Set(["objects.jsonl", "objects.json", "scripts.json", "script.json"]);
+      await tar.x({
+        file: tmpFile,
+        cwd: tmpDir,
+        gzip: !isPlainTar,
+        filter: (p) => targets.has(path.basename(p))
+      }).catch(async () => {
+        await tar.x({ file: tmpFile, cwd: tmpDir, gzip: !isPlainTar }).catch(() => {
         });
-      }
-      const targets = ["objects.jsonl", "objects.json", "scripts.json", "script.json"];
-      const found = await this.findFile(tmpDir, targets);
+      });
+      const found = await this.findFile(tmpDir, [...targets]);
       if (!found) {
         throw new Error(
           "Keine passende Datei im Archiv gefunden (objects.json, objects.jsonl, scripts.json, script.json)"

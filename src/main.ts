@@ -10,8 +10,7 @@ import * as utils from "@iobroker/adapter-core";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import * as os from "node:os";
-import { exec } from "node:child_process";
-import { promisify } from "node:util";
+import * as tar from "tar";
 import * as ftp from "basic-ftp";
 import { Writable } from "node:stream";
 import * as https from "node:https";
@@ -20,8 +19,6 @@ import SftpClient from "ssh2-sftp-client";
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const SMB2 = require("@marsaud/smb2");
-
-const execAsync = promisify(exec);
 
 function sanitizeId(raw: string): string {
 	return raw.replace(/\s/g, "_").replace(/[^a-zA-Z0-9_\-.]/g, "_");
@@ -444,19 +441,20 @@ class ScriptRestore extends utils.Adapter {
 		try {
 			await fs.writeFile(tmpFile, buf);
 
-			const extractFlag = isPlainTar ? "-xf" : "-xzf";
-			try {
-				await execAsync(
-					`tar ${extractFlag} "${tmpFile}" -C "${tmpDir}" --wildcards` +
-						` "*/objects.jsonl" "*/objects.json" "*/scripts.json" "*/script.json"` +
-						` 2>/dev/null`,
-				);
-			} catch {
-				await execAsync(`tar ${extractFlag} "${tmpFile}" -C "${tmpDir}" 2>/dev/null`).catch(() => {});
-			}
+			const targets = new Set(["objects.jsonl", "objects.json", "scripts.json", "script.json"]);
+			await tar
+				.x({
+					file: tmpFile,
+					cwd: tmpDir,
+					gzip: !isPlainTar,
+					filter: (p: string) => targets.has(path.basename(p)),
+				})
+				.catch(async () => {
+					// fallback: extract everything if selective filter fails
+					await tar.x({ file: tmpFile, cwd: tmpDir, gzip: !isPlainTar }).catch(() => {});
+				});
 
-			const targets = ["objects.jsonl", "objects.json", "scripts.json", "script.json"];
-			const found = await this.findFile(tmpDir, targets);
+			const found = await this.findFile(tmpDir, [...targets]);
 			if (!found) {
 				throw new Error(
 					"Keine passende Datei im Archiv gefunden (objects.json, objects.jsonl, scripts.json, script.json)",
