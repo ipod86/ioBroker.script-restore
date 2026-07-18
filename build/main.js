@@ -160,8 +160,7 @@ class ScriptRestore extends utils.Adapter {
     }
     const backupPath = this.config.backupPath || "/opt/iobroker/backups";
     try {
-      const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
-      const entries = rawEntries;
+      const entries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
       const files = entries.filter((e) => {
         const n = String(e.name);
         return e.isFile() && (n.startsWith("iobroker") || n.startsWith("javascript")) && (n.endsWith(".tar.gz") || n.endsWith(".tar") || n.endsWith(".json") || n.endsWith(".jsonl"));
@@ -722,7 +721,9 @@ class ScriptRestore extends utils.Adapter {
         username: this.config.webdavUser,
         password: this.config.webdavPassword
       });
-      const list = await client.getDirectoryContents(this.config.webdavPath || "/");
+      const list = await client.getDirectoryContents(this.config.webdavPath || "/", {
+        signal: AbortSignal.timeout(3e4)
+      });
       const arr = Array.isArray(list) ? list : list.data;
       this.sendTo(
         obj.from,
@@ -746,7 +747,7 @@ class ScriptRestore extends utils.Adapter {
         password: this.config.webdavPassword
       });
       const remotePath = this.config.webdavPath || "/";
-      const list = await client.getDirectoryContents(remotePath);
+      const list = await client.getDirectoryContents(remotePath, { signal: AbortSignal.timeout(3e4) });
       const arr = Array.isArray(list) ? list : list.data;
       const files = arr.filter((i) => {
         const n = i.basename;
@@ -771,7 +772,9 @@ class ScriptRestore extends utils.Adapter {
         password: this.config.webdavPassword
       });
       const remotePath = (this.config.webdavPath ? `${this.config.webdavPath}/` : "/") + filename;
-      const buf = Buffer.from(await client.getFileContents(remotePath));
+      const buf = Buffer.from(
+        await client.getFileContents(remotePath, { signal: AbortSignal.timeout(3e4) })
+      );
       const scripts = await this.parseBuffer(buf, filename);
       this.sendTo(obj.from, obj.command, { scripts }, obj.callback);
     } catch (e) {
