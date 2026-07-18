@@ -20,9 +20,7 @@
                     "type": "divider"
                 },
                 "backupPath": {
-                    "type": "selectSendTo",
-                    "command": "suggestBackupPath",
-                    "manual": true,
+                    "type": "text",
                     "label": "backupPath",
                     "placeholder": "/opt/iobroker/backups",
                     "hidden": "!data.localEnabled",

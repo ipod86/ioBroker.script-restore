@@ -593,15 +593,15 @@ class ScriptRestore extends utils.Adapter {
       }
     } catch {
     }
-    const options = [];
     for (const p of candidates) {
       try {
         await fs.access(p);
-        options.push({ value: p, label: p });
+        this.sendTo(obj.from, obj.command, { result: p }, obj.callback);
+        return;
       } catch {
       }
     }
-    this.sendTo(obj.from, obj.command, options, obj.callback);
+    this.sendTo(obj.from, obj.command, { result: "" }, obj.callback);
   }
   // ─── HTTP ────────────────────────────────────────────────────────────────
   downloadUrl(urlRaw) {
