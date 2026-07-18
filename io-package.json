@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "news": {
+      "0.1.10": {
+        "en": "fix: replace shell tar command with pure Node.js tar library for Windows compatibility\nfeat: test local backup path button with result feedback\nfeat: suggest backup path button\nfix: jsonConfig sendTo result format validation",
+        "de": "Behebung: Ersetzen Sie den Shell-Befehl `tar` durch die reine Node.js-`tar`-Bibliothek, um die Windows-Kompatibilität zu gewährleisten.\nFunktion: Schaltfläche zum Testen des lokalen Sicherungspfads mit Ergebnisrückmeldung\nFunktion: Schaltfläche „Backup-Pfad vorschlagen“\nBehoben: Validierung des Ergebnisformats von jsonConfig sendTo",
+        "ru": "Исправление: заменить команду shell tar на библиотеку tar, написанную на чистом Node.js, для совместимости с Windows.\nфункция: тестирование кнопки \"Путь к локальному резервному копированию\" с обратной связью по результатам.\nфункция: кнопка \"Предложить резервный путь\"\nИсправление: проверка формата результатов функции sendTo в jsonConfig",
+        "pt": "Correção: substituir o comando tar do shell por uma biblioteca tar pura do Node.js para compatibilidade com o Windows.\nFuncionalidade: botão para testar o caminho de backup local com feedback do resultado.\nFuncionalidade: botão para sugerir caminho alternativo\nCorreção: Validação do formato de resultado do sendTo em jsonConfig",
+        "nl": "Oplossing: vervang het shell tar-commando door de pure Node.js tar-bibliotheek voor compatibiliteit met Windows.\nfeature: testknop voor lokaal back-uppad met resultaatfeedback\nfunctie: knop voor het voorstellen van een back-uppad\nOpgelost: validatie van het resultaatformaat van jsonConfig sendTo",
+        "fr": "Correction : remplacement de la commande tar du shell par la bibliothèque tar Node.js pure pour la compatibilité Windows\nFonctionnalité : test du bouton de chemin de sauvegarde local avec retour d’information sur les résultats\nfonctionnalité : bouton de suggestion de chemin de sauvegarde\nCorrection : validation du format du résultat sendTo de jsonConfig",
+        "it": "Correzione: sostituire il comando tar della shell con la libreria tar di Node.js per la compatibilità con Windows.\nFunzione: pulsante per testare il percorso di backup locale con feedback del risultato\nFunzione: pulsante per suggerire il percorso di backup\nCorrezione: convalida del formato del risultato di jsonConfig sendTo",
+        "es": "Corrección: reemplazar el comando tar de shell con la biblioteca tar de Node.js pura para compatibilidad con Windows.\nfeat: prueba el botón de ruta de copia de seguridad local con retroalimentación del resultado.\nFunción: botón para sugerir rutas de respaldo\nCorrección: validación del formato de resultado de sendTo de jsonConfig",
+        "pl": "Naprawiono: zastąp polecenie tar powłoki czystą biblioteką tar Node.js w celu zapewnienia zgodności z systemem Windows\nwyczyn: test przycisku lokalnej ścieżki kopii zapasowej z informacją zwrotną o wynikach\nwyczyn: przycisk sugerowania ścieżki zapasowej\nnaprawiono: walidację formatu wyniku jsonConfig sendTo",
+        "uk": "виправлення: замініть команду оболонки tar чистою бібліотекою tar Node.js для сумісності з Windows\nподвиг: кнопка тестування локального шляху резервного копіювання з результатом зворотного зв'язку\nподача: кнопка запропонувати резервний шлях\nвиправлення: перевірка формату результату sendTo від jsonConfig",
+        "zh-cn": "修复：为了兼容 Windows，将 shell tar 命令替换为纯 Node.js tar 库。\n功能：测试本地备份路径按钮并反馈结果\n功能：建议备份路径按钮\n修复：jsonConfig sendTo 结果格式验证"
+      },
       "0.1.9": {
         "en": "feat: checkbox multi-select for ZIP export; import scripts.zip and JS adapter backup ZIP; fix: align script list item columns",
         "de": "feat: Checkbox-Mehrfachauswahl für ZIP-Export; Import von scripts.zip und JS-Adapter-Backup-ZIP; fix: Spaltenausrichtung der Skriptliste",
@@ -80,19 +93,6 @@
         "pl": "dodaj podświetlanie składni dla JS / TS, Blockly (XML) i Rules (JSON) - czysty JS, brak zewnętrznych deb\nwykrywanie języka: czytaj jOBroker system language poprzez adapter (system.config) zamiast przeglądarki / DOM\nprzetłumaczyć wszystkie pozostałe teksty ładowarki (czytanie pliku / archiwum, pobieranie, wczytywanie URL)",
         "uk": "додати синтаксис виділення для JS / T, Blockly (XML) і Правил (JSON) — чистий JS, не зовнішній депс\nenglish languageEspañol idioma中文 语言Русский языкУкраїнська моваPortuguese idioma\nперевести всі інші тексти навантажувача (читати файл/архів, вилучення, завантаження URL)",
         "zh-cn": "增加JS/TS、Blockly(XML)和Rules(JSON)的语法重点——纯JS,没有外部解析\n固定语言检测:通过适配器(system.config)读取ioBroker系统语言,而不是浏览器/DOM\n翻译所有剩余的加载器文本(读取文件/存档、提取、加载 URL)"
-      },
-      "0.1.3": {
-        "en": "fix language flash: skip socket override when language already detected from admin frame\nreplace all hardcoded status strings with translated t() calls\nadd codeHint translation key in all 11 languages",
-        "de": "fixer sprachblitz: überschreiben der sprachfassung, wenn die sprache bereits von admin-rahmen erkannt wurde\nalle hardcoded status strings durch übersetzte t()-anrufe ersetzen\ncode hinzufügenHint Übersetzungsschlüssel in allen 11 Sprachen",
-        "ru": "исправьте языковую вспышку: пропустите переопределение сокетов, когда язык уже обнаружен в рамке администратора\nзаменить все жестко закодированные строки состояния переводными вызовами t()\nдобавить ключ перевода codeHint на все 11 языков",
-        "pt": "flash da linguagem de correção: sobreposição do socket pule quando a linguagem já detectada do frame do administrador\nsubstituir todas as cadeias de estado codificadas por chamadas traduzidas em t()\nadicionar códigoHint chave de tradução em todos os 11 idiomas",
-        "nl": "fix taalflits: sla socket over wanneer taal al gedetecteerd vanuit admin frame\nvervangen alle hardcoded status strings door vertaalde t() calls\ncodeHint vertaalsleutel toevoegen in alle 11 talen",
-        "fr": "résoudre le flash de langue: sauter la préséance socket lorsque la langue déjà détectée à partir du cadre admin\nremplacer toutes les chaînes d'état codées en dur par des appels traduit t()\najouter codeHint clé de traduction dans les 11 langues",
-        "it": "fix lingua flash: saltare socket override quando la lingua già rilevata dalla cornice di amministrazione\nsostituire tutte le stringhe di stato codificate con le chiamate t() tradotte\naggiungere codice Chiave di traduzione in tutte le 11 lingue",
-        "es": "solucionar el flash del lenguaje: saltar la anulación de la toma cuando el lenguaje ya detectado desde el marco de administración\nreemplazar todas las cadenas de estado codificadas con llamadas t( traducido)\nañadir codeHint traducción clave en los 11 idiomas",
-        "pl": "fix flash język: skip derogator gniazda, gdy język już wykryty z ramki admin\nzastąp wszystkie zaszyfrowane łańcuchy stanu translated t () calls\ndodaj klucz tłumaczeniowy CodeHint we wszystkich 11 językach",
-        "uk": "фіксувати мовне спалах: пропустити розетку перенапругою, коли мова вже виявлена з адмін кадру\nзамінити всі жорсткікодовані рядки стану з перекладеними t() дзвінки\nadd codeПеревірити ключ у всіх 11 мовах",
-        "zh-cn": "修补语言闪存: 当语言已经从管理员框架中检测到时跳过套接字覆盖\n将所有硬码状态字符串替换为已翻译的 t() 调用\n在所有11种语言中添加代码Hint翻译密钥"
       }
     },
     "titleLang": {
