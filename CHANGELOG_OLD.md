@@ -21,6 +21,10 @@
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
+## 0.1.7 (2026-07-01)
+* (ipod86) fix: translate common.news 0.1.5 entries into all 10 languages (E1144)
+* (ipod86) fix: pin @types/node to ^22, fix dependabot cooldown format (W0066, W8917)
+
 ## 0.1.6 (2026-06-27)
 * (ipod86) fix: upgrade typescript to ^6.0.3 with explicit mocha types for TypeScript 6 compatibility (W0083)
 
