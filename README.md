@@ -75,6 +75,9 @@ The archive is parsed entirely in the browser — no files are written to disk d
 | `.zip` (JS adapter backup) | JS adapter internal backup (`YYYY-MM-DD-scripts.zip`, contains `.json` files with script metadata) |
 
 ## Changelog
+### **WORK IN PROGRESS**
+* (ipod86) fix: move @types/tar to devDependencies (W0050, W5060)
+
 ### 0.1.10 (2026-07-18)
 * (ipod86) fix: replace shell tar command with pure Node.js tar library for Windows compatibility
 * (ipod86) feat: test local backup path button with result feedback
