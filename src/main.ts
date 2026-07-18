@@ -636,7 +636,7 @@ class ScriptRestore extends utils.Adapter {
 		const formData = obj.message as Record<string, unknown> | undefined;
 		const typed = typeof formData?.backupPath === "string" ? formData.backupPath.trim() : "";
 		const backupPath = typed || this.config.backupPath || "/opt/iobroker/backups";
-		this.log.debug(`testLocalPath: using path "${backupPath}" (typed="${typed}")`);
+		this.log.debug(`testLocalPath: msg=${JSON.stringify(formData)} typed="${typed}" path="${backupPath}"`);
 		try {
 			const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
 			const files = rawEntries.filter(e => {
@@ -653,7 +653,7 @@ class ScriptRestore extends utils.Adapter {
 				this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
 			}
 		} catch {
-			this.sendTo(obj.from, obj.command, t("pathNotFound"), obj.callback);
+			this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);
 		}
 	}
 
