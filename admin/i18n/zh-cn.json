@@ -40,7 +40,7 @@
     "smbUser": "用户",
     "suggestPath": "建议路径",
     "testConnection": "测试连接",
-    "testLocalPath": "测试路径",
+    "testLocalPath": "测试路径（请先保存）",
     "webdavEnabled": "启用 WebDAV",
     "webdavPassword": "密码",
     "webdavPath": "路径",

@@ -40,7 +40,7 @@
     "smbUser": "Gebruiker",
     "suggestPath": "Pad voorstellen",
     "testConnection": "Verbinding testen",
-    "testLocalPath": "Pad testen",
+    "testLocalPath": "Pad testen (eerst opslaan)",
     "webdavEnabled": "WebDAV inschakelen",
     "webdavPassword": "Wachtwoord",
     "webdavPath": "Pad",

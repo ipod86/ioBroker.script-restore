@@ -40,7 +40,7 @@
     "smbUser": "User",
     "suggestPath": "Suggest path",
     "testConnection": "Test connection",
-    "testLocalPath": "Test path",
+    "testLocalPath": "Test path (save first)",
     "webdavEnabled": "Enable WebDAV",
     "webdavPassword": "Password",
     "webdavPath": "Path",

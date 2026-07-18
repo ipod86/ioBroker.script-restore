@@ -40,7 +40,7 @@
     "smbUser": "Benutzer",
     "suggestPath": "Pfad vorschlagen",
     "testConnection": "Verbindung testen",
-    "testLocalPath": "Pfad testen",
+    "testLocalPath": "Pfad testen (vorher speichern)",
     "webdavEnabled": "WebDAV aktivieren",
     "webdavPassword": "Passwort",
     "webdavPath": "Pfad",
