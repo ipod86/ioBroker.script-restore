@@ -1,11 +1,9 @@
 /* global window */
-function SuggestPathButton({ socket, adapterName, instance, data, onChange }) {
+window.SuggestPathButton = function SuggestPathButton({ socket, adapterName, instance, data, onChange }) {
 	const React = window.React;
 	if (!React) {
 		return null;
 	}
-	const label = data && data._lang === "de" ? "Pfad vorschlagen" : "Suggest path";
-
 	return React.createElement(
 		"button",
 		{
@@ -23,14 +21,11 @@ function SuggestPathButton({ socket, adapterName, instance, data, onChange }) {
 			onClick: function () {
 				socket.sendTo(`${adapterName}.${instance}`, "suggestBackupPath", null, function (result) {
 					if (result && result.result && onChange && data) {
-						var updated = Object.assign({}, data, { backupPath: result.result });
-						onChange(updated);
+						onChange(Object.assign({}, data, { backupPath: result.result }));
 					}
 				});
 			},
 		},
-		label,
+		"Pfad vorschlagen",
 	);
-}
-
-export default SuggestPathButton;
+};
