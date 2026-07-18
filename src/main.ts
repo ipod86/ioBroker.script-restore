@@ -646,12 +646,12 @@ class ScriptRestore extends utils.Adapter {
 				);
 			});
 			if (files.length === 0) {
-				this.sendTo(obj.from, obj.command, t("noBackups"), obj.callback);
+				this.sendTo(obj.from, obj.command, { result: t("noBackups") }, obj.callback);
 			} else {
-				this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
+				this.sendTo(obj.from, obj.command, { result: t("backupsFound", files.length) }, obj.callback);
 			}
 		} catch {
-			this.sendTo(obj.from, obj.command, t("pathNotFound"), obj.callback);
+			this.sendTo(obj.from, obj.command, { result: t("pathNotFound") }, obj.callback);
 		}
 	}
 
