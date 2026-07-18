@@ -596,12 +596,12 @@ class ScriptRestore extends utils.Adapter {
     for (const p of candidates) {
       try {
         await fs.access(p);
-        this.sendTo(obj.from, obj.command, { backupPath: p }, obj.callback);
+        this.sendTo(obj.from, obj.command, { result: p }, obj.callback);
         return;
       } catch {
       }
     }
-    this.sendTo(obj.from, obj.command, {}, obj.callback);
+    this.sendTo(obj.from, obj.command, { result: "" }, obj.callback);
   }
   // ─── HTTP ────────────────────────────────────────────────────────────────
   downloadUrl(urlRaw) {
