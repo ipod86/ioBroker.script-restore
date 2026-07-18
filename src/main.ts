@@ -96,6 +96,9 @@ class ScriptRestore extends utils.Adapter {
 					);
 					break;
 				}
+				case "testLocalPath":
+					await this.handleTestLocalPath(obj);
+					break;
 				case "suggestBackupPath":
 					await this.handleSuggestBackupPath(obj);
 					break;
@@ -573,6 +576,83 @@ class ScriptRestore extends utils.Adapter {
 	}
 
 	// ─── Suggest backup path ─────────────────────────────────────────────────
+
+	private async handleTestLocalPath(obj: ioBroker.Message): Promise<void> {
+		const msgs: Record<string, Record<string, string>> = {
+			pathNotFound: {
+				en: "Path not found",
+				de: "Pfad nicht gefunden",
+				ru: "Путь не найден",
+				pt: "Caminho não encontrado",
+				nl: "Pad niet gevonden",
+				fr: "Chemin introuvable",
+				it: "Percorso non trovato",
+				es: "Ruta no encontrada",
+				pl: "Ścieżka nie znaleziona",
+				uk: "Шлях не знайдено",
+				"zh-cn": "路径未找到",
+			},
+			noBackups: {
+				en: "No backups found in folder",
+				de: "Keine Backups im Ordner gefunden",
+				ru: "Резервные копии в папке не найдены",
+				pt: "Nenhum backup encontrado na pasta",
+				nl: "Geen back-ups gevonden in map",
+				fr: "Aucune sauvegarde trouvée dans le dossier",
+				it: "Nessun backup trovato nella cartella",
+				es: "No se encontraron copias de seguridad en la carpeta",
+				pl: "Nie znaleziono kopii zapasowych w folderze",
+				uk: "У папці резервних копій не знайдено",
+				"zh-cn": "文件夹中未找到备份",
+			},
+			backupsFound: {
+				en: "✓ {n} backup(s) found",
+				de: "✓ {n} Backup(s) gefunden",
+				ru: "✓ Найдено резервных копий: {n}",
+				pt: "✓ {n} backup(s) encontrado(s)",
+				nl: "✓ {n} back-up(s) gevonden",
+				fr: "✓ {n} sauvegarde(s) trouvée(s)",
+				it: "✓ {n} backup trovati",
+				es: "✓ {n} copia(s) de seguridad encontrada(s)",
+				pl: "✓ Znaleziono {n} kopii zapasowych",
+				uk: "✓ Знайдено резервних копій: {n}",
+				"zh-cn": "✓ 找到 {n} 个备份",
+			},
+		};
+
+		let lang = "en";
+		try {
+			const sysConfig = await this.getForeignObjectAsync("system.config");
+			lang = (sysConfig?.common as unknown as { language?: string })?.language ?? "en";
+		} catch {
+			/* use default */
+		}
+
+		const t = (key: string, n?: number): string => {
+			const m = msgs[key]?.[lang] ?? msgs[key]?.en ?? key;
+			return n !== undefined ? m.replace("{n}", String(n)) : m;
+		};
+
+		const backupPath = this.config.backupPath || "/opt/iobroker/backups";
+		try {
+			const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
+			const files = rawEntries.filter(e => {
+				const n = String(e.name);
+				return (
+					e.isFile() &&
+					(n.startsWith("iobroker") || n.startsWith("javascript")) &&
+					(n.endsWith(".tar.gz") || n.endsWith(".tar") || n.endsWith(".json") || n.endsWith(".jsonl"))
+				);
+			});
+			if (files.length === 0) {
+				this.sendTo(obj.from, obj.command, t("noBackups"), obj.callback);
+			} else {
+				this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
+			}
+		} catch {
+			this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);
+		}
+	}
 
 	private async handleSuggestBackupPath(obj: ioBroker.Message): Promise<void> {
 		const candidates = ["/opt/iobroker/backups", "/root/backups"];

@@ -95,6 +95,9 @@ class ScriptRestore extends utils.Adapter {
           );
           break;
         }
+        case "testLocalPath":
+          await this.handleTestLocalPath(obj);
+          break;
         case "suggestBackupPath":
           await this.handleSuggestBackupPath(obj);
           break;
@@ -511,6 +514,76 @@ class ScriptRestore extends utils.Adapter {
     });
   }
   // ─── Suggest backup path ─────────────────────────────────────────────────
+  async handleTestLocalPath(obj) {
+    var _a, _b;
+    const msgs = {
+      pathNotFound: {
+        en: "Path not found",
+        de: "Pfad nicht gefunden",
+        ru: "\u041F\u0443\u0442\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D",
+        pt: "Caminho n\xE3o encontrado",
+        nl: "Pad niet gevonden",
+        fr: "Chemin introuvable",
+        it: "Percorso non trovato",
+        es: "Ruta no encontrada",
+        pl: "\u015Acie\u017Cka nie znaleziona",
+        uk: "\u0428\u043B\u044F\u0445 \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E",
+        "zh-cn": "\u8DEF\u5F84\u672A\u627E\u5230"
+      },
+      noBackups: {
+        en: "No backups found in folder",
+        de: "Keine Backups im Ordner gefunden",
+        ru: "\u0420\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0435 \u043A\u043E\u043F\u0438\u0438 \u0432 \u043F\u0430\u043F\u043A\u0435 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B",
+        pt: "Nenhum backup encontrado na pasta",
+        nl: "Geen back-ups gevonden in map",
+        fr: "Aucune sauvegarde trouv\xE9e dans le dossier",
+        it: "Nessun backup trovato nella cartella",
+        es: "No se encontraron copias de seguridad en la carpeta",
+        pl: "Nie znaleziono kopii zapasowych w folderze",
+        uk: "\u0423 \u043F\u0430\u043F\u0446\u0456 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0438\u0445 \u043A\u043E\u043F\u0456\u0439 \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E",
+        "zh-cn": "\u6587\u4EF6\u5939\u4E2D\u672A\u627E\u5230\u5907\u4EFD"
+      },
+      backupsFound: {
+        en: "\u2713 {n} backup(s) found",
+        de: "\u2713 {n} Backup(s) gefunden",
+        ru: "\u2713 \u041D\u0430\u0439\u0434\u0435\u043D\u043E \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0445 \u043A\u043E\u043F\u0438\u0439: {n}",
+        pt: "\u2713 {n} backup(s) encontrado(s)",
+        nl: "\u2713 {n} back-up(s) gevonden",
+        fr: "\u2713 {n} sauvegarde(s) trouv\xE9e(s)",
+        it: "\u2713 {n} backup trovati",
+        es: "\u2713 {n} copia(s) de seguridad encontrada(s)",
+        pl: "\u2713 Znaleziono {n} kopii zapasowych",
+        uk: "\u2713 \u0417\u043D\u0430\u0439\u0434\u0435\u043D\u043E \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0438\u0445 \u043A\u043E\u043F\u0456\u0439: {n}",
+        "zh-cn": "\u2713 \u627E\u5230 {n} \u4E2A\u5907\u4EFD"
+      }
+    };
+    let lang = "en";
+    try {
+      const sysConfig = await this.getForeignObjectAsync("system.config");
+      lang = (_b = (_a = sysConfig == null ? void 0 : sysConfig.common) == null ? void 0 : _a.language) != null ? _b : "en";
+    } catch {
+    }
+    const t = (key, n) => {
+      var _a2, _b2, _c, _d;
+      const m = (_d = (_c = (_a2 = msgs[key]) == null ? void 0 : _a2[lang]) != null ? _c : (_b2 = msgs[key]) == null ? void 0 : _b2.en) != null ? _d : key;
+      return n !== void 0 ? m.replace("{n}", String(n)) : m;
+    };
+    const backupPath = this.config.backupPath || "/opt/iobroker/backups";
+    try {
+      const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
+      const files = rawEntries.filter((e) => {
+        const n = String(e.name);
+        return e.isFile() && (n.startsWith("iobroker") || n.startsWith("javascript")) && (n.endsWith(".tar.gz") || n.endsWith(".tar") || n.endsWith(".json") || n.endsWith(".jsonl"));
+      });
+      if (files.length === 0) {
+        this.sendTo(obj.from, obj.command, t("noBackups"), obj.callback);
+      } else {
+        this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
+      }
+    } catch {
+      this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);
+    }
+  }
   async handleSuggestBackupPath(obj) {
     var _a;
     const candidates = ["/opt/iobroker/backups", "/root/backups"];

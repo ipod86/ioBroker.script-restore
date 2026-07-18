@@ -40,6 +40,7 @@
     "smbUser": "Користувач",
     "suggestPath": "Запропонувати шлях",
     "testConnection": "Перевірити з'єднання",
+    "testLocalPath": "Перевірити шлях",
     "webdavEnabled": "Увімкнути WebDAV",
     "webdavPassword": "Пароль",
     "webdavPath": "Шлях",
