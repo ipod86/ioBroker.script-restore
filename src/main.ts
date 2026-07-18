@@ -580,30 +580,30 @@ class ScriptRestore extends utils.Adapter {
 	private async handleTestLocalPath(obj: ioBroker.Message): Promise<void> {
 		const msgs: Record<string, Record<string, string>> = {
 			pathNotFound: {
-				en: "Path not found",
-				de: "Pfad nicht gefunden",
-				ru: "Путь не найден",
-				pt: "Caminho não encontrado",
-				nl: "Pad niet gevonden",
-				fr: "Chemin introuvable",
-				it: "Percorso non trovato",
-				es: "Ruta no encontrada",
-				pl: "Ścieżka nie znaleziona",
-				uk: "Шлях не знайдено",
-				"zh-cn": "路径未找到",
+				en: "✗ Path not found",
+				de: "✗ Pfad nicht gefunden",
+				ru: "✗ Путь не найден",
+				pt: "✗ Caminho não encontrado",
+				nl: "✗ Pad niet gevonden",
+				fr: "✗ Chemin introuvable",
+				it: "✗ Percorso non trovato",
+				es: "✗ Ruta no encontrada",
+				pl: "✗ Ścieżka nie znaleziona",
+				uk: "✗ Шлях не знайдено",
+				"zh-cn": "✗ 路径未找到",
 			},
 			noBackups: {
-				en: "No backups found in folder",
-				de: "Keine Backups im Ordner gefunden",
-				ru: "Резервные копии в папке не найдены",
-				pt: "Nenhum backup encontrado na pasta",
-				nl: "Geen back-ups gevonden in map",
-				fr: "Aucune sauvegarde trouvée dans le dossier",
-				it: "Nessun backup trovato nella cartella",
-				es: "No se encontraron copias de seguridad en la carpeta",
-				pl: "Nie znaleziono kopii zapasowych w folderze",
-				uk: "У папці резервних копій не знайдено",
-				"zh-cn": "文件夹中未找到备份",
+				en: "⚠ No backups found in folder",
+				de: "⚠ Keine Backups im Ordner gefunden",
+				ru: "⚠ Резервные копии в папке не найдены",
+				pt: "⚠ Nenhum backup encontrado na pasta",
+				nl: "⚠ Geen back-ups gevonden in map",
+				fr: "⚠ Aucune sauvegarde trouvée dans le dossier",
+				it: "⚠ Nessun backup trovato nella cartella",
+				es: "⚠ No se encontraron copias de seguridad en la carpeta",
+				pl: "⚠ Nie znaleziono kopii zapasowych w folderze",
+				uk: "⚠ У папці резервних копій не знайдено",
+				"zh-cn": "⚠ 文件夹中未找到备份",
 			},
 			backupsFound: {
 				en: "✓ {n} backup(s) found",
@@ -651,7 +651,7 @@ class ScriptRestore extends utils.Adapter {
 				this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
 			}
 		} catch {
-			this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);
+			this.sendTo(obj.from, obj.command, t("pathNotFound"), obj.callback);
 		}
 	}
 

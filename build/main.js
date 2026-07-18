@@ -518,30 +518,30 @@ class ScriptRestore extends utils.Adapter {
     var _a, _b, _c;
     const msgs = {
       pathNotFound: {
-        en: "Path not found",
-        de: "Pfad nicht gefunden",
-        ru: "\u041F\u0443\u0442\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D",
-        pt: "Caminho n\xE3o encontrado",
-        nl: "Pad niet gevonden",
-        fr: "Chemin introuvable",
-        it: "Percorso non trovato",
-        es: "Ruta no encontrada",
-        pl: "\u015Acie\u017Cka nie znaleziona",
-        uk: "\u0428\u043B\u044F\u0445 \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E",
-        "zh-cn": "\u8DEF\u5F84\u672A\u627E\u5230"
+        en: "\u2717 Path not found",
+        de: "\u2717 Pfad nicht gefunden",
+        ru: "\u2717 \u041F\u0443\u0442\u044C \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D",
+        pt: "\u2717 Caminho n\xE3o encontrado",
+        nl: "\u2717 Pad niet gevonden",
+        fr: "\u2717 Chemin introuvable",
+        it: "\u2717 Percorso non trovato",
+        es: "\u2717 Ruta no encontrada",
+        pl: "\u2717 \u015Acie\u017Cka nie znaleziona",
+        uk: "\u2717 \u0428\u043B\u044F\u0445 \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E",
+        "zh-cn": "\u2717 \u8DEF\u5F84\u672A\u627E\u5230"
       },
       noBackups: {
-        en: "No backups found in folder",
-        de: "Keine Backups im Ordner gefunden",
-        ru: "\u0420\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0435 \u043A\u043E\u043F\u0438\u0438 \u0432 \u043F\u0430\u043F\u043A\u0435 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B",
-        pt: "Nenhum backup encontrado na pasta",
-        nl: "Geen back-ups gevonden in map",
-        fr: "Aucune sauvegarde trouv\xE9e dans le dossier",
-        it: "Nessun backup trovato nella cartella",
-        es: "No se encontraron copias de seguridad en la carpeta",
-        pl: "Nie znaleziono kopii zapasowych w folderze",
-        uk: "\u0423 \u043F\u0430\u043F\u0446\u0456 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0438\u0445 \u043A\u043E\u043F\u0456\u0439 \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E",
-        "zh-cn": "\u6587\u4EF6\u5939\u4E2D\u672A\u627E\u5230\u5907\u4EFD"
+        en: "\u26A0 No backups found in folder",
+        de: "\u26A0 Keine Backups im Ordner gefunden",
+        ru: "\u26A0 \u0420\u0435\u0437\u0435\u0440\u0432\u043D\u044B\u0435 \u043A\u043E\u043F\u0438\u0438 \u0432 \u043F\u0430\u043F\u043A\u0435 \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D\u044B",
+        pt: "\u26A0 Nenhum backup encontrado na pasta",
+        nl: "\u26A0 Geen back-ups gevonden in map",
+        fr: "\u26A0 Aucune sauvegarde trouv\xE9e dans le dossier",
+        it: "\u26A0 Nessun backup trovato nella cartella",
+        es: "\u26A0 No se encontraron copias de seguridad en la carpeta",
+        pl: "\u26A0 Nie znaleziono kopii zapasowych w folderze",
+        uk: "\u26A0 \u0423 \u043F\u0430\u043F\u0446\u0456 \u0440\u0435\u0437\u0435\u0440\u0432\u043D\u0438\u0445 \u043A\u043E\u043F\u0456\u0439 \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E",
+        "zh-cn": "\u26A0 \u6587\u4EF6\u5939\u4E2D\u672A\u627E\u5230\u5907\u4EFD"
       },
       backupsFound: {
         en: "\u2713 {n} backup(s) found",
@@ -582,7 +582,7 @@ class ScriptRestore extends utils.Adapter {
         this.sendTo(obj.from, obj.command, t("backupsFound", files.length), obj.callback);
       }
     } catch {
-      this.sendTo(obj.from, obj.command, { error: t("pathNotFound") }, obj.callback);
+      this.sendTo(obj.from, obj.command, t("pathNotFound"), obj.callback);
     }
   }
   async handleSuggestBackupPath(obj) {
