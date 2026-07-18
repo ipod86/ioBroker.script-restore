@@ -24,35 +24,33 @@
                     "label": "backupPath",
                     "placeholder": "/opt/iobroker/backups",
                     "hidden": "!data.localEnabled",
-                    "xs": 12,
-                    "sm": 12,
-                    "md": 12,
-                    "lg": 12,
-                    "xl": 12
+                    "xs": 10,
+                    "sm": 10,
+                    "md": 11,
+                    "lg": 11,
+                    "xl": 11
+                },
+                "_suggestBtn": {
+                    "type": "sendTo",
+                    "command": "suggestBackupPath",
+                    "label": "📁",
+                    "hidden": "!data.localEnabled",
+                    "xs": 2,
+                    "sm": 2,
+                    "md": 1,
+                    "lg": 1,
+                    "xl": 1
                 },
                 "_localTestBtn": {
                     "type": "sendTo",
                     "command": "testLocalPath",
                     "label": "testLocalPath",
-
                     "hidden": "!data.localEnabled",
                     "xs": 12,
-                    "sm": 6,
-                    "md": 6,
-                    "lg": 6,
-                    "xl": 6
-                },
-                "_suggestBtn": {
-                    "type": "sendTo",
-                    "command": "suggestBackupPath",
-                    "label": "suggestPath",
-
-                    "hidden": "!data.localEnabled",
-                    "xs": 12,
-                    "sm": 6,
-                    "md": 6,
-                    "lg": 6,
-                    "xl": 6
+                    "sm": 12,
+                    "md": 12,
+                    "lg": 12,
+                    "xl": 12
                 }
             }
         },
