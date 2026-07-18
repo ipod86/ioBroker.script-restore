@@ -655,7 +655,6 @@ class ScriptRestore extends utils.Adapter {
 
 	private async handleSuggestBackupPath(obj: ioBroker.Message): Promise<void> {
 		const candidates = ["/opt/iobroker/backups", "/root/backups"];
-		// Check if backupPC or iobroker-backup adapter is configured
 		try {
 			const backupObj = (await this.getForeignObjectAsync("system.adapter.backitup.0")) as ioBroker.Object | null;
 			if (backupObj?.native?.defaultFolder) {
@@ -664,16 +663,16 @@ class ScriptRestore extends utils.Adapter {
 		} catch {
 			// adapter not installed
 		}
+		const found: string[] = [];
 		for (const p of candidates) {
 			try {
 				await fs.access(p);
-				this.sendTo(obj.from, obj.command, { result: p }, obj.callback);
-				return;
+				found.push(p);
 			} catch {
 				// not accessible
 			}
 		}
-		this.sendTo(obj.from, obj.command, { result: "" }, obj.callback);
+		this.sendTo(obj.from, obj.command, found, obj.callback);
 	}
 
 	// ─── HTTP ────────────────────────────────────────────────────────────────
