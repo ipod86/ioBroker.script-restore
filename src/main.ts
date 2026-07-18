@@ -162,8 +162,7 @@ class ScriptRestore extends utils.Adapter {
 		}
 		const backupPath = this.config.backupPath || "/opt/iobroker/backups";
 		try {
-			const rawEntries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
-			const entries = rawEntries;
+			const entries = await fs.readdir(backupPath, { withFileTypes: true, encoding: "utf8" });
 			const files = entries
 				.filter(e => {
 					const n = String(e.name);
@@ -810,7 +809,9 @@ class ScriptRestore extends utils.Adapter {
 				username: this.config.webdavUser,
 				password: this.config.webdavPassword,
 			});
-			const list = await client.getDirectoryContents(this.config.webdavPath || "/");
+			const list = await client.getDirectoryContents(this.config.webdavPath || "/", {
+				signal: AbortSignal.timeout(30_000),
+			});
 			const arr = Array.isArray(list) ? list : (list as { data: unknown[] }).data;
 			this.sendTo(
 				obj.from,
@@ -835,7 +836,7 @@ class ScriptRestore extends utils.Adapter {
 				password: this.config.webdavPassword,
 			});
 			const remotePath = this.config.webdavPath || "/";
-			const list = await client.getDirectoryContents(remotePath);
+			const list = await client.getDirectoryContents(remotePath, { signal: AbortSignal.timeout(30_000) });
 			const arr = Array.isArray(list) ? list : (list as { data: { basename: string; type: string }[] }).data;
 			const files = arr
 				.filter((i: { basename: string; type: string }) => {
@@ -869,7 +870,9 @@ class ScriptRestore extends utils.Adapter {
 				password: this.config.webdavPassword,
 			});
 			const remotePath = (this.config.webdavPath ? `${this.config.webdavPath}/` : "/") + filename;
-			const buf = Buffer.from((await client.getFileContents(remotePath)) as ArrayBuffer);
+			const buf = Buffer.from(
+				(await client.getFileContents(remotePath, { signal: AbortSignal.timeout(30_000) })) as ArrayBuffer,
+			);
 			const scripts = await this.parseBuffer(buf, filename);
 			this.sendTo(obj.from, obj.command, { scripts }, obj.callback);
 		} catch (e) {
