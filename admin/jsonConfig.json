@@ -31,9 +31,9 @@
                     "xl": 12
                 },
                 "_localTestBtn": {
-                    "type": "sendTo",
-                    "command": "testLocalPath",
-                    "label": "testLocalPath",
+                    "type": "custom",
+                    "url": "custom/testPathButton.js",
+                    "name": "TestPathButton",
                     "hidden": "!data.localEnabled",
                     "xs": 12,
                     "sm": 6,
