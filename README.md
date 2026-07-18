@@ -76,6 +76,8 @@ The archive is parsed entirely in the browser — no files are written to disk d
 
 ## Changelog
 ### **WORK IN PROGRESS**
+* (ipod86) fix: add 30s timeout to all WebDAV operations
+* (ipod86) fix: remove redundant variable alias in handleListLocalFiles
 
 ### 0.1.11 (2026-07-18)
 * (ipod86) fix: move @types/tar to devDependencies (W0050, W5060)
