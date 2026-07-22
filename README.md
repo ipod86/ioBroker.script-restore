@@ -75,6 +75,10 @@ The archive is parsed entirely in the browser — no files are written to disk d
 | `.zip` (JS adapter backup) | JS adapter internal backup (`YYYY-MM-DD-scripts.zip`, contains `.json` files with script metadata) |
 
 ## Changelog
+### 0.1.13 (2026-07-22)
+* (winnyschuster) fix: correct folder indentation in script tree for deeply nested folders
+* (ipod86) chore: update dev dependencies (@types/tar, @iobroker/testing, @types/node)
+
 ### 0.1.12 (2026-07-18)
 * (ipod86) fix: add 30s timeout to all WebDAV operations
 * (ipod86) fix: remove redundant variable alias in handleListLocalFiles

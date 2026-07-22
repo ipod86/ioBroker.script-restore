@@ -77,6 +77,23 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 
 ## Changelog
 
+### 0.1.13 (2026-07-22)
+* (winnyschuster) fix: Ordner-Einrückung im Skriptbaum für tief verschachtelte Ordner korrigiert
+* (ipod86) chore: Entwicklungsabhängigkeiten aktualisiert (@types/tar, @iobroker/testing, @types/node)
+
+### 0.1.12 (2026-07-18)
+* (ipod86) fix: 30s Timeout für alle WebDAV-Operationen hinzugefügt
+* (ipod86) fix: redundante Variable in handleListLocalFiles entfernt
+
+### 0.1.11 (2026-07-18)
+* (ipod86) fix: @types/tar in devDependencies verschoben (W0050, W5060)
+
+### 0.1.10 (2026-07-18)
+* (ipod86) fix: Shell-tar-Befehl durch reine Node.js-tar-Bibliothek ersetzt (Windows-Kompatibilität)
+* (ipod86) feat: Schaltfläche zum Testen des lokalen Backup-Pfads mit Ergebnis-Feedback
+* (ipod86) feat: Schaltfläche für Backup-Pfad-Vorschlag
+* (ipod86) fix: jsonConfig sendTo Ergebnisformat-Validierung
+
 ### 0.1.9 (2026-07-17)
 * (ipod86) feat: Checkbox-Mehrfachauswahl für ZIP-Export — ☐ anklicken zum Markieren, Skript-Klick zeigt nur an
 * (ipod86) feat: Import von scripts.zip (unser Adapter-Export) und JS-Adapter-Backup-ZIP (2026-07-17-scripts.zip)
@@ -88,25 +105,6 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 * (ipod86) fix: JSZip lokal im Admin-Tab eingebunden — keine CDN-Abhängigkeit
 * (ipod86) fix: ZIP-Export in allen Browsern repariert (Script-Tag-Laden, DOM-Append vor Click)
 * (ipod86) fix: postinstall-Script aus package.json entfernt (E0093)
-
-### 0.1.7 (2026-07-01)
-* (ipod86) fix: common.news-Einträge 0.1.5 in alle 10 Sprachen übersetzt (E1144)
-* (ipod86) fix: @types/node auf ^22 fixiert, dependabot Cooldown-Format korrigiert (W0066, W8917)
-
-### 0.1.6 (2026-06-27)
-* (ipod86) fix: TypeScript auf ^6.0.3 aktualisiert mit expliziten Mocha-Typen für TypeScript-6-Kompatibilität (W0083)
-
-### 0.1.5 (2026-06-06)
-* (ipod86) fix: @alcalzone/release-script auf ^5.2.1 aktualisiert (E0036)
-* (ipod86) fix: Fehlende Platzhalter-i18n-Schlüssel in alle 11 Sprachdateien ergänzt (W5612)
-* (ipod86) fix: i18n auf Kurzformat migriert, npm-Provenance-Signierung hinzugefügt (S5601, S2008)
-* (ipod86) fix: Auf @tsconfig/node22 aktualisiert, @types/node auf ^22 fixiert (W0086, W0090, W0066)
-* (ipod86) fix: Abhängigkeiten neu geordnet — types/eslint/prettier in devDependencies verschoben (W5060, W0078, E3031)
-
-### 0.1.4 (2026-05-24)
-* (ipod86) Syntaxhervorhebung für JS/TS, Blockly (XML) und Rules (JSON) — reines JS, keine externe Bibliothek
-* (ipod86) Spracherkennung korrigiert: ioBroker-Systemsprache wird über den Adapter (system.config) gelesen statt über Browser/DOM
-* (ipod86) Alle verbleibenden Loader-Texte übersetzt (Datei/Archiv lesen, Entpacken, URL laden)
 
 Ältere Changelogs sind in [CHANGELOG_OLD.md](CHANGELOG_OLD.md) verfügbar.
 

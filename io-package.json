@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.12",
+    "version": "0.1.13",
     "news": {
+      "0.1.13": {
+        "en": "fix: correct folder indentation in script tree for deeply nested folders; update dev dependencies",
+        "de": "fix: Ordner-Einrückung im Skriptbaum für tief verschachtelte Ordner korrigiert; Entwicklungsabhängigkeiten aktualisiert",
+        "ru": "fix: исправлено отступы папок в дереве скриптов для глубоко вложенных папок; обновлены зависимости разработки",
+        "pt": "fix: corrigida indentação de pastas na árvore de scripts para pastas profundamente aninhadas; dependências de desenvolvimento atualizadas",
+        "nl": "fix: mapinspringing in scriptboom gecorrigeerd voor diep geneste mappen; ontwikkelingsafhankelijkheden bijgewerkt",
+        "fr": "fix: correction de l'indentation des dossiers dans l'arborescence de scripts pour les dossiers profondément imbriqués; dépendances de développement mises à jour",
+        "it": "fix: correzione dell'indentazione delle cartelle nell'albero degli script per cartelle profondamente nidificate; dipendenze di sviluppo aggiornate",
+        "es": "fix: corrección de la sangría de carpetas en el árbol de scripts para carpetas profundamente anidadas; dependencias de desarrollo actualizadas",
+        "pl": "fix: poprawiono wcięcia folderów w drzewie skryptów dla głęboko zagnieżdżonych folderów; zaktualizowano zależności deweloperskie",
+        "uk": "fix: виправлено відступи папок у дереві скриптів для глибоко вкладених папок; оновлено залежності розробки",
+        "zh-cn": "fix: 修正脚本树中深层嵌套文件夹的缩进；更新开发依赖"
+      },
       "0.1.12": {
         "en": "fix: add 30s timeout to all WebDAV operations\nfix: remove redundant variable alias in handleListLocalFiles",
         "de": "Behebung: 30 Sekunden Timeout für alle WebDAV-Operationen hinzufügen\nBehebung: Überflüssigen Variablenalias in handleListLocalFiles entfernen",
@@ -80,19 +93,6 @@
         "pl": "poprawka: przetłumacz wpisy common.news 0.1.5 na wszystkie 10 języków (E1144)\nnaprawiono: przypnij @types/node do ^22, naprawiono format cooldownu dependabot (W0066, W8917)",
         "uk": "виправлення: переклад записів common.news 0.1.5 усіма 10 мовами (E1144)\nвиправлення: закріпити @types/node на ^22, виправити формат відновлення роботи dependabot (W0066, W8917)",
         "zh-cn": "修复：将 common.news 0.1.5 条目翻译成所有 10 种语言 (E1144)\n修复：将 @types/node 固定为 ^22，修复 dependabot 冷却时间格式（W0066，W8917）"
-      },
-      "0.1.6": {
-        "en": "upgrade typescript to 6.0 with explicit mocha types for TypeScript 6 compatibility (W0083)",
-        "de": "TypeScript auf 6.0 aktualisiert mit expliziten Mocha-Typen für TypeScript 6-Kompatibilität (W0083)",
-        "ru": "обновление TypeScript до 6.0 с явными типами mocha для совместимости с TypeScript 6 (W0083)",
-        "pt": "atualização do TypeScript para 6.0 com tipos mocha explícitos para compatibilidade com TypeScript 6 (W0083)",
-        "nl": "TypeScript bijgewerkt naar 6.0 met expliciete mocha-typen voor TypeScript 6-compatibiliteit (W0083)",
-        "fr": "mise à jour de TypeScript vers 6.0 avec types mocha explicites pour la compatibilité TypeScript 6 (W0083)",
-        "it": "aggiornamento di TypeScript a 6.0 con tipi mocha espliciti per la compatibilità con TypeScript 6 (W0083)",
-        "es": "actualización de TypeScript a 6.0 con tipos mocha explícitos para compatibilidad con TypeScript 6 (W0083)",
-        "pl": "aktualizacja TypeScript do 6.0 z jawnymi typami mocha dla kompatybilności z TypeScript 6 (W0083)",
-        "uk": "оновлення TypeScript до 6.0 з явними типами mocha для сумісності з TypeScript 6 (W0083)",
-        "zh-cn": "将 TypeScript 升级到 6.0，添加显式 mocha 类型以兼容 TypeScript 6 (W0083)"
       }
     },
     "titleLang": {

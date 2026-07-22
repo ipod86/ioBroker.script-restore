@@ -1,5 +1,24 @@
 # Older Changelog
 
+### 0.1.7 (2026-07-01)
+* (ipod86) fix: common.news-Einträge 0.1.5 in alle 10 Sprachen übersetzt (E1144)
+* (ipod86) fix: @types/node auf ^22 fixiert, dependabot Cooldown-Format korrigiert (W0066, W8917)
+
+### 0.1.6 (2026-06-27)
+* (ipod86) fix: TypeScript auf ^6.0.3 aktualisiert mit expliziten Mocha-Typen für TypeScript-6-Kompatibilität (W0083)
+
+### 0.1.5 (2026-06-06)
+* (ipod86) fix: @alcalzone/release-script auf ^5.2.1 aktualisiert (E0036)
+* (ipod86) fix: Fehlende Platzhalter-i18n-Schlüssel in alle 11 Sprachdateien ergänzt (W5612)
+* (ipod86) fix: i18n auf Kurzformat migriert, npm-Provenance-Signierung hinzugefügt (S5601, S2008)
+* (ipod86) fix: Auf @tsconfig/node22 aktualisiert, @types/node auf ^22 fixiert (W0086, W0090, W0066)
+* (ipod86) fix: Abhängigkeiten neu geordnet — types/eslint/prettier in devDependencies verschoben (W5060, W0078, E3031)
+
+### 0.1.4 (2026-05-24)
+* (ipod86) Syntaxhervorhebung für JS/TS, Blockly (XML) und Rules (JSON) — reines JS, keine externe Bibliothek
+* (ipod86) Spracherkennung korrigiert: ioBroker-Systemsprache wird über den Adapter (system.config) gelesen statt über Browser/DOM
+* (ipod86) Alle verbleibenden Loader-Texte übersetzt (Datei/Archiv lesen, Entpacken, URL laden)
+
 ### 0.1.3 (2026-05-24)
 * (ipod86) fix language flash: skip socket override when language already detected from admin frame
 * (ipod86) replace all hardcoded status strings with translated t() calls
