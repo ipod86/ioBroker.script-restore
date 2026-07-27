@@ -25,7 +25,7 @@
     "node": ">= 22.13.0"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.4.1",
+    "@iobroker/adapter-core": "^3.4.3",
     "@marsaud/smb2": "^0.18.0",
     "basic-ftp": "^6.0.1",
     "ssh2-sftp-client": "^12.1.1",
