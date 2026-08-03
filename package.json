@@ -29,7 +29,7 @@
     "@marsaud/smb2": "^0.18.0",
     "basic-ftp": "^6.0.1",
     "ssh2-sftp-client": "^12.1.1",
-    "tar": "^7.5.20",
+    "tar": "^7.5.22",
     "webdav": "^5.10.0"
   },
   "devDependencies": {
