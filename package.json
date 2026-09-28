@@ -30,7 +30,7 @@
     "basic-ftp": "^6.2.1",
     "ssh2-sftp-client": "^12.1.1",
     "tar": "^7.5.22",
-    "webdav": "^5.10.0"
+    "webdav": "^5.11.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.2.1",
